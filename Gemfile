@@ -92,7 +92,7 @@ gem 'simplecov', require: false
 gem 'google-cloud-text_to_speech'
 
 # Exporting table data
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 
 # installing brakeman
 gem "brakeman"
