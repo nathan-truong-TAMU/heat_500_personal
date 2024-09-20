@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     @links = Link.all
     if params[:password] == 'TxAMHeat#2k13'
       session[:authenticated] = true
-      redirect_to root_path, notice: 'Successfully authenticated.'
+      redirect_to meetings_path, notice: 'Successfully authenticated.'
     else
       flash.now[:alert] = 'Invalid password'
       render :new

@@ -399,6 +399,36 @@
           null
         ]
       },
+<<<<<<< HEAD
+=======
+      "/csce431/heat_500/app/controllers/SpeechesController.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+>>>>>>> test
       "/csce431/heat_500/app/controllers/users/omniauth_callbacks_controller.rb": {
         "lines": [
           null,
@@ -646,6 +676,39 @@
           null
         ]
       },
+<<<<<<< HEAD
+=======
+      "/csce431/heat_500/app/services/text_to_speech_service.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          2,
+          null,
+          2,
+          null,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          2,
+          null,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          2,
+          null,
+          null
+        ]
+      },
+>>>>>>> test
       "/csce431/heat_500/app/models/link.rb": {
         "lines": [
           1,
@@ -653,6 +716,10 @@
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1726818061
+=======
+    "timestamp": 1726813655
+>>>>>>> test
   }
 }

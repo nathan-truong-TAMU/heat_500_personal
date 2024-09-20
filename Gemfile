@@ -89,7 +89,7 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem 'simplecov', require: false
 
 # Exporting table data
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 
 # installing brakeman
 gem "brakeman"
