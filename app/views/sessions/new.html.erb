@@ -211,7 +211,7 @@ table {
           <% @events.each do |event| %>
             <tr>
               <td><%= event.event_name %></td>
-              <td><%= link_to h(event.event_link), h(event.event_link) %></td>
+              <td><%= link_to_if valid_url?(event.event_link), h(event.event_link), h(event.event_link) %></td>
              <td><%= event.event_end.strftime("%Y-%m-%d %I:%M %p") %></td>
              <td><%= event.event_datetime.strftime("%Y-%m-%d %I:%M %p") %></td>
              <td><%= event.event_points %></td>
@@ -236,7 +236,7 @@ table {
       <% @links.each do |link| %>
         <tr>
           <td><%= link.title %></td>
-          <td><%= link_to h(link.url), h(link.url) %></td>
+          <td><%= link_to_if valid_url?(link.url), h(link.url), h(link.url) %></td>
         </tr>
       <% end %>
     </tbody>

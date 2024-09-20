@@ -88,11 +88,8 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 # Simplecov
 gem 'simplecov', require: false
 
-# Text-to-speech
-gem 'google-cloud-text_to_speech'
-
 # Exporting table data
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 
 # installing brakeman
 gem "brakeman"
