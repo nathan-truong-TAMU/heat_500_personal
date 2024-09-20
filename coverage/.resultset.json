@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kritikadhakal/Desktop/heat/app/models/user.rb": {
+      "/csce431/heat_500/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -25,64 +25,56 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/application_record.rb": {
+      "/csce431/heat_500/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/application_helper.rb": {
+      "/csce431/heat_500/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/events_helper.rb": {
+      "/csce431/heat_500/app/helpers/events_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/events_members_helper.rb": {
+      "/csce431/heat_500/app/helpers/events_members_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/meetings_member_helper.rb": {
+      "/csce431/heat_500/app/helpers/meetings_member_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/members_helper.rb": {
+      "/csce431/heat_500/app/helpers/members_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/pages_helper.rb": {
+      "/csce431/heat_500/app/helpers/pages_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/helpers/sessions_helper.rb": {
+      "/csce431/heat_500/app/helpers/sessions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/channels/application_cable/channel.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/kritikadhakal/Desktop/heat/app/channels/application_cable/connection.rb": {
+      "/csce431/heat_500/app/channels/application_cable/channel.rb": {
         "lines": [
           1,
           1,
@@ -90,7 +82,15 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/events_controller.rb": {
+      "/csce431/heat_500/app/channels/application_cable/connection.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/csce431/heat_500/app/controllers/events_controller.rb": {
         "lines": [
           1,
           1,
@@ -169,7 +169,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/meetings_controller.rb": {
+      "/csce431/heat_500/app/controllers/meetings_controller.rb": {
         "lines": [
           1,
           1,
@@ -258,7 +258,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/members_controller.rb": {
+      "/csce431/heat_500/app/controllers/members_controller.rb": {
         "lines": [
           1,
           1,
@@ -361,7 +361,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/pages_controller.rb": {
+      "/csce431/heat_500/app/controllers/pages_controller.rb": {
         "lines": [
           1,
           1,
@@ -369,13 +369,19 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/sessions_controller.rb": {
+      "/csce431/heat_500/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           1,
           1,
           1,
           1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
           null,
           null,
           1,
@@ -393,34 +399,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/SpeechesController.rb": {
-        "lines": [
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          2,
-          null,
-          2,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/users/omniauth_callbacks_controller.rb": {
+      "/csce431/heat_500/app/controllers/users/omniauth_callbacks_controller.rb": {
         "lines": [
           null,
           null,
@@ -484,7 +463,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/users/registrations_controller.rb": {
+      "/csce431/heat_500/app/controllers/users/registrations_controller.rb": {
         "lines": [
           null,
           null,
@@ -559,7 +538,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/controllers/users/sessions_controller.rb": {
+      "/csce431/heat_500/app/controllers/users/sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -597,7 +576,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/jobs/application_job.rb": {
+      "/csce431/heat_500/app/jobs/application_job.rb": {
         "lines": [
           1,
           null,
@@ -608,7 +587,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/mailers/application_mailer.rb": {
+      "/csce431/heat_500/app/mailers/application_mailer.rb": {
         "lines": [
           1,
           1,
@@ -616,7 +595,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/event.rb": {
+      "/csce431/heat_500/app/models/event.rb": {
         "lines": [
           1,
           1,
@@ -624,7 +603,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/events_member.rb": {
+      "/csce431/heat_500/app/models/events_member.rb": {
         "lines": [
           1,
           1,
@@ -632,7 +611,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/meeting.rb": {
+      "/csce431/heat_500/app/models/meeting.rb": {
         "lines": [
           1,
           null,
@@ -648,7 +627,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/meetings_member.rb": {
+      "/csce431/heat_500/app/models/meetings_member.rb": {
         "lines": [
           1,
           1,
@@ -656,7 +635,7 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/models/member.rb": {
+      "/csce431/heat_500/app/models/member.rb": {
         "lines": [
           1,
           1,
@@ -667,43 +646,13 @@
           null
         ]
       },
-      "/Users/kritikadhakal/Desktop/heat/app/services/text_to_speech_service.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          2,
-          null,
-          2,
-          null,
-          null,
-          2,
-          null,
-          null,
-          null,
-          null,
-          2,
-          null,
-          null,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/kritikadhakal/Desktop/heat/app/models/link.rb": {
+      "/csce431/heat_500/app/models/link.rb": {
         "lines": [
           1,
           null
         ]
       }
     },
-    "timestamp": 1713376507
+    "timestamp": 1726818061
   }
 }
