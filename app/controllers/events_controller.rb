@@ -8,7 +8,8 @@ class EventsController < ApplicationController
   end
 
   def require_login
-    redirect_to login_path unless session[:authenticated]
+    @events = Event.all
+    redirect_to loginevent_path unless session[:authenticated]
   end
 
   # GET /events/1 or /events/1.json

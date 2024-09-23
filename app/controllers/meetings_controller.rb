@@ -14,7 +14,7 @@ class MeetingsController < ApplicationController
   end
   
   def require_login
-    redirect_to login_path unless session[:authenticated]
+    redirect_to loginevent_path unless session[:authenticated]
   end
   
   # GET /meetings/1 or /meetings/1.json
