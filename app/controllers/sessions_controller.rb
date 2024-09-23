@@ -5,6 +5,18 @@ class SessionsController < ApplicationController
     @links = Link.all
   end
 
+  def newmeeting
+    @meetings = Meeting.all
+  end
+
+  def newevent
+    @events = Event.all
+  end
+
+  def newlink
+    @links = Link.all
+  end
+
   def new2
     @meetings = Meeting.all
     @events = Event.all
