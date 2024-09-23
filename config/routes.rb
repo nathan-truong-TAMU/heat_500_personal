@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   get 'login2', to: 'sessions#new2'
   get 'loginevent', to: 'sessions#newevent' 
+  get 'loginlink', to: 'sessions#newlink' 
 
   # for exporting table data
   get 'meetings_export', to: 'meetings_members#export', as: 'meetings_export'
