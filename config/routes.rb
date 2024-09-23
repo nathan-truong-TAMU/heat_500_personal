@@ -37,6 +37,14 @@ Rails.application.routes.draw do
 
   get 'login2', to: 'sessions#new2'
 
+  get 'one_time_logout', to: 'sessions#destroy'
+
+  # Add this route for toggling the authenticated view============================================
+  get 'toggle_view_mode', to: 'sessions#toggle_view_mode'
+
+
+
+
   # for exporting table data
   get 'meetings_export', to: 'meetings_members#export', as: 'meetings_export'
 

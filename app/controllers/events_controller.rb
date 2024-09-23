@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
-  before_action :require_login
+  before_action :require_login, only: %i[new show]
 
   # GET /events or /events.json
   def index
@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   end
 
   def require_login
-    redirect_to login_path unless session[:authenticated]
+    redirect_to login2_path unless session[:authenticated]
   end
 
   # GET /events/1 or /events/1.json
@@ -29,7 +29,11 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     respond_to do |format|
-      if @event.save
+      if @event.event_end < @event.event_datetime  # <-- Added date validation in the controller
+        flash.now[:alert] = 'Event end time must be after the start time.'  # <-- Added error message for invalid date range
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: { error: 'Event end time must be after the start time' }, status: :unprocessable_entity }
+      elsif @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
@@ -42,7 +46,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1 or /events/1.json
   def update
     respond_to do |format|
-      if @event.update(event_params)
+      if @event.event_end < @event.event_datetime  # <-- Added date validation in the controller
+        flash.now[:alert] = 'Event end time must be after the start time.'  # <-- Added error message for invalid date range
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: { error: 'Event end time must be after the start time' }, status: :unprocessable_entity }
+      elsif @event.update(event_params)
         format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -50,6 +58,7 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /events/1 or /events/1.json

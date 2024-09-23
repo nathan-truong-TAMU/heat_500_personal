@@ -360,7 +360,7 @@ DEPENDENCIES
   jbuilder
   omniauth
   omniauth-google-oauth2
-  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth-rails_csrf_protection
   pg
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.4)
