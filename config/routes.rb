@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
 
   get 'login2', to: 'sessions#new2'
+  get 'loginevent', to: 'sessions#newevent' 
+  get 'loginlink', to: 'sessions#newlink' 
 
   get 'one_time_logout', to: 'sessions#destroy'
 

@@ -15,6 +15,14 @@ class SessionsController < ApplicationController
     redirect_to request.referrer || root_path, notice: "View mode switched."
   end
 
+  def newevent
+    @events = Event.all
+  end
+
+  def newlink
+    @links = Link.all
+  end
+
   def new2
     @meetings = Meeting.all
     @events = Event.all
