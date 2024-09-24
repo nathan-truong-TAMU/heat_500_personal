@@ -1,15 +1,17 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
-  before_action :require_login
+  before_action :set_event, only: %i[show edit update destroy]
+  before_action :require_login, only: %i[new show edit update destroy]
 
   # GET /events or /events.json
   def index
     @events = Event.all
   end
 
+  # Ensure user is logged in
   def require_login
-    @events = Event.all
-    redirect_to loginevent_path unless session[:authenticated]
+    unless session[:authenticated]
+      redirect_to login2_path, alert: "You must be logged in to access this page."
+    end
   end
 
   # GET /events/1 or /events/1.json
@@ -56,7 +58,6 @@ class EventsController < ApplicationController
   # DELETE /events/1 or /events/1.json
   def destroy
     @event.destroy
-
     respond_to do |format|
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
@@ -64,13 +65,16 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:event_link, :event_name, :event_datetime, :event_end, :event_points, :event_description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to events_url, alert: "Event not found."
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:event_link, :event_name, :event_datetime, :event_end, :event_points, :event_description)
+  end
 end
