@@ -32,10 +32,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     respond_to do |format|
-      if invalid_event_times?(@event)
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: { error: 'Event end time must be after the start time' }, status: :unprocessable_entity }
-      elsif @event.save
+      if @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
@@ -48,10 +45,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1 or /events/1.json
   def update
     respond_to do |format|
-      if invalid_event_times?(@event)
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: { error: 'Event end time must be after the start time' }, status: :unprocessable_entity }
-      elsif @event.update(event_params)
+      if @event.update(event_params)
         format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -71,19 +65,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  # Ensure event times are valid
-  def invalid_event_times?(event)
-    if event.event_end.nil? || event.event_datetime.nil?
-      flash.now[:alert] = 'Event start and end times must be provided.'
-      true
-    elsif event.event_end < event.event_datetime
-      flash.now[:alert] = 'Event end time must be after the start time.'
-      true
-    else
-      false
-    end
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
