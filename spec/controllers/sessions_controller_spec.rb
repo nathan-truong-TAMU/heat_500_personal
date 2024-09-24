@@ -10,10 +10,10 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "POST #create" do
     context "with valid password" do
-      it "authenticates and redirects to meetings path" do
+      it "authenticates and redirects to root path" do
         post :create, params: { password: 'TxAMHeat#2k13' }
         expect(session[:authenticated]).to be true
-        expect(response).to redirect_to(meetings_path)
+        expect(response).to redirect_to(root_path)
         expect(flash[:notice]).to eq('Successfully authenticated.')
       end
     end

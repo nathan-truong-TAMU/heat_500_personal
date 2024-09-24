@@ -1,5 +1,3 @@
-<!-- app/views/links/index.html.erb -->
-
 <%= link_to 'Back', root_path %>
 
 <h1>Links</h1>
@@ -7,10 +5,30 @@
 <div id="links">
   <% @links.each do |link| %>
     <%= render link %>
-    <p>
-      <%= link_to "Show this link", link %>
-    </p>
+    <!-- Show the link only if authenticated or in 'admin' view mode -->
+    <% if session[:authenticated] && session[:view_mode] == 'admin' %>
+      <p>
+        <%= link_to "Show this link", link %>
+      </p>
+    <% end %>
+
+    <!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
+    <% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
+      <%= link_to 'Login to manage links', login2_path %>
+    <% end %>
   <% end %>
 </div>
 
-<%= link_to "New link", new_link_path %>
+<!-- Show 'New link' button only if authenticated or in 'admin' view mode -->
+<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+  <%= link_to "New link", new_link_path %>
+<% end %>
+
+<!-- Toggle View button available only if authenticated or in 'admin' view mode -->
+<% if session[:authenticated] %>
+  <p>
+    <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
+  </p>
+<% end %>
+
+
