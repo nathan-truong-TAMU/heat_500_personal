@@ -6,14 +6,36 @@
   <% @events.each do |event| %>
     <div class="event">
       <%= render event %>
-      <p>
-        <%= link_to "Show this event", event, class: 'event-link' %>
-      </p>
+      <% if session[:authenticated] && session[:view_mode] == 'admin'%>
+        <p>
+          <%= link_to "Show this event", event, class: 'event-link' %>
+        </p>
+      <% end %>
     </div>
   <% end %>
 </div>
 
-<%= link_to "New event", new_event_path, class: 'new-event-link' %>
+
+<% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
+  <%= link_to 'Login to manage links', login2_path %>
+<% end %>
+
+<% if session[:authenticated] && session[:view_mode] == 'admin'%>
+  <%= link_to "New event", new_event_path, class: 'new-event-link' %>
+<% end %>
+
+<!-- Displaying flash messages for any errors -->
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if session[:authenticated] %>
+  <p>
+    <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
+  </p>
+<% end %>
 
 <style>
   body {
