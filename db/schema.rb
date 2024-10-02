@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_02_230958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,25 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.date "date"
-    t.string "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.time "time"
-    t.text "description"
-  end
-
-  create_table "meetings_members", force: :cascade do |t|
-    t.bigint "meeting_id", null: false
-    t.bigint "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meeting_id"], name: "index_meetings_members_on_meeting_id"
-    t.index ["member_id"], name: "index_meetings_members_on_member_id"
-  end
-
   create_table "members", force: :cascade do |t|
     t.string "member_name"
     t.integer "member_points"
@@ -86,6 +67,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
 
   add_foreign_key "events_members", "events"
   add_foreign_key "events_members", "members"
-  add_foreign_key "meetings_members", "meetings"
-  add_foreign_key "meetings_members", "members"
 end
