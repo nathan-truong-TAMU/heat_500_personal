@@ -6,7 +6,7 @@ class MembersController < ApplicationController
     def check_member_attendance
       if current_user.present?
         @member = Member.find_by(member_name: current_user.full_name)
-        @attended = if @member.present? && (@member.meetings.any? || @member.events.any?)
+        @attended = if @member.present? && ( @member.events.any?)
           true
                     else
           false
