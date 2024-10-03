@@ -24,8 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_234742) do
     t.text "description"
     t.string "category"
     t.string "location"
-    t.bigint "link_id", null: false
-    t.index ["link_id"], name: "index_events_on_link_id"
+    t.string "link"
   end
 
   create_table "events_members", force: :cascade do |t|
@@ -68,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_234742) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "links"
   add_foreign_key "events_members", "events"
   add_foreign_key "events_members", "members"
 end

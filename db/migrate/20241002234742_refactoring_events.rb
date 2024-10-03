@@ -8,6 +8,6 @@ class RefactoringEvents < ActiveRecord::Migration[7.0]
     rename_column :events, :event_description, :description
     add_column :events, :category, :string
     add_column :events, :location, :string
-    add_reference :events, :link, null: false, foreign_key: true
+    add_column :events, :link, :string
   end
 end

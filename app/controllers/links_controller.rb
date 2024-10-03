@@ -72,4 +72,7 @@ class LinksController < ApplicationController
   def link_params
     params.require(:link).permit(:title, :url)
   end
+
+  def event_params
+    params.require(:event).permit()
 end
