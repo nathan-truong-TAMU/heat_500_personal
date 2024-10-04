@@ -1,23 +1,23 @@
 <div id="<%= dom_id(event) %>" class="event-card">
   <p>
     <strong>Event Link:</strong>
-    <%= link_to event.event_link, event.event_link %>
+    <%= link_to event.link, event.link %>
   </p>
 
   <p>
     <strong>Event Name:</strong>
-    <%= event.event_name %>
+    <%= event.name %>
   </p>
 
   <p>
     <strong>Event Description:</strong>
-    <%= event.event_description %>
+    <%= event.description %>
   </p>
 
   <p>
     <strong>Event Deadline:</strong>
-    <% if event.event_end.present? %>
-      <%= event.event_end.strftime("%A, %d %B %Y at %I:%M %p") %>
+    <% if event.end_date.present? %>
+      <%= event.end_date.strftime("%A, %d %B %Y at %I:%M %p") %>
     <% else %>
       <em>No deadline available</em>
     <% end %>
@@ -25,8 +25,8 @@
 
   <p>
     <strong>Event Start:</strong>
-    <% if event.event_datetime.present? %>
-      <%= event.event_datetime.strftime("%A, %d %B %Y at %I:%M %p") %>
+    <% if event.start_date.present? %>
+      <%= event.start_date.strftime("%A, %d %B %Y at %I:%M %p") %>
     <% else %>
       <em>No start date available</em>
     <% end %>
@@ -34,7 +34,7 @@
 
   <p>
     <strong>Event Points:</strong>
-    <%= event.event_points %>
+    <%= event.points %>
   </p>
 </div>
 
