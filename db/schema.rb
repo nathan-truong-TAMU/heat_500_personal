@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_02_234742) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_04_063815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.datetime "start_date"
+    t.string "description"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_announcements_on_member_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -44,11 +54,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_234742) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "member_name"
-    t.integer "member_points"
-    t.boolean "executive_status"
+    t.string "member"
+    t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "position"
+    t.boolean "dues_paid"
+    t.string "email"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_234742) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "announcements", "members"
   add_foreign_key "events_members", "events"
   add_foreign_key "events_members", "members"
 end
