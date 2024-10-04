@@ -24,7 +24,7 @@ class EventsMembersController < ApplicationController
       sheet.add_row %w[Date Event Members]
       @events.each do |event|
         event_members = event.events_members
-        members_list = event_members.any? ? event_members.map { |em| em.member.member_name }.join(', ') : 'No attendees yet'
+        members_list = event_members.any? ? event_members.map { |em| em.member.name }.join(', ') : 'No attendees yet'
         sheet.add_row [event.start_date.strftime('%B %d, %Y'), event.name, members_list]
       end
     end
@@ -53,7 +53,7 @@ class EventsMembersController < ApplicationController
       @event.members.delete(@member)
 
       # Deduct one point from the member's member_points value
-      @member.decrement!(:member_points, @event.points) #change this to a variable number.
+      @member.decrement!(:points, @event.points) #change this to a variable number.
 
       flash[:notice] = "Member removed from event successfully and one point deducted!"
     else
@@ -77,7 +77,7 @@ class EventsMembersController < ApplicationController
       if @event_member.save
         @member = Member.find(@event_member.member_id)
         @event = Event.find(@event_member.event_id)
-        @member.increment!(:member_points, @event.points)
+        @member.increment!(:points, @event.points)
 
         format.html { redirect_to events_members_path, notice: 'Member added to event successfully!' }
         format.json { render :show, status: :created, location: @event_member }

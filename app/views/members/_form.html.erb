@@ -12,18 +12,19 @@
     <% end %>
 
     <div class="form-field">
-      <%= form.label :member_name, class: 'form-label' %>
-      <%= form.text_field :member_name, class: 'form-control' %>
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
     </div>
 
     <div class="form-field">
-      <%= form.label :member_points, class: 'form-label' %>
-      <%= form.number_field :member_points, class: 'form-control' %>
+      <%= form.label :points, class: 'form-label' %>
+      <%= form.number_field :points, class: 'form-control' %>
     </div>
 
     <div class="form-field">
-      <%= form.label :executive_status, class: 'form-label' %>
-      <%= form.check_box :executive_status, class: 'form-control' %>
+      <%= form.label :position, class: 'form-label' %>
+      <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
+        ['Admin', 'Admin']]), class: 'form-control' %>
     </div>
 
     <div class="form-field">

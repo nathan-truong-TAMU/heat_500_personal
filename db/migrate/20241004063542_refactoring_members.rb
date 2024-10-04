@@ -1,6 +1,6 @@
 class RefactoringMembers < ActiveRecord::Migration[7.0]
   def change
-    rename_column :members, :member_name, :member
+    rename_column :members, :member_name, :name
     rename_column :members, :member_points, :points
     remove_column :members, :executive_status
     add_column :members, :position, :string
