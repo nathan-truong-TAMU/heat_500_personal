@@ -1,20 +1,18 @@
 <div id="<%= dom_id member %>">
   <p>
     <strong>Member name:</strong>
-    <%= member.member_name %>
+    <%= member.name %>
   </p>
 
   <p>
     <strong>Member points:</strong>
-    <%= member.member_points %>
+    <%= member.points %>
   </p>
 
-  <p>
-    <strong>Executive status:</strong>
-    <span class="<%= 'executive-status-' + member.executive_status.to_s %>">
-      <%= member.executive_status ? 'Yes' : 'No' %>
-    </span>
-  </p>
+  <strong>Position:</strong>
+  <span class="<%= 'position-' + (member.position.present? ? member.position.parameterize : 'no position') %>">
+    <%= member.position.present? ? member.position : 'No position' %>
+  </span>
 </div>
 
 <style>
@@ -47,11 +45,11 @@
     margin-right: 5px;
   }
 
-  .executive-status-true {
-    color: #28a745;
+  .position-officer {
+    color: #ffc107;
   }
 
-  .executive-status-false {
+  .position-admin {
     color: #dc3545;
   }
 </style>
