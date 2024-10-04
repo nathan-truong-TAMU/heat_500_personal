@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_04_063815) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_04_073311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_063815) do
     t.index ["member_id"], name: "index_events_members_on_member_id"
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price"
+    t.string "name"
+    t.string "description"
+    t.string "category"
+    t.string "photo_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "leaderboards", force: :cascade do |t|
+    t.string "level_name"
+    t.integer "level_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -61,6 +79,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_063815) do
     t.string "position"
     t.boolean "dues_paid"
     t.string "email"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "path"
+    t.string "alt_text"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
