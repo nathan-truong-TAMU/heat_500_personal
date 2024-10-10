@@ -57,35 +57,11 @@
 <body>
 
 <div class="header">
-  <h2>Meetings and Events attended for <%= current_user.full_name %></h2>
+  <h2>Events attended for <%= current_user.full_name %></h2>
   <!-- Back Button -->
   <button class="back-button" onclick="redirectToHome()">Back to Home</button>
 </div>
 <br>
-  
-  <div class="meetings-attended">
-    <h3>Meetings Attended</h3>
-    <% if @member && @member.meetings.any? %>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @member.meetings.each do |meeting| %>
-            <tr>
-              <td><%= meeting.date.strftime("%b %d, %Y") %></td>
-              <td><%= meeting.name %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p><%= @member ? "This member has not attended any meetings yet." : "Member is not in the system." %></p>
-    <% end %>
-  </div>
 
   <div class="events-attended">
     <h3>Events Attended</h3>
@@ -114,7 +90,7 @@
 
 <div class="total-points">
   <h3>Total Points:</h3>
-  <p><%= @member ? @member.member_points : "Member is not in the system." %></p>
+  <p><%= @member ? @member.points : "Member is not in the system." %></p>
 </div>
 
 <script>

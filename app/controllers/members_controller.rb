@@ -5,8 +5,8 @@ class MembersController < ApplicationController
   def check_member_attendance
     def check_member_attendance
       if current_user.present?
-        @member = Member.find_by(member_name: current_user.full_name)
-        @attended = if @member.present? && (@member.meetings.any? || @member.events.any?)
+        @member = Member.find_by(name: current_user.full_name)
+        @attended = if @member.present? && ( @member.events.any?)
           true
                     else
           false
@@ -94,6 +94,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:member_name, :member_points, :executive_status)
+      params.require(:member).permit(:name, :points, :position, :dues_paid, :email)
     end
 end

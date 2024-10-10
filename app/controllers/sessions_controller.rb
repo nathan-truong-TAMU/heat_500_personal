@@ -2,8 +2,6 @@ class SessionsController < ApplicationController
   def new
 
     session[:previous_url] = request.referrer unless request.referrer == login_url
-
-    @meetings = Meeting.all
     @events = Event.all
     @links = Link.all
   end
@@ -24,7 +22,6 @@ class SessionsController < ApplicationController
   end
 
   def new2
-    @meetings = Meeting.all
     @events = Event.all
     @links = Link.all
   end
@@ -35,10 +32,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @meetings = Meeting.all
     @events = Event.all
     @links = Link.all
-    if params[:password] == 'TxAMHeat#2k13'
+
+    member = Member.find_by(email: params[:email])
+    if params[:password] == 'TxAMHeat#2k13'|| member&.position == 'Admin'
       session[:authenticated] = true
       session[:view_mode] = 'admin'
       redirect_to session[:previous_url] || root_path, notice: 'Successfully authenticated.'
