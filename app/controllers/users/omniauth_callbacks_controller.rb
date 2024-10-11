@@ -19,11 +19,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # Checks the email of the google account's permissions in the member table
       member = Member.find_by(email: user.email)
       if member&.position == 'Admin'
-        session[:authenticated] = true
-        session[:view_mode] = 'admin'
+        session[:authenticated] = 'Admin'
+        session[:view_mode] = 'Admin'
+      elsif member&.position == 'Officer'
+        session[:authenticated] = 'Officer'
+        session[:view_mode] = 'Officer'
       else
-        session[:authenticated] = false
-        session[:view_mode] = 'guest'
+        session[:authenticated] = 'Guest'
+        session[:view_mode] = 'Guest'
       end
     else
       flash[:alert] =
