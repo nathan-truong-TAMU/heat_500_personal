@@ -7,7 +7,7 @@
 <div class="action-links">
   <%= link_to "Edit this member", edit_member_path(@member) %> |
   <%= link_to "Back to members", members_path %>
-  <%= button_to "Destroy this member", @member, method: :delete, data: { confirm: "Are you sure?" }, form_class: "action-link", class: "danger-link" %>
+  <%= button_to "Destroy this member", @member, method: :delete, data: { turbo_confirm: "Are you sure?" }, form_class: "action-link", class: "danger-link" %>
 </div>
 
 

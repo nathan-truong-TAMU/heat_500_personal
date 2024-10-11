@@ -1,19 +1,23 @@
-<!-- app/views/links/_link.html.erb -->
-
 <div id="<%= dom_id link %>">
   <style>
     .custom-link {
       display: inline-block;
       padding: 10px 20px;
-      font-size: 20px; /* Adjust the font size as needed */
-      background-color: white;
-      color: #333; /* Text color */
-      border-radius: 20px; /* Adjust the border radius as needed */
-      text-decoration: none; /* Remove underline */
+      font-size: 20px;
+      background-color: #8FBC8F; /* Soft green background */
+      color: #2F4F4F; /* Darker green text */
+      border-radius: 15px 50px 30px 50px; /* Leaf-like shape */
+      text-decoration: none;
+      border: 2px solid #6B8E23; /* Olive green border */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+      transition: all 0.3s ease-in-out; /* Smooth transition */
     }
 
     .custom-link:hover {
-      background-color: #f0f0f0; /* Background color on hover */
+      background-color: #98FB98; /* Lighter green on hover */
+      color: #006400; /* Dark green text on hover */
+      transform: scale(1.05); /* Slightly increase size on hover */
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
     }
   </style>
 

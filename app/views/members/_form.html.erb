@@ -22,6 +22,16 @@
     </div>
 
     <div class="form-field">
+      <%= form.label :email, class: 'form-label' %>
+      <%= form.text_field :email, class: 'form-control' %>
+    </div>
+      
+    <div class="form-field">
+      <%= form.label :dues, class: 'form-label' %>
+      <%= form.check_box :dues_paid, class: 'form-control' %>
+    </div>
+
+    <div class="form-field">
       <%= form.label :position, class: 'form-label' %>
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
         ['Admin', 'Admin']]), class: 'form-control' %>
