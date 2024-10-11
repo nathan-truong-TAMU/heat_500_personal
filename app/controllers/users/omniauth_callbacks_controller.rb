@@ -15,6 +15,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect user, event: :authentication
+
+      # Checks the email of the google account's permissions in the member table
+      member = Member.find_by(email: user.email)
+      if member&.position == 'Admin'
+        session[:authenticated] = true
+        session[:view_mode] = 'admin'
+      else
+        session[:authenticated] = false
+        session[:view_mode] = 'guest'
+      end
     else
       flash[:alert] =
         t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
