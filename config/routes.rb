@@ -35,17 +35,18 @@ Rails.application.routes.draw do
     delete 'remove_member_from_event', on: :collection
   end
 
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-
-  get 'login2', to: 'sessions#new2'
-  get 'loginevent', to: 'sessions#newevent' 
-  get 'loginlink', to: 'sessions#newlink' 
-
-  get 'one_time_logout', to: 'sessions#destroy'
-
-  # Add this route for toggling the authenticated view============================================
-  get 'toggle_view_mode', to: 'sessions#toggle_view_mode'
+  # Add this route for toggling the authenticated view
+  devise_scope :user do
+    get 'toggle_view_mode', to: 'users/sessions#toggle_view_mode'
+    get 'login', to: 'users/sessions#new'
+    post 'login', to: 'users/sessions#create'
+  
+    get 'login2', to: 'users/sessions#new2'
+    get 'loginevent', to: 'users/sessions#newevent' 
+    get 'loginlink', to: 'users/sessions#newlink' 
+  
+    get 'one_time_logout', to: 'users/sessions#destroy'
+  end
 
 
   get "/redirect", to: "calendars#redirect"
