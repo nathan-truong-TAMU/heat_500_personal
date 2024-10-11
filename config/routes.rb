@@ -45,7 +45,8 @@ Rails.application.routes.draw do
   get 'toggle_view_mode', to: 'sessions#toggle_view_mode'
 
 
-
+  get "/redirect", to: "calendars#redirect"
+  get "/callback", to: "calendars#callback"
 
   # for exporting table data
   get 'meetings_export', to: 'meetings_members#export', as: 'meetings_export'

@@ -9,6 +9,11 @@
     <%= member.points %>
   </p>
 
+  <p>
+    <strong>Dues Paid: </strong>
+    <%= member.dues_paid? ? 'Yes' : 'No' %>
+  </p>
+
   <strong>Position:</strong>
   <span class="<%= 'position-' + (member.position.present? ? member.position.parameterize : 'no position') %>">
     <%= member.position.present? ? member.position : 'No position' %>
