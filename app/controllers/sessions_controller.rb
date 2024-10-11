@@ -6,10 +6,14 @@ class SessionsController < ApplicationController
     @links = Link.all
   end
 
+  # Toggles between Admin/Guest or Officer/Guest depending on roles
   def toggle_view_mode
-    # Toggle between 'admin' and 'guest' view modes
-    session[:view_mode] = session[:view_mode] == 'admin' ? 'guest' : 'admin'
-    # Redirect back to the previous page (or home if not available)
+    if session[:authenticated] == 'Admin'
+      session[:view_mode] = session[:view_mode] == 'Admin' ? 'Guest' : 'Admin'
+    elsif session[:authenticated] == 'Officer'
+      session[:view_mode] = session[:view_mode] == 'Officer' ? 'Guest' : 'Officer'
+    end
+
     redirect_to request.referrer || root_path, notice: "View mode switched."
   end
 
@@ -36,8 +40,8 @@ class SessionsController < ApplicationController
     @links = Link.all
     member = Member.find_by(email: params[:email])
     if params[:password] == 'TxAMHeat#2k13'|| member&.position == 'Admin'
-      session[:authenticated] = true
-      session[:view_mode] = 'admin'
+      session[:authenticated] = 'Admin'
+      session[:view_mode] = 'Admin'
       redirect_to session[:previous_url] || root_path, notice: 'Successfully authenticated.'
     else
       flash.now[:alert] = 'Invalid password'
