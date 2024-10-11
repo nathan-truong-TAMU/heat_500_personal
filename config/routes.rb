@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :events
-  get 'meetings_members/index'
+  resources :events do
+    collection do
+      delete 'destroy_all' # Route for clearing all events
+    end
+  end
   resources :members
   root 'pages#home'
   devise_for :users, controllers: {
