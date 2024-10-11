@@ -21,7 +21,7 @@
 
 <!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
 <% if is_guest_or_guest_view? %>
-      <%= link_to 'Login to manage links', login2_path, class: "auth-link" %>
+      <%= link_to 'Login to manage links', login_manual_path, class: "auth-link" %>
 <% end %>
 
 <!-- Show 'New link' button only if authenticated or in 'admin' view mode -->

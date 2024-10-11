@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
 
     # Redirects user to the admin/officer password page if they aren't an admin/officer
     def require_login
-        redirect_to login2_path unless is_officer_or_admin?
+        redirect_to login_manual_path unless is_officer_or_admin?
     end
 end

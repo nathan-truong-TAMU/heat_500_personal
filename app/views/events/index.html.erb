@@ -20,7 +20,7 @@
 
 <!-- Shows login prompt if the user doesn't have valid permissions -->
 <% if is_guest_or_guest_view? %>
-  <%= link_to 'Login to manage events', login2_path %>
+  <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 
 <!-- Shows new event link if user is Admin/Officer  -->
