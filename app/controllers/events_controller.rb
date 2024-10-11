@@ -1,10 +1,20 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
-  before_action :require_login, only: %i[new show edit update destroy]
+  before_action :require_login, only: %i[new show edit update destroy destroy_all]
 
   # GET /events or /events.json
   def index
     @events = Event.all
+  end
+
+  # DELETE /events/destroy_all
+  def destroy_all
+    if session[:authenticated]
+      Event.delete_all
+      redirect_to events_url, notice: "All events have been successfully deleted."
+    else
+      redirect_to events_url, alert: "You do not have permission to delete all events."
+    end
   end
 
   # GET /events/1 or /events/1.json
