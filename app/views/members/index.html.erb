@@ -4,16 +4,28 @@
 
 <h1>Members</h1>
 
-<div id="members">
+<table class="member-item" summary="Member list">
+      <tr class = "header">
+        <th>Name</th>
+        <th>Points</th>
+        <th>Dues Paid</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
   <% @members.each do |member| %>
-    <div class="member-item">
-      <%= render member %>
-      <div class="member-action">
-        <%= link_to "Show this member", member %>
-      </div>
-    </div>
+    <tr>
+            <td><%= member.name %></td>
+            <td><%= member.points %></td>
+            <td><%= member.dues_paid? ? 'Yes' : 'No' %></td>
+            <td><%= member.position || '-' %></td>
+            <td class = "actions">
+                <%= link_to("Show", member_path(member), class: 'action show') %>
+                <%= link_to("Edit", edit_member_path(member), class: 'action edit') %>
+                <%= link_to("Delete", member_path(member), data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } )%>
+            </td>
+        </tr>
   <% end %>
-</div>
+</table>
 
 <%= link_to "New member", new_member_path, class: 'new-member-link' %>
 
