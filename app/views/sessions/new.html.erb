@@ -165,34 +165,6 @@ table {
   }
 </script>
 
-  <div class="container mt-4">
-    <!-- Member View Table -->
-    <div class="mb-4">
-      <h2 class="mb-3">Meetings</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Location</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @meetings.each do |meeting| %>
-            <tr>
-              <td><%= meeting.name %></td>
-              <td><%= meeting.date %></td>
-              <td><%= meeting.time.strftime("%I:%M %p") if meeting.time.present? %></td>
-              <td><%= meeting.location %></td>
-              <td><%= meeting.description %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
     <!-- Member View Events Table -->
     <div class="mb-4">
       <h2 class="mb-3">Events</h2>
