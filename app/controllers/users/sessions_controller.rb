@@ -3,20 +3,10 @@
 class Users::SessionsController < Devise::SessionsController
   def new
     session[:previous_url] = request.referrer unless request.referrer == login_url
-    @events = Event.all
-    @links = Link.all
   end
 
   def login_manual
     @events = Event.all
-    @links = Link.all
-  end
-
-  def newevent
-    @events = Event.all
-  end
-
-  def newlink
     @links = Link.all
   end
 
