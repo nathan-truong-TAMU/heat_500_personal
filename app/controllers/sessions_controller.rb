@@ -34,7 +34,6 @@ class SessionsController < ApplicationController
   def create
     @events = Event.all
     @links = Link.all
-    puts "HELLO\n\n\n\n\n"
     member = Member.find_by(email: params[:email])
     if params[:password] == 'TxAMHeat#2k13'|| member&.position == 'Admin'
       session[:authenticated] = true
