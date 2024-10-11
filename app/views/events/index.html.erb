@@ -24,6 +24,10 @@
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
 
+<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+  <%= button_to "Clear All Events", destroy_all_events_path, method: :delete,data: { turbo_confirm: "Are you sure?" }, class: "clearEventsButton" %>
+<% end %>
+
 <!-- Displaying flash messages for any errors -->
 <% if flash[:alert] %>
   <div class="alert alert-danger">
@@ -100,5 +104,30 @@
 
   .event-link:hover, .new-event-link:hover {
     opacity: 0.8;
+  }
+
+  .clearEventsButton {
+    background-color: #28a745; /* Matching green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .clearEventsButton:hover {
+    background-color: #218838; /* Slightly darker green on hover */
+    opacity: 0.9;
+  }
+
+  /* Ensure buttons are vertically aligned */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
   }
 </style>
