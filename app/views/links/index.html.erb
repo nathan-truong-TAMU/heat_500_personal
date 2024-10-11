@@ -7,27 +7,30 @@
   <% @links.each do |link| %>
     <div style="margin-bottom: 20px;">
       <%= render link %>
-      <!-- Show the link only if authenticated or in 'admin' view mode -->
-      <% if session[:authenticated] && session[:view_mode] == 'admin' %>
+
+      <!-- Shows editing link if the user is Officer/Admin and in Officer/Admin view mode -->
+      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
         <p>
           <%= link_to "Show this link", link %>
         </p>
       <% end %>
     </div>
-    <!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
+
   <% end %>
 </div>
 
-<% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
+<!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
+<% if is_guest_or_guest_view? %>
       <%= link_to 'Login to manage links', login2_path, class: "auth-link" %>
 <% end %>
+
 <!-- Show 'New link' button only if authenticated or in 'admin' view mode -->
-<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+<% if is_officer_or_admin? && is_officer_or_admin_view? %>
   <%= link_to "New link", new_link_path, class: "admin-link" %>
 <% end %>
 
-<!-- Toggle View button available only if authenticated or in 'admin' view mode -->
-<% if session[:authenticated] %>
+<!-- Shows view toggle if the user is Admin/Officer -->
+<% if is_officer_or_admin? %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path, class: "toggle-link" %>
   </p>

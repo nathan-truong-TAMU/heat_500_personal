@@ -7,7 +7,7 @@
     <div class="event">
       <%= render event %>
 
-      <!-- Only renders editing link if user is Admin/Officer -->
+      <!-- Shows editing link if user is Admin/Officer -->
       <% if is_officer_or_admin? && is_officer_or_admin_view? %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
@@ -18,12 +18,12 @@
   <% end %>
 </div>
 
-<!-- Only renders login prompt if the user doesn't have valid permissions -->
-<% if (session[:authenticated] == 'Guest') || (session[:view_mode] == 'Guest') %>
+<!-- Shows login prompt if the user doesn't have valid permissions -->
+<% if is_guest_or_guest_view? %>
   <%= link_to 'Login to manage events', login2_path %>
 <% end %>
 
-<!-- Only renders new event link if user is Admin/Officer  -->
+<!-- Shows new event link if user is Admin/Officer  -->
 <% if is_officer_or_admin? && is_officer_or_admin_view? %>
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
@@ -35,7 +35,7 @@
   </div>
 <% end %>
 
-<!-- Only renders view toggle if the user is Admin/Officer -->
+<!-- Shows view toggle if the user is Admin/Officer -->
 <% if is_officer_or_admin? %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
