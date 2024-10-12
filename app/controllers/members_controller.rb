@@ -26,10 +26,6 @@ class MembersController < ApplicationController
     @members = Member.all
   end
 
-  def require_login
-    redirect_to login2_path unless session[:authenticated]
-  end
-
   # GET /members/1 or /members/1.json
   def show
   end

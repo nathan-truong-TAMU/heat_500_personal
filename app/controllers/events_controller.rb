@@ -7,13 +7,6 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
-  # Ensure user is logged in
-  def require_login
-    unless session[:authenticated]
-      redirect_to login2_path, alert: "You must be logged in to access this page."
-    end
-  end
-
   # DELETE /events/destroy_all
   def destroy_all
     if session[:authenticated]
