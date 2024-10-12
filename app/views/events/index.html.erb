@@ -6,21 +6,25 @@
   <% @events.each do |event| %>
     <div class="event">
       <%= render event %>
-      <% if session[:authenticated] && session[:view_mode] == 'admin'%>
+
+      <!-- Shows editing link if user is Admin/Officer -->
+      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
         </p>
       <% end %>
+
     </div>
   <% end %>
 </div>
 
-
-<% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
-  <%= link_to 'Login to manage links', login2_path %>
+<!-- Shows login prompt if the user doesn't have valid permissions -->
+<% if is_guest_or_guest_view? %>
+  <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 
-<% if session[:authenticated] && session[:view_mode] == 'admin'%>
+<!-- Shows new event link if user is Admin/Officer  -->
+<% if is_officer_or_admin? && is_officer_or_admin_view? %>
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
 
@@ -35,7 +39,8 @@
   </div>
 <% end %>
 
-<% if session[:authenticated] %>
+<!-- Shows view toggle if the user is Admin/Officer -->
+<% if is_officer_or_admin? %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
   </p>
