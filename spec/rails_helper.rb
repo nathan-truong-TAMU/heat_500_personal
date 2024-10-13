@@ -1,17 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'simplecov'
-SimpleCov.start 'rails' do
-  add_filter '/app/controllers/application_controller.rb'
-  add_filter '/app/controllers/meetings_members_controller.rb'
-  add_filter '/app/controllers/events_members_controller.rb'
-  add_filter '/app/controllers/links_controller.rb'
-end
 require 'spec_helper'
-require 'devise'
-
-# Needed for the rspec files
-require 'factory_bot_rails'
-
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -45,9 +33,6 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 
-  # Needed for the rspec files
-  config.include FactoryBot::Syntax::Methods
-
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -75,16 +60,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
-
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::IntegrationHelpers, type: :request
-end
-
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
 end
