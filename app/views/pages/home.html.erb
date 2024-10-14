@@ -82,6 +82,12 @@
           <li class="nav-item">
             <%= link_to "Events", events_path, class: "nav-link" %>
           </li>
+          <% if is_officer_or_admin? %>
+            <li class="nav-item">
+              <%= link_to "Event Attendance", events_members_path, class: "nav-link" %>
+            </li>
+          <% end %>
+
         </ul>
       </div>
       <div class="ml-auto">

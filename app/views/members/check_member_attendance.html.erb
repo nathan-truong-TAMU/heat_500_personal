@@ -2,12 +2,18 @@
 <html>
 <head>
   <title>Member Attendance</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     /* Add CSS styles here */
     body {
       font-family: Arial, sans-serif;
+      background: none;
+      background-color: green;
+      /* border: 3px red solid; */
       margin: 0;
       padding: 0;
+      overflow: scroll;
     }
     .header {
       background-color: #500000;
@@ -23,9 +29,12 @@
       position: relative;
     }
     table {
-      width: 100%;
+      width: 95%;
       border-collapse: collapse;
       margin-bottom: 20px;
+      padding: 1%;
+      border: solid black 1px;
+      
     }
     th, td {
       border: 1px solid #ddd;
@@ -57,27 +66,96 @@
 <body>
 
 <div class="header">
-  <h2>Events attended for <%= current_user.full_name %></h2>
+  <h1>Profile</h1>
+  <br>
+  <h2><%= current_user.full_name %></h2>
+
   <!-- Back Button -->
   <button class="back-button" onclick="redirectToHome()">Back to Home</button>
 </div>
+
+<%# Have the the profile information displayed for the user to edit%>
+<div class="" style="text-align: center; color: green; width: 90%;">
+  <h3>Member Page</h3>
+  <h3><% current_user.avatar_url %></h3>
+  <br>
+  <%= image_tag(current_user.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block") %>
+
+  <div class="form-container">
+    <%= form_with(model: @member, local: true) do |form| %>
+      <% if @member.errors.any? %>
+        <div>
+          <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+          <ul>
+            <% @member.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-field">
+        <%= form.label :name, class: 'form-label' %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :points, class: 'form-label' %>
+        <%= form.number_field :points, disabled: true, class: 'form-control' %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :email, class: 'form-label' %>
+        <%= form.text_field :email, disabled: true, class: 'form-control' %>
+      </div>
+        
+      <div class="form-field">
+        <%= form.label :dues, class: 'form-label' %>
+        <%= form.check_box :dues_paid, disabled: true, class: 'form-control' %>
+      </div>
+
+      <%
+        
+      %>
+      <div class="form-field">
+        <%= form.text_field nil , hidden: true, :readonly => true, :name => 'source', :value => 'member', class: 'form-control' %>
+      </div>
+
+
+      <br>
+      <div class="form-field">
+        <%= form.submit 'Save Changes', class: 'form-submit btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
 <br>
+<hr>
+
+<div>
 
   <div class="events-attended">
     <h3>Events Attended</h3>
-    <% if @member && @member.events.any? %>
+    <% if @member && @join_events %>
       <table>
         <thead>
           <tr>
             <th>Date</th>
             <th>Name</th>
+            <th>Points</th>
+            <th>View Event</th>
           </tr>
         </thead>
         <tbody>
-          <% @member.events.each do |event| %>
+          <% @join_events.each do |event| %>
             <tr>
-              <td><%= event.event_datetime.strftime("%b %d, %Y %I:%M %p") %></td>
-              <td><%= event.event_name %></td>
+              <td><%= event.start_date.strftime("%b %d, %Y %I:%M %p") %></td>
+              <td><%= event.name %></td>
+              <td><%= event.points %></td>
+
+              <td><%= link_to "Show this event", event, class: ' btn btn-primary'  %></td>
             </tr>
           <% end %>
         </tbody>

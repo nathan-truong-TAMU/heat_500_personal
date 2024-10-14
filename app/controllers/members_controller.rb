@@ -1,19 +1,22 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy ]
-  before_action :require_login, except: [:check_member_attendance]
+  before_action :require_login, except: [:check_member_attendance, :update] #update also added because members should be able to access it to change profile
 
   def check_member_attendance
-    def check_member_attendance
-      if current_user.present?
-        @member = Member.find_by(name: current_user.full_name)
-        @attended = if @member.present? && ( @member.events.any?)
+    if current_user.present?
+      puts current_user.email
+      @member = Member.find_by(email: current_user.email)
+      @member_events = EventsMember.includes(:event, :member).where(member: @member.id)
+      @join_events = @member.events.all #calls the join table to get all the events for the member
+
+      @attended = 
+        (if @member.present? && ( @member.events.any?)
           true
-                    else
+        else
           false
-                    end
-      else
-        @attended = false
-      end
+        end)
+    else
+      @attended = false
     end
   end
 
@@ -61,9 +64,12 @@ class MembersController < ApplicationController
 
   # PATCH/PUT /members/1 or /members/1.json
   def update
+    #checking where the form was sent from
+    source = params[:source] ? params[:source] : nil
+
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
+        format.html { redirect_to (!source ? member_url(@member) : "/check_member_attendance"), notice: "Member was successfully updated." }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -90,6 +96,7 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:name, :points, :position, :dues_paid, :email)
+      params.require(:member).permit(:name, :points, :position, :dues_paid, :email, :source)
+      # params.permit(:source)
     end
 end
