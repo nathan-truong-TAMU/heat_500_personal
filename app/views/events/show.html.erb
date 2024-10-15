@@ -4,9 +4,11 @@
 
 <div class="event-actions">
   <%= link_to "Edit this event", edit_event_path(@event) %> |
-  <%= link_to "Back to events", events_path %>
+  <%= link_to "Back to events", events_path %> |
+  <%= link_to "Add Members", "/event/#{@event.id}/add" %> 
 
-  <%= button_to "Destroy this event", @event, method: :delete, form: {class: "inline-form"} %>
+
+  <%= button_to "Destroy this event", @event, method: :delete, form: {class: "inline-form event-actions "} %>
 </div>
 
 <style>
@@ -34,9 +36,19 @@
     margin: 20px auto;
   }
 
+  .destroy-button{
+    border: none;
+    border-radius: 6px;
+    color: white;
+    display: block;
+    margin-top: 1%;
+    background-color: blue;
+  }
+
   .event-actions {
     text-align: center;
-    margin-top: 20px;
+    /* display: block; */
+    margin-top: 1%;
   }
 
   .event-actions a, .event-actions form input[type=submit] {

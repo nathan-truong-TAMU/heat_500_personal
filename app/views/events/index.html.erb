@@ -19,7 +19,7 @@
 </div>
 
 <!-- Shows login prompt if the user doesn't have valid permissions -->
-<% if is_guest_or_guest_view? %>
+<% if is_member_or_member_view? %>
   <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 

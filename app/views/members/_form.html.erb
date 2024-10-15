@@ -18,7 +18,7 @@
 
     <div class="form-field">
       <%= form.label :points, class: 'form-label' %>
-      <%= form.number_field :points, class: 'form-control' %>
+      <%= form.number_field :points, disabled: true, class: 'form-control' %>
     </div>
 
     <div class="form-field">
@@ -36,7 +36,7 @@
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
         ['Admin', 'Admin']]), class: 'form-control' %>
     </div>
-
+    <br>
     <div class="form-field">
       <%= form.submit 'Save Member', class: 'form-submit' %>
     </div>
