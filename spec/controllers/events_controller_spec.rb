@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   let(:valid_attributes) do
-    { event_name: 'Test Event', event_datetime: DateTime.now }
+    { name: 'Test Event', start_date: DateTime.now }
   end
 
   before(:each) do
@@ -56,13 +56,13 @@ RSpec.describe EventsController, type: :controller do
   describe "PATCH #update" do
     context "with valid params" do
       let(:new_attributes) do
-        { event_name: 'Updated Event' }
+        { name: 'Updated Event' }
       end
 
       it "updates the requested event" do
         patch :update, params: { id: @event.id, event: new_attributes }
         @event.reload
-        expect(@event.event_name).to eq('Updated Event')
+        expect(@event.name).to eq('Updated Event')
       end
 
       it "redirects to the event" do

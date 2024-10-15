@@ -1,11 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: %i[show edit update destroy]
   before_action :require_login, only: %i[new show]
- 
-
-  def require_login
-    redirect_to login2_path unless session[:authenticated]
-  end
 
   # GET /links
   def index
@@ -71,5 +66,9 @@ class LinksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def link_params
     params.require(:link).permit(:title, :url)
+  end
+
+  def event_params
+    params.require(:event).permit()
   end
 end

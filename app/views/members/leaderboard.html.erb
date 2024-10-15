@@ -1,0 +1,102 @@
+<head>
+  <title>Leaderboard</title>
+
+  <style>
+    /* Add CSS styles here */
+
+    body {
+      /* font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: scroll; */
+    }
+
+    .header {
+      background-color: #500000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .member-table{
+        background-color: white;
+        width: 98%;
+        border-radius: 12px;
+    }
+    
+    h3 {
+      margin-top: 0;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #FFFFFF;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .back-button:hover {
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<%= link_to 'Back', root_path, class: 'back-link' %>
+
+
+
+<p class="notice"><%= notice %></p>
+
+<h1>Leaderboard</h1>
+<%if !@filter %>
+    <%= link_to("Filter by dues paid", "/leaderboard?filter=true", class: 'btn btn-primary') %>
+<%else%>
+    <%= link_to("Remove dues filter", "/leaderboard", class: 'btn btn-primary') %>
+<%end%>
+
+<table class="table member-table" summary="Member list">
+      <tr class = "header">
+        <th>Ranking</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Points</th>
+        <th>Dues Paid</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
+  <% @join_google_users.each do |member| %>
+        <tr style=<%= (@curr <= 3) ? "background-color: red": "" %>> 
+            <%if @curr == 1%>
+                <td style="background-color: gold;"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
+            <%elsif @curr == 2%>  
+                <td style="background-color: silver;"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
+            <%elsif @curr == 3%> 
+                <td style="background-color: bronze;"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
+            <%else%> 
+              <td "><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
+            <%end%>
+            
+            <td><%= member.name %></td>
+            <td><%= member.email %></td>
+            <td><%= member.points %></td>
+            <td><%= member.dues_paid? ? 'Yes' : 'No' %></td>
+            <td><%= member.position || '-' %></td>
+            <td class = "actions">
+                <%= link_to("Show", member_path(member), class: 'btn btn-primary') %>
+            </td>
+        </tr>
+
+    <%@curr = @curr + 1%>
+
+  <% end %>
+</table>

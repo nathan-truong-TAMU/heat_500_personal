@@ -1,20 +1,45 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy ]
-  before_action :require_login, except: [:check_member_attendance]
+  before_action :require_login, except: [:check_member_attendance, :leaderboard, :update] #update also added because members should be able to access it to change profile
 
   def check_member_attendance
-    def check_member_attendance
-      if current_user.present?
-        @member = Member.find_by(member_name: current_user.full_name)
-        @attended = if @member.present? && (@member.meetings.any? || @member.events.any?)
+    if current_user.present?
+      puts current_user.email
+      @member = Member.find_by(email: current_user.email)
+      @member_events = EventsMember.includes(:event, :member).where(member: @member.id)
+      @join_events = @member.events.all #calls the join table to get all the events for the member
+
+      @attended = 
+        (if @member.present? && ( @member.events.any?)
           true
-                    else
+        else
           false
-                    end
-      else
-        @attended = false
-      end
+        end)
+    else
+      @attended = false
     end
+  end
+
+  # GET /leaderboard
+  def leaderboard
+    #the controller method/action for the leaderboard page. Should really only be retrieval of information
+    @filter = params[:filter]
+    
+
+    @members = Member.all
+    @members = @members.order(points: "desc")
+
+    @curr = 1
+
+    @join_google_users = User.select("users.*, members.*").joins("INNER JOIN members ON members.email = users.email")
+    @join_google_users = @join_google_users.order(points: "desc")
+
+    if(@filter)
+      @join_google_users = @join_google_users.where("dues_paid = true")
+    end
+
+    puts @join_google_users
+
   end
 
   def set_member
@@ -24,10 +49,6 @@ class MembersController < ApplicationController
   # GET /members or /members.json
   def index
     @members = Member.all
-  end
-
-  def require_login
-    redirect_to login2_path unless session[:authenticated]
   end
 
   # GET /members/1 or /members/1.json
@@ -65,9 +86,12 @@ class MembersController < ApplicationController
 
   # PATCH/PUT /members/1 or /members/1.json
   def update
+    #checking where the form was sent from
+    source = params[:source] ? params[:source] : nil
+
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
+        format.html { redirect_to (!source ? member_url(@member) : "/check_member_attendance"), notice: "Member was successfully updated." }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -94,6 +118,7 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:member_name, :member_points, :executive_status)
+      params.require(:member).permit(:name, :points, :position, :dues_paid, :email, :source)
+      # params.permit(:source)
     end
 end

@@ -1,13 +1,4 @@
-# frozen_string_literal: true
-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
-
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
-
   def google_oauth2
     user = User.from_omniauth(auth)
 
@@ -15,6 +6,33 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect user, event: :authentication
+
+      # Checks the email of the google account's permissions in the member table
+      member = Member.find_by(email: user.email)
+      
+      # If the user is logging into the website for the first time, automatically add their information to members table
+      unless member
+        member = Member.create(
+          name: user.full_name,
+          email: user.email,
+          position: 'Member',
+          points: 0,
+          dues_paid: false
+        )
+      end
+
+      # Handles setting session variables
+      if member&.position == 'Admin'
+        session[:authenticated] = 'Admin'
+        session[:view_mode] = 'Admin'
+      elsif member&.position == 'Officer'
+        session[:authenticated] = 'Officer'
+        session[:view_mode] = 'Officer'
+      else
+        session[:authenticated] = 'Member'
+        session[:view_mode] = 'Member'
+      end
+
     else
       flash[:alert] =
         t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
