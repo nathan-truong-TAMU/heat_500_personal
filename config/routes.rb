@@ -38,7 +38,9 @@ Rails.application.routes.draw do
   end
 
   get "/redirect", to: "calendars#redirect"
-  get "/callback", to: "calendars#callback"
+  get "/auth/google_oauth2/callback", to: "calendars#callback"
+  get "/calendars", to: "calendars#calendars"
+  get "/calendarevents/:calendar_id", to: "calendars#events", as: "calendarevents", calendar_id: "/[^\/]+/"
 
   get 'events_export', to: 'events_members#export', as: 'events_export'
 
