@@ -6,22 +6,30 @@
   <% @events.each do |event| %>
     <div class="event">
       <%= render event %>
-      <% if session[:authenticated] && session[:view_mode] == 'admin'%>
+
+      <!-- Shows editing link if user is Admin/Officer -->
+      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
         </p>
       <% end %>
+
     </div>
   <% end %>
 </div>
 
-
-<% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
-  <%= link_to 'Login to manage links', login2_path %>
+<!-- Shows login prompt if the user doesn't have valid permissions -->
+<% if is_member_or_member_view? %>
+  <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 
-<% if session[:authenticated] && session[:view_mode] == 'admin'%>
+<!-- Shows new event link if user is Admin/Officer  -->
+<% if is_officer_or_admin? && is_officer_or_admin_view? %>
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
+<% end %>
+
+<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+  <%= button_to "Clear All Events", destroy_all_events_path, method: :delete,data: { turbo_confirm: "Are you sure?" }, class: "clearEventsButton" %>
 <% end %>
 
 <!-- Displaying flash messages for any errors -->
@@ -31,7 +39,8 @@
   </div>
 <% end %>
 
-<% if session[:authenticated] %>
+<!-- Shows view toggle if the user is Admin/Officer -->
+<% if is_officer_or_admin? %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
   </p>
@@ -100,5 +109,30 @@
 
   .event-link:hover, .new-event-link:hover {
     opacity: 0.8;
+  }
+
+  .clearEventsButton {
+    background-color: #28a745; /* Matching green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .clearEventsButton:hover {
+    background-color: #218838; /* Slightly darker green on hover */
+    opacity: 0.9;
+  }
+
+  /* Ensure buttons are vertically aligned */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
   }
 </style>

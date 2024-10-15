@@ -1,16 +1,19 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
-  before_action :require_login, only: %i[new show edit update destroy]
+  before_action :require_login, only: %i[new show edit update destroy destroy_all]
 
   # GET /events or /events.json
   def index
     @events = Event.all
   end
 
-  # Ensure user is logged in
-  def require_login
-    unless session[:authenticated]
-      redirect_to login2_path, alert: "You must be logged in to access this page."
+  # DELETE /events/destroy_all
+  def destroy_all
+    if session[:authenticated]
+      Event.delete_all
+      redirect_to events_url, notice: "All events have been successfully deleted."
+    else
+      redirect_to events_url, alert: "You do not have permission to delete all events."
     end
   end
 
@@ -75,6 +78,6 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:event_link, :event_name, :event_datetime, :event_end, :event_points, :event_description)
+    params.require(:event).permit(:link, :name, :start_date, :end_date, :points, :description, :category, :location)
   end
 end

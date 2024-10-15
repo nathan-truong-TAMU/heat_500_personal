@@ -1,0 +1,69 @@
+<ul>
+  <% @event_list.items.each do |event| %>
+    <div class="event-list">
+    <div class="event-item">
+        <div class="event-title"><%= event.summary %></div>
+        <div class="event-date"><% if event.start %>
+        <%= event.start.date || event.start.date_time || 'No date available' %>
+      <% else %>
+        No date available
+      <% end %>  </div>
+    </div>
+</div>
+  <% end %>
+</ul>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container for the event list */
+.event-list {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual event item */
+.event-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.event-item:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+/* Event title */
+.event-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Event date */
+.event-date {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Event description */
+.event-description {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Hover effect for event items */
+.event-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+</style>

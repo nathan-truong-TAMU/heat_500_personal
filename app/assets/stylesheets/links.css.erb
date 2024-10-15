@@ -1,0 +1,156 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+
+body {
+  background-image: url('<%= asset_path("heat.png") %>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #C0C0C0; /* Fallback color */
+}
+
+#links {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-family: 'Georgia', serif;
+  color: #2f4f4f;
+  text-align: center;
+}
+
+a {
+  font-family: 'Arial', sans-serif;
+  color: #006400;
+}
+
+a:hover {
+  color: #228B22;
+}
+
+
+.auth-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #6B8E23; /* Olive green */
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.auth-link:hover {
+  background-color: #cffcd6; /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+
+.admin-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #228B22; /* Forest green */
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.admin-link:hover {
+  background-color: #deffe3; /* Darker forest green on hover */
+  transform: scale(1.05);
+}
+
+
+.toggle-link {
+  display: inline-block;
+  padding: 8px 18px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #3CB371; /* Medium sea green */
+  border-radius: 15px 50px 30px 50px; /* Leaf-like shape */
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #2E8B57; /* Sea green border */
+}
+
+.toggle-link:hover {
+  background-color: #2E8B57; /* Dark sea green on hover */
+  color: #FFFACD; /* Light yellow text on hover */
+  transform: scale(1.05) rotate(-3deg); /* Slight rotation and scale on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+.toggle-link:active {
+  background-color: #6B8E23; /* Olive green when clicked */
+  transform: scale(0.95); /* Slight shrink on active */
+}
+
+
+
+.edit-link {
+  color: #ffffff;
+  background-color: #3CB371; /* Medium sea green */
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.edit-link:hover {
+  background-color: #2E8B57; /* Dark sea green */
+  transform: scale(1.05);
+}
+
+/* Style for "Back to links" */
+.back-link {
+  color: #ffffff;
+  background-color: #6B8E23; /* Olive green */
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.back-link:hover {
+  background-color: #556B2F; /* Darker olive */
+  transform: scale(1.05);
+}
+
+/* Style for "Destroy this link" */
+.destroy-button {
+  color: #ffffff;
+  background-color: #DC143C; /* Crimson red */
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.destroy-button:hover {
+  background-color: #8B0000; /* Dark red */
+  transform: scale(1.05);
+}
+
+.destroy-button:active {
+  background-color: #FF4500; /* Red-orange on click */
+  transform: scale(0.95);
+}

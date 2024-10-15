@@ -1,33 +1,38 @@
+<%= stylesheet_link_tag "links", media: "all", "data-turbo-track": "reload" %>
 <%= link_to 'Back', root_path %>
 
 <h1>Links</h1>
 
 <div id="links">
   <% @links.each do |link| %>
-    <%= render link %>
-    <!-- Show the link only if authenticated or in 'admin' view mode -->
-    <% if session[:authenticated] && session[:view_mode] == 'admin' %>
-      <p>
-        <%= link_to "Show this link", link %>
-      </p>
-    <% end %>
+    <div style="margin-bottom: 20px;">
+      <%= render link %>
 
-    <!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
-    <% if !session[:authenticated]  || session[:view_mode] == 'guest'%>
-      <%= link_to 'Login to manage links', login2_path %>
-    <% end %>
+      <!-- Shows editing link if the user is Officer/Admin and in Officer/Admin view mode -->
+      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
+        <p>
+          <%= link_to "Show this link", link %>
+        </p>
+      <% end %>
+    </div>
+
   <% end %>
 </div>
 
-<!-- Show 'New link' button only if authenticated or in 'admin' view mode -->
-<% if session[:authenticated] && session[:view_mode] == 'admin' %>
-  <%= link_to "New link", new_link_path %>
+<!-- Show 'Login to manage links' only if the user is not authenticated and in member view mode -->
+<% if is_member_or_member_view? %>
+      <%= link_to 'Login to manage links', login_manual_path, class: "auth-link" %>
 <% end %>
 
-<!-- Toggle View button available only if authenticated or in 'admin' view mode -->
-<% if session[:authenticated] %>
+<!-- Show 'New link' button only if authenticated or in 'admin' view mode -->
+<% if is_officer_or_admin? && is_officer_or_admin_view? %>
+  <%= link_to "New link", new_link_path, class: "admin-link" %>
+<% end %>
+
+<!-- Shows view toggle if the user is Admin/Officer -->
+<% if is_officer_or_admin? %>
   <p>
-    <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
+    <%= link_to 'Toggle View Mode', toggle_view_mode_path, class: "toggle-link" %>
   </p>
 <% end %>
 

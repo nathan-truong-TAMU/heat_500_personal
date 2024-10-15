@@ -10,19 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_04_073311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
-    t.string "event_link"
-    t.string "event_name"
-    t.datetime "event_datetime"
+  create_table "announcements", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.datetime "start_date"
+    t.string "description"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "event_end"
-    t.integer "event_points"
-    t.text "event_description"
+    t.index ["member_id"], name: "index_announcements_on_member_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "end_date"
+    t.integer "points"
+    t.text "description"
+    t.string "category"
+    t.string "location"
+    t.string "link"
   end
 
   create_table "events_members", force: :cascade do |t|
@@ -34,6 +46,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
     t.index ["member_id"], name: "index_events_members_on_member_id"
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price"
+    t.string "name"
+    t.string "description"
+    t.string "category"
+    t.string "photo_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "leaderboards", force: :cascade do |t|
+    t.string "level_name"
+    t.integer "level_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -41,29 +71,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.date "date"
-    t.string "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.time "time"
-    t.text "description"
-  end
-
-  create_table "meetings_members", force: :cascade do |t|
-    t.bigint "meeting_id", null: false
-    t.bigint "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meeting_id"], name: "index_meetings_members_on_meeting_id"
-    t.index ["member_id"], name: "index_meetings_members_on_member_id"
-  end
-
   create_table "members", force: :cascade do |t|
-    t.string "member_name"
-    t.integer "member_points"
-    t.boolean "executive_status"
+    t.string "name"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "position"
+    t.boolean "dues_paid"
+    t.string "email"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "path"
+    t.string "alt_text"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -84,8 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_232313) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "announcements", "members"
   add_foreign_key "events_members", "events"
   add_foreign_key "events_members", "members"
-  add_foreign_key "meetings_members", "meetings"
-  add_foreign_key "meetings_members", "members"
 end

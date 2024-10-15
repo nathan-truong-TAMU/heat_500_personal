@@ -7,28 +7,16 @@
 <div class="action-links">
   <%= link_to "Edit this member", edit_member_path(@member) %> |
   <%= link_to "Back to members", members_path %>
-  <%= button_to "Destroy this member", @member, method: :delete, data: { confirm: "Are you sure?" }, form_class: "action-link", class: "danger-link" %>
+  <%= button_to "Destroy this member", @member, method: :delete, data: { turbo_confirm: "Are you sure?" }, form_class: "action-link", class: "danger-link" %>
 </div>
 
-<div class="meetings-attended">
-  <h3>Meetings Attended</h3>
-  <% if @member.meetings.any? %>
-    <ul>
-      <% @member.meetings.each do |meeting| %>
-        <li><%= meeting.name %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>This member has not attended any meetings yet.</p>
-  <% end %>
-</div>
 
 <div class="events-attended">
   <h3>Events Attended</h3>
   <% if @member.events.any? %>
     <ul>
       <% @member.events.each do |event| %>
-        <li><%= event.event_name %></li>
+        <li><%= event.name %></li>
       <% end %>
     </ul>
   <% else %>
@@ -95,29 +83,6 @@
 
   .action-links form {
     display: inline;
-  }
-
-  .meetings-attended {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 20px;
-    max-width: 600px;
-    margin: 20px auto;
-  }
-
-  .meetings-attended h3 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-
-  .meetings-attended ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .meetings-attended li {
-    margin-bottom: 5px;
   }
 
   .events-attended {
