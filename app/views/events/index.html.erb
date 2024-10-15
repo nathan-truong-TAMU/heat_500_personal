@@ -8,7 +8,7 @@
       <%= render event %>
 
       <!-- Shows editing link if user is Admin/Officer -->
-      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
+      <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
         </p>
@@ -19,12 +19,12 @@
 </div>
 
 <!-- Shows login prompt if the user doesn't have valid permissions -->
-<% if is_guest_or_guest_view? %>
+<% if is_guest_or_guest_view?(session) %>
   <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 
 <!-- Shows new event link if user is Admin/Officer  -->
-<% if is_officer_or_admin? && is_officer_or_admin_view? %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
 
@@ -40,7 +40,7 @@
 <% end %>
 
 <!-- Shows view toggle if the user is Admin/Officer -->
-<% if is_officer_or_admin? %>
+<% if is_officer_or_admin?(session) %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
   </p>

@@ -18,6 +18,14 @@ module Validation
             end
         end
 
+        # Checks if the inputted title is valid
+        def is_valid_title
+            # Checks for an empty name
+            if is_input_empty(title)
+                errors.add(:title, "can't be blank!")
+            end
+        end
+
         # Checks if the inputted points is valid
         def is_valid_points
             # Checks for negative points
@@ -50,10 +58,31 @@ module Validation
             end
         end
 
+        # Checks if the inputted link is valid
+        def is_valid_url
+            # Checks for empty link
+            if is_input_empty(url)
+                errors.add(:url, "can't be blank!")
+
+            else
+                # Checks if the link is reachable
+                begin
+                    open(url) do |response|
+                    end
+
+                # Handles if link isn't reachable
+                rescue StandardError => e
+                    errors.add(:url, "must be reachable! (Error: #{e.message})")
+                end
+            end
+        end
+
         # Checks if the inputted Start and End dates are valid
         def is_valid_dates
-            if start_date > end_date
-                errors.add(:start_date, "can't be after the End date!")
+            if start_date.present? && end_date.present?
+                if start_date > end_date
+                    errors.add(:start_date, "can't be after the End date!")
+                end
             end
         end
     end

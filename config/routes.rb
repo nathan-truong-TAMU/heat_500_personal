@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get 'login', to: 'users/sessions#new'
     post 'login', to: 'users/sessions#create'
   
-    get 'login_manual', to: 'users/sessions#login_manual' 
+    get 'login_manual', to: 'users/sessions#login_manual'
   
     get 'one_time_logout', to: 'users/sessions#destroy'
   end

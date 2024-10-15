@@ -9,7 +9,7 @@
       <%= render link %>
 
       <!-- Shows editing link if the user is Officer/Admin and in Officer/Admin view mode -->
-      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
+      <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
         <p>
           <%= link_to "Show this link", link %>
         </p>
@@ -20,17 +20,17 @@
 </div>
 
 <!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
-<% if is_guest_or_guest_view? %>
+<% if is_guest_or_guest_view?(session) %>
       <%= link_to 'Login to manage links', login_manual_path, class: "auth-link" %>
 <% end %>
 
 <!-- Show 'New link' button only if authenticated or in 'admin' view mode -->
-<% if is_officer_or_admin? && is_officer_or_admin_view? %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <%= link_to "New link", new_link_path, class: "admin-link" %>
 <% end %>
 
 <!-- Shows view toggle if the user is Admin/Officer -->
-<% if is_officer_or_admin? %>
+<% if is_officer_or_admin?(session) %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path, class: "toggle-link" %>
   </p>
