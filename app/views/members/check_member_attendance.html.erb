@@ -77,8 +77,9 @@
 <%# Have the the profile information displayed for the user to edit%>
 <div class="" style="text-align: center; color: green; width: 90%;">
   <h3>Member Page</h3>
-  <h3><% current_user.avatar_url %></h3>
+  <h3><% puts "Here is the url #{current_user.avatar_url} " %></h3>
   <br>
+  
   <%= image_tag(current_user.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block") %>
 
   <div class="form-container">

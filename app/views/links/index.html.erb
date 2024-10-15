@@ -19,8 +19,8 @@
   <% end %>
 </div>
 
-<!-- Show 'Login to manage links' only if the user is not authenticated and in guest view mode -->
-<% if is_guest_or_guest_view? %>
+<!-- Show 'Login to manage links' only if the user is not authenticated and in member view mode -->
+<% if is_member_or_member_view? %>
       <%= link_to 'Login to manage links', login_manual_path, class: "auth-link" %>
 <% end %>
 

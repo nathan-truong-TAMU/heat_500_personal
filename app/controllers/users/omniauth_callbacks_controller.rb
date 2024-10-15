@@ -15,7 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         member = Member.create(
           name: user.full_name,
           email: user.email,
-          position: 'Guest',
+          position: 'Member',
           points: 0,
           dues_paid: false
         )
@@ -29,8 +29,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session[:authenticated] = 'Officer'
         session[:view_mode] = 'Officer'
       else
-        session[:authenticated] = 'Guest'
-        session[:view_mode] = 'Guest'
+        session[:authenticated] = 'Member'
+        session[:view_mode] = 'Member'
       end
 
     else

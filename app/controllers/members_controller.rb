@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy ]
-  before_action :require_login, except: [:check_member_attendance, :update] #update also added because members should be able to access it to change profile
+  before_action :require_login, except: [:check_member_attendance, :leaderboard, :update] #update also added because members should be able to access it to change profile
 
   def check_member_attendance
     if current_user.present?
@@ -18,6 +18,28 @@ class MembersController < ApplicationController
     else
       @attended = false
     end
+  end
+
+  # GET /leaderboard
+  def leaderboard
+    #the controller method/action for the leaderboard page. Should really only be retrieval of information
+    @filter = params[:filter]
+    
+
+    @members = Member.all
+    @members = @members.order(points: "desc")
+
+    @curr = 1
+
+    @join_google_users = User.select("users.*, members.*").joins("INNER JOIN members ON members.email = users.email")
+    @join_google_users = @join_google_users.order(points: "desc")
+
+    if(@filter)
+      @join_google_users = @join_google_users.where("dues_paid = true")
+    end
+
+    puts @join_google_users
+
   end
 
   def set_member

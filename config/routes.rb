@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   get 'events_export', to: 'events_members#export', as: 'events_export'
 
   get '/check_member_attendance', to: 'members#check_member_attendance'
+
+  get '/leaderboard', to: 'members#leaderboard'
 end

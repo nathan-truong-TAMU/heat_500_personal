@@ -11,11 +11,11 @@ class ApplicationController < ActionController::Base
     end
     helper_method :is_officer_or_admin_view?
 
-    # Checks if a user is a guest or in guest view
-    def is_guest_or_guest_view?
-        session[:authenticated] == 'Guest' || session[:view_mode] == 'Guest'
+    # Checks if a user is a member or in member view
+    def is_member_or_member_view?
+        session[:authenticated] == 'Member' || session[:view_mode] == 'Member'
     end
-    helper_method :is_guest_or_guest_view?
+    helper_method :is_member_or_member_view?
 
     # Redirects user to the admin/officer password page if they aren't an admin/officer
     def require_login
