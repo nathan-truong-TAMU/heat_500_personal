@@ -16,7 +16,7 @@
   <% if @member.events.any? %>
     <ul>
       <% @member.events.each do |event| %>
-        <li><%= event.event_name %></li>
+        <li><%= event.name %></li>
       <% end %>
     </ul>
   <% else %>

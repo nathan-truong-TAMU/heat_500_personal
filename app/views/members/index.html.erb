@@ -4,9 +4,10 @@
 
 <h1>Members</h1>
 
-<table class="member-item" summary="Member list">
+<table class="table member-table" summary="Member list">
       <tr class = "header">
         <th>Name</th>
+        <th>Email</th>
         <th>Points</th>
         <th>Dues Paid</th>
         <th>Position</th>
@@ -15,13 +16,14 @@
   <% @members.each do |member| %>
     <tr>
             <td><%= member.name %></td>
+            <td><%= member.email %></td>
             <td><%= member.points %></td>
             <td><%= member.dues_paid? ? 'Yes' : 'No' %></td>
             <td><%= member.position || '-' %></td>
             <td class = "actions">
-                <%= link_to("Show", member_path(member), class: 'action show') %>
-                <%= link_to("Edit", edit_member_path(member), class: 'action edit') %>
-                <%= link_to("Delete", member_path(member), data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } )%>
+                <%= link_to("Show", member_path(member), class: 'btn btn-primary') %>
+                <%= link_to("Edit", edit_member_path(member), class: 'btn btn-primary') %>
+                <%= link_to("Delete", member_path(member), class: 'btn btn-danger', data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } )%>
             </td>
         </tr>
   <% end %>
@@ -58,6 +60,11 @@
     color: #333;
     text-align: center;
     margin-bottom: 30px;
+  }
+
+  .member-table{
+    background-color: rgba(98, 111, 71,0.95);
+    color: #FEFAE0;
   }
 
   #members {

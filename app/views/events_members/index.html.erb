@@ -51,16 +51,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @events.order(event_datetime: :desc).each do |event| %>
+    <% @events.order(start_date: :desc).each do |event| %>
       <tr>
-        <td><%= event.event_datetime.strftime("%B %d, %Y") %></td>
-        <td><%= event.event_name %></td>
+        <td><%= event.start_date.strftime("%B %d, %Y") %></td>
+        <td><%= event.name %></td>
         <td>
           <% event_members = event.events_members %>
           <% if event_members.any? %>
             <ul>
               <% event_members.each do |event_member| %>
-                <li><%= event_member.member.member_name %></li>
+                <li><%= event_member.member.name %></li>
               <% end %>
             </ul>
           <% else %>
@@ -72,7 +72,7 @@
             <%= form.hidden_field :event_id, value: event.id %>
             <div class="form-group">
               <%= form.label :member_id, "Member" %>
-              <%= form.collection_select :member_id, Member.all, :id, :member_name, prompt: "Select Member" %>
+              <%= form.collection_select :member_id, Member.all, :id, :name, prompt: "Select Member" %>
             </div>
             <%= form.submit "Add Member", class: "btn btn-primary" %>
           <% end %>
@@ -94,7 +94,7 @@
 
 <h2>Remove Member from Event</h2>
 <%= form_with(url: remove_member_from_event_events_members_path, method: :delete) do |form| %>
-  <%= form.collection_select :event_id, @events, :id, :event_name, prompt: "Select Event" %>
-  <%= form.collection_select :member_id, @members, :id, :member_name, prompt: "Select Member" %>
+  <%= form.collection_select :event_id, @events, :id, :name, prompt: "Select Event" %>
+  <%= form.collection_select :member_id, @members, :id, :name, prompt: "Select Member" %>
   <%= form.submit "Remove Member", class: "btn btn-danger" %>
 <% end %>

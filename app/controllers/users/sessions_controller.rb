@@ -38,12 +38,12 @@ class Users::SessionsController < Devise::SessionsController
     stored_location_for(resource_or_scope) || root_path
   end
 
-  # Toggles between Admin/Guest or Officer/Guest depending on roles
+  # Toggles between Admin/Member or Officer/Member depending on roles
   def toggle_view_mode
     if session[:authenticated] == 'Admin'
-      session[:view_mode] = session[:view_mode] == 'Admin' ? 'Guest' : 'Admin'
+      session[:view_mode] = session[:view_mode] == 'Admin' ? 'Member' : 'Admin'
     elsif session[:authenticated] == 'Officer'
-      session[:view_mode] = session[:view_mode] == 'Officer' ? 'Guest' : 'Officer'
+      session[:view_mode] = session[:view_mode] == 'Officer' ? 'Member' : 'Officer'
     end
 
     redirect_to request.referrer || root_path, notice: "View mode switched."

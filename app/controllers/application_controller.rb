@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
         session[:view_mode] == 'Officer' || session[:view_mode] == "Admin"
     end
 
-    # Checks if a user is a guest or in guest view
-    def is_guest_or_guest_view?
-        session[:authenticated] == 'Guest' || session[:view_mode] == 'Guest'
+    # Checks if a user is a member or in member view
+    def is_member_or_member_view?
+        session[:authenticated] == 'Member' || session[:view_mode] == 'Member'
     end
 
     # Redirects user to the admin/officer password page if they aren't an admin/officer
