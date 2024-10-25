@@ -8,7 +8,7 @@ module ApplicationHelper
     end
     
     def is_officer_or_admin_view?(session)
-    session[:view_mode] == 'Admin' || session[:view_mode] == 'Officer'
+        session[:view_mode] == 'Admin' || session[:view_mode] == 'Officer'
     end
 
     # Checks if a user is a guest or in guest view
