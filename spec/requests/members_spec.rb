@@ -12,13 +12,13 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/events", type: :request do
+RSpec.describe "/members", type: :request do
   before do
     post login_path, params: {password: 'TxAMHeat#2k13'}
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Event. As you add validations to Event, be sure to
+  # Member. As you add validations to Member, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -30,59 +30,59 @@ RSpec.describe "/events", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Event.create! valid_attributes
-      get events_url
+      Member.create! valid_attributes
+      get members_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      event = Event.create! valid_attributes
-      get event_url(event)
+      member = Member.create! valid_attributes
+      get member_url(member)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_event_url
+      get new_member_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      event = Event.create! valid_attributes
-      get edit_event_url(event)
+      member = Member.create! valid_attributes
+      get edit_member_url(member)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Event" do
+      it "creates a new Member" do
         expect {
-          post events_url, params: { event: valid_attributes }
-        }.to change(Event, :count).by(1)
+          post members_url, params: { member: valid_attributes }
+        }.to change(Member, :count).by(1)
       end
 
-      it "redirects to the created event" do
-        post events_url, params: { event: valid_attributes }
-        expect(response).to redirect_to(event_url(Event.last))
+      it "redirects to the created member" do
+        post members_url, params: { member: valid_attributes }
+        expect(response).to redirect_to(member_url(Member.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Event" do
+      it "does not create a new Member" do
         expect {
-          post events_url, params: { event: invalid_attributes }
-        }.to change(Event, :count).by(0)
+          post members_url, params: { member: invalid_attributes }
+        }.to change(Member, :count).by(0)
       end
 
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post events_url, params: { event: invalid_attributes }
+        post members_url, params: { member: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -95,26 +95,26 @@ RSpec.describe "/events", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested event" do
-        event = Event.create! valid_attributes
-        patch event_url(event), params: { event: new_attributes }
-        event.reload
+      it "updates the requested member" do
+        member = Member.create! valid_attributes
+        patch member_url(member), params: { member: new_attributes }
+        member.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the event" do
-        event = Event.create! valid_attributes
-        patch event_url(event), params: { event: new_attributes }
-        event.reload
-        expect(response).to redirect_to(event_url(event))
+      it "redirects to the member" do
+        member = Member.create! valid_attributes
+        patch member_url(member), params: { member: new_attributes }
+        member.reload
+        expect(response).to redirect_to(member_url(member))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        event = Event.create! valid_attributes
-        patch event_url(event), params: { event: invalid_attributes }
+        member = Member.create! valid_attributes
+        patch member_url(member), params: { member: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -122,17 +122,17 @@ RSpec.describe "/events", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested event" do
-      event = Event.create! valid_attributes
+    it "destroys the requested member" do
+      member = Member.create! valid_attributes
       expect {
-        delete event_url(event)
-      }.to change(Event, :count).by(-1)
+        delete member_url(member)
+      }.to change(Member, :count).by(-1)
     end
 
-    it "redirects to the events list" do
-      event = Event.create! valid_attributes
-      delete event_url(event)
-      expect(response).to redirect_to(events_url)
+    it "redirects to the members list" do
+      member = Member.create! valid_attributes
+      delete member_url(member)
+      expect(response).to redirect_to(members_url)
     end
   end
 end

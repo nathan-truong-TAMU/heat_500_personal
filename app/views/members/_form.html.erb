@@ -16,14 +16,10 @@
       <%= form.text_field :name, class: 'form-control' %>
     </div>
 
+    <!-- Points have a hard limit of 999,999,999 -->
     <div class="form-field">
       <%= form.label :points, class: 'form-label' %>
-      <%= form.number_field :points, disabled: true, class: 'form-control' %>
-    </div>
-
-    <div class="form-field">
-      <%= form.label :email, class: 'form-label' %>
-      <%= form.text_field :email, class: 'form-control' %>
+      <%= form.text_field :points, class: 'form-control', maxlength: 9, oninput: "this.value=this.value.replace(/[^0-9]/g,'');" %>
     </div>
       
     <div class="form-field">
