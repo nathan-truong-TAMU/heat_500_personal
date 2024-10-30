@@ -13,23 +13,13 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :link, "Event Link", class: 'form-label' %>
-      <%= form.text_field :link, class: 'form-control', placeholder: "Enter link to event" %>
-    </div>
-
-    <div class="form-group">
       <%= form.label :name, "Event Name", class: 'form-label' %>
       <%= form.text_field :name, class: 'form-control', placeholder: "Enter name of event" %>
     </div>
 
     <div class="form-group">
       <%= form.label :description, "Event Description", class: 'form-label' %>
-      <%= form.text_field :description, class: 'form-control', placeholder: "Enter description of event" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :end_date, "Event Deadline", class: 'form-label' %>
-      <%= form.datetime_field :end_date, class: 'form-control', placeholder: "Enter deadline date/time of event" %>
+      <%= form.text_area :description, class: 'form-control', placeholder: "Enter description of event" %>
     </div>
 
     <div class="form-group">
@@ -38,13 +28,19 @@
     </div>
 
     <div class="form-group">
+      <%= form.label :end_date, "Event Deadline", class: 'form-label' %>
+      <%= form.datetime_field :end_date, class: 'form-control', placeholder: "Enter deadline date/time of event" %>
+    </div>
+
+    <div class="form-group">
       <%= form.label :location, "Event Location", class: 'form-label' %>
       <%= form.text_field :location, class: 'form-control', placeholder: "Enter the location of the event" %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :points, "Event Points", class: 'form-label' %>
-      <%= form.select :points,  options_for_select((2..7).to_a.map { |num| [num, num] }, event.points) %>
+    <!-- Points have a hard limit of 999,999,999 -->
+    <div class="form-field">
+      <%= form.label :points, class: 'form-label' %>
+      <%= form.text_field :points, class: 'form-control', maxlength: 9, oninput: "this.value=this.value.replace(/[^0-9]/g,'');" %>
     </div>
 
     <div class="form-group">

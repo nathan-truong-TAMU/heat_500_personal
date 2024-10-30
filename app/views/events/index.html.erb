@@ -8,9 +8,10 @@
       <%= render event %>
 
       <!-- Shows editing link if user is Admin/Officer -->
-      <% if is_officer_or_admin? && is_officer_or_admin_view? %>
+      <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
+          <%= link_to "Show QR Code", qr_code_event_path(event), class: 'qr-code-link', target: '_blank' %>
         </p>
       <% end %>
 
@@ -19,16 +20,16 @@
 </div>
 
 <!-- Shows login prompt if the user doesn't have valid permissions -->
-<% if is_member_or_member_view? %>
+<% if is_guest_or_guest_view?(session) %>
   <%= link_to 'Login to manage events', login_manual_path %>
 <% end %>
 
 <!-- Shows new event link if user is Admin/Officer  -->
-<% if is_officer_or_admin? && is_officer_or_admin_view? %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
 
-<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <%= button_to "Clear All Events", destroy_all_events_path, method: :delete,data: { turbo_confirm: "Are you sure?" }, class: "clearEventsButton" %>
 <% end %>
 
@@ -40,7 +41,7 @@
 <% end %>
 
 <!-- Shows view toggle if the user is Admin/Officer -->
-<% if is_officer_or_admin? %>
+<% if is_officer_or_admin?(session) %>
   <p>
     <%= link_to 'Toggle View Mode', toggle_view_mode_path %>
   </p>

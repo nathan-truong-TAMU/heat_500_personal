@@ -13,19 +13,21 @@
 
     <div class="form-field">
       <%= form.label :name, class: 'form-label' %>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :name, required: true, class: 'form-control' %>
     </div>
 
+    <!-- Points have a hard limit of 999,999,999 -->
+    <%# Also don't want to let them change points directly since it needs to correlate with meetings %>
     <div class="form-field">
       <%= form.label :points, class: 'form-label' %>
-      <%= form.number_field :points, disabled: true, class: 'form-control' %>
+      <%= form.text_field :points, class: 'form-control', disabled: true, maxlength: 9, oninput: "this.value=this.value.replace(/[^0-9]/g,'');" %>
     </div>
 
+    <%# Only be able to access the email field for the creation of the member %>
     <div class="form-field">
       <%= form.label :email, class: 'form-label' %>
-      <%= form.text_field :email, class: 'form-control' %>
+      <%= form.text_field :email, required: true, type: "email", disabled: (member.email.present? && member.id.present?), class: 'form-control' %>
     </div>
-      
     <div class="form-field">
       <%= form.label :dues, class: 'form-label' %>
       <%= form.check_box :dues_paid, class: 'form-control' %>
@@ -33,8 +35,9 @@
 
     <div class="form-field">
       <%= form.label :position, class: 'form-label' %>
+      <!-- Defaults to current position if editing and to Member if creating a new member -->
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
-        ['Admin', 'Admin']]), class: 'form-control' %>
+        ['Admin', 'Admin']], member.position || 'Member'), class: 'form-control' %>
     </div>
     <br>
     <div class="form-field">
