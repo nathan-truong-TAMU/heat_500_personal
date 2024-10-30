@@ -1,0 +1,73 @@
+<ul>
+  <%= month_calendar(events: @event, attribute: :start_date) do |date, events| %>
+    <%= date.day %>
+    <% events.each do |event| %>
+      <div>
+        <%= event.name %>
+      </div>
+    <% end %>
+  <% end %>
+</ul>
+
+<style>
+.simple-calendar {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+.day {
+    align-items: center;
+    justify-content: center;
+    position: relative; /* For absolute positioning of events */
+    transition: background-color 0.2s;
+}
+
+.wday-0 { background-color: #f9f9f9; } /* Sunday */
+.wday-1 { background-color: #ffffff; } /* Monday */
+.wday-2 { background-color: #ffffff; } /* Tuesday */
+.wday-3 { background-color: #ffffff; } /* Wednesday */
+.wday-4 { background-color: #ffffff; } /* Thursday */
+.wday-5 { background-color: #ffffff; } /* Friday */
+.wday-6 { background-color: #f9f9f9; } /* Saturday */
+
+.today {
+    background-color: #7A94A1; /* Today's date */
+    color: #1f2f22;
+}
+
+.past {
+    background-color: #1f2f22;  /* Past dates */
+    color: #7A94A1;
+}
+
+.future {
+    background-color: #3E5640; /* Future dates */
+    color: #7A94A1;
+}
+
+.start-date {
+}
+
+.prev-month {
+    opacity: 0.5
+}
+
+.next-month {
+    opacity: 0.5
+}
+
+.current-month {
+    font-weight: bold; /* Bold text for current month days */
+}
+
+.has-events {
+    background-color: #93A889; /* Highlight days with events */
+    color: #1f2f22;
+}
+
+.has-events::after {
+}
+</style>
