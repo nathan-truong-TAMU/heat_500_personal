@@ -30,7 +30,7 @@
     <div class="form-field">
       <%= form.label :position, class: 'form-label' %>
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
-        ['Admin', 'Admin']]), class: 'form-control' %>
+        ['Admin', 'Admin']], member.position || 'Member'), class: 'form-control' %>
     </div>
     <br>
     <div class="form-field">

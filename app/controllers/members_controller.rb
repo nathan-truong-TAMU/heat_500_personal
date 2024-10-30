@@ -62,6 +62,7 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    @member = Member.find(params[:id])
   end
 
   # POST /members or /members.json
