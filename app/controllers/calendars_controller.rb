@@ -67,6 +67,13 @@ class CalendarsController < ApplicationController
         @calendars = Icalendar.parse(cal)
       end
       @events = @calendars[0].events
+      @eventdates = Array.new()
+      @events.each do |event|
+        name = event.summary
+        dateTime = event.dtstart
+        date = dateTime.strftime("%Y-%m-%d")
+        @eventdates.append(date)
+      end
       @event = Event.all
     end
     
