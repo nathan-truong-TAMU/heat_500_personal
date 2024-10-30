@@ -10,17 +10,20 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-        <style>
-        .flash__alert   { color: red; }
-        .flash__notice  { color: blue; }
-        .flash__success { color: green; }
+    <style>
+      .flash-general  { border-radius: 2px; font-family: "Georgia"; font-weight: bold; }
+      .flash__alert   { color: black; background-color: #CABA9C;}
+      .flash__notice  { color: blue; }
+      .flash__success { color: green; }
     </style>
   </head>
 
   <body>
     <% if flash.any? %>
       <% flash.each do |key, value| -%>
-        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+      <%# flash.discard() is meant to make sure it only is displayed once.%>
+      <%# Noticed it would duplicate for notice so doing it for flash notices for now %>
+        <section class="flash flash-general flash__<%= key %>"><%=(key != "notice") ? value.html_safe : flash.discard(value) %></section>
       <% end -%>
     <% end %>
     <%= yield %>

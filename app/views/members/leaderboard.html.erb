@@ -4,26 +4,26 @@
   <style>
     /* Add CSS styles here */
 
-    body {
-      /* font-family: Arial, sans-serif;
+    /* body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      overflow: scroll; */
-    }
+      overflow: scroll;
+    } */
 
     .header {
       background-color: #500000;
       color: white;
-      padding: 20px;
-      text-align: center;
-      position: relative;
+      padding: auto;
+      /* text-align: center; */
+      /* position: relative; */
     }
-    .container {
+    /* .container {
       max-width: 800px;
       margin: 20px auto;
       padding: 20px;
       position: relative;
-    }
+    } */
 
     .member-table{
         background-color: white;
@@ -75,9 +75,9 @@
         <th>Actions</th>
       </tr>
   <% @join_google_users.each do |member| %>
-        <tr style=<%= (@curr <= 3) ? "background-color: red": "" %>> 
+        <tr style="<%(@curr == 1) ? 'background-color: red;' : '' %>"> 
             <%if @curr == 1%>
-                <td style="background-color: gold;"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
+                <td style="background-color: gold; text-align: center"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %> <br> Gold Member </td>
             <%elsif @curr == 2%>  
                 <td style="background-color: silver;"><%= @curr %> <%= image_tag(member.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block")  %>  </td>
             <%elsif @curr == 3%> 

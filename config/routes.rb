@@ -47,4 +47,6 @@ Rails.application.routes.draw do
   get '/check_member_attendance', to: 'members#check_member_attendance'
 
   get '/leaderboard', to: 'members#leaderboard'
+
+  get '/members', to: 'members#index', as: 'member_list'
 end
