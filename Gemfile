@@ -87,6 +87,8 @@ gem "omniauth-rails_csrf_protection"
 
 #Google calendar
 gem 'google-apis-calendar_v3'
+gem "icalendar"
+gem "simple_calendar"
 
 # Simplecov
 gem 'simplecov', require: false

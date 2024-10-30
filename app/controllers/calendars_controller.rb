@@ -56,6 +56,19 @@ class CalendarsController < ApplicationController
       #  puts "Calendar ID: #{params[:calendar_id]}"
         # Log the error message or handle it accordingly
     end
+    def icalendar
+      require 'icalendar'
+      require 'open-uri'
+      puts "Before opening URI"
+      @calendars = nil
+      @currTime = Time.new
+      URI.open("https://calendar.google.com/calendar/ical/c_cbc58022ad21f89e06e114a10386754bc7803170afc55fb497499fc681d683ab%40group.calendar.google.com/public/basic.ics") do |cal|
+        #calendars = RiCal.parse(cal)
+        @calendars = Icalendar.parse(cal)
+      end
+      @events = @calendars[0].events
+      @event = Event.all
+    end
     
     private
     
