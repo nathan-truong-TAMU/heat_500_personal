@@ -4,6 +4,12 @@ Rails.application.routes.draw do
     collection do
       delete 'destroy_all' # Route for clearing all events
     end
+
+    member do
+      get 'qr_code' # Route for displaying the QR code
+      get 'register_attendance', to: 'events_members#register_attendance'
+    end
+  
   end
 
   resources :members
@@ -35,6 +41,7 @@ Rails.application.routes.draw do
     get 'login_manual', to: 'users/sessions#login_manual'
   
     get 'one_time_logout', to: 'users/sessions#destroy'
+    
   end
 
   get "/redirect", to: "calendars#redirect"

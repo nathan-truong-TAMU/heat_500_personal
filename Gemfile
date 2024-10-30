@@ -99,3 +99,5 @@ gem "brakeman"
 
 # installing rubocop
 gem "rubocop"
+
+gem "rqrcode"
