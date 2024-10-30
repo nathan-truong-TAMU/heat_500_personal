@@ -4,11 +4,65 @@
 
 <h1>Members</h1>
 
+<div>
+  <%# Filter the members by dues paid %>
+  <%if params[:filter] != "dues" %>
+    <%= link_to("Filter by Dues Paid", member_list_path(sort: params[:sort], order: params[:order], filter: "dues"), class: 'btn btn-primary') %></th>
+  <%else%>
+    <%= link_to("Remove Filter for Dues Paid", member_list_path(sort: params[:sort], order: params[:order], filter: nil), class: 'btn btn-primary') %></th>
+  <%end%>
+
+  <%# Filter the members to be only members%>
+  <%if params[:filter] != "members" %>
+    <%= link_to("Filter by Members only", member_list_path(sort: params[:sort], order: params[:order], filter: "members"), class: 'btn btn-primary') %></th>
+  <%else%>
+    <%= link_to("Remove Filter for Members", member_list_path(sort: params[:sort], order: params[:order], filter: nil), class: 'btn btn-primary') %></th>
+  <%end%>
+
+  <%# Filter the members to be only officers %>
+  <%if params[:filter] != "officers" %>
+    <%= link_to("Filter by Officers", member_list_path(sort: params[:sort], order: params[:order], filter: "officers"), class: 'btn btn-primary') %></th>
+  <%else%>
+    <%= link_to("Remove Filter for Officers", member_list_path(sort: params[:sort], order: params[:order], filter: nil), class: 'btn btn-primary') %></th>
+  <%end%>
+</div>
 <table class="table member-table" summary="Member list">
       <tr class = "header">
-        <th>Name</th>
-        <th>Email</th>
-        <th>Points</th>
+        <%# Using conditional logic for the ui changes to switch between different sorting %>
+
+        <%# Name %>
+        <%if params[:sort] == "name" %>
+          <%if params[:order] == "desc" %>
+            <th><%= link_to(raw("Name &#8595"), member_list_path(sort: "name", order: "asc"), focus: true, class: 'btn btn-primary sort-btn') %></th>
+          <%else%>
+            <th><%= link_to(raw("Name &#8593"), member_list_path, focus: true, class: 'btn btn-primary sort-btn') %></th>
+          <%end %>
+        <%else%>
+          <th><%= link_to(raw("Name"), member_list_path(sort: "name", order: "desc"), class: 'btn btn-primary sort-btn') %></th>
+        <%end%>
+        
+        <%# Email %>
+        <%if params[:sort] == "email" %>
+          <%if params[:order] == "desc" %>
+            <th><%= link_to(raw("Email &#8595"), member_list_path(sort: "email", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn selected-btn') %></th>
+          <%else%>
+            <th><%= link_to(raw("Email &#8593"), member_list_path, class: 'btn btn-primary sort-btn selected-btn') %></th>
+          <%end %>
+        <%else%>
+          <th><%= link_to(raw("Email"), member_list_path(sort: "email", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+        <%end%>
+
+        <%# Points %>
+        <%if params[:sort] == "points" %>
+          <%if params[:order] == "desc" %>
+            <th><%= link_to(raw("Points &#8595"), member_list_path(sort: "points", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn selected-btn') %></th>
+          <%else%>
+            <th><%= link_to(raw("Points &#8593"), member_list_path, class: 'btn btn-primary sort-btn selected-btn') %></th>
+          <%end %>
+        <%else%>
+          <th><%= link_to(raw("Points"), member_list_path(sort: "points", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+        <%end%>
+        <%# <th>Points</th> %>
         <th>Dues Paid</th>
         <th>Position</th>
         <th>Actions</th>
@@ -101,6 +155,22 @@
 
   .new-member-link:hover, .back-link:hover {
     background-color: #0056b3;
+  }
+
+  .sort-btn{
+    background-color: #4C6444;
+    
+  }
+
+  .sort-btn:hover{
+    background-color: #102820;
+    text-decoration: underline;
+    
+  }
+
+  .selected-btn{
+    background-color: #102820;
+    color: red;
   }
 
 </style>

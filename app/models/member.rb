@@ -7,4 +7,5 @@ class Member < ApplicationRecord
     include Validation
     validate :is_valid_name
     validate :is_valid_points
+    validate :is_valid_email
 end

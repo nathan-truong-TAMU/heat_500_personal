@@ -5,7 +5,8 @@
 <div class="event-actions">
   <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %> |
-  <%= link_to "Add Members", "/event/#{@event.id}/add" %> 
+  <%# Can implement this last after doing event attendance %>
+  <%= link_to "Add Members", "/event/#{@event.id}/add"%> 
 
 
   <%= button_to "Destroy this event", @event, method: :delete, form: {class: "inline-form event-actions "} %>

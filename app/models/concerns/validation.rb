@@ -39,6 +39,16 @@ module Validation
             end
         end
 
+        #Checks if the email is valid
+        def is_valid_email
+            if is_input_empty(email)
+                errors.add(:email, "can't be blank!")
+            elsif !email.match(/[a-zA-Z0-9.!#$%&*+\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+/)
+                #email format validation to make sure it actually ends properly with .com,.edu, etc
+                errors.add(:email, "needs to be a valid email, i.e. example@example.com")
+            end
+        end
+
         # Checks if the inputted link is valid
         def is_valid_link
             # Checks for empty link

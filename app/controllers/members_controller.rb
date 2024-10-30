@@ -49,6 +49,18 @@ class MembersController < ApplicationController
   # GET /members or /members.json
   def index
     @members = Member.all
+
+    #need to check the params to filter and sort as indicated
+    filter = params[:filter]
+    sort = params[:sort]
+    order = params[:order]
+
+    #doing the sorting if needed
+    member_index_sort(sort, order)
+
+    #doing the filter if needed
+    member_index_filter(filter)
+
   end
 
   # GET /members/1 or /members/1.json
@@ -67,6 +79,21 @@ class MembersController < ApplicationController
   # POST /members or /members.json
   def create
     @member = Member.new(member_params)
+
+    #making sure the points is at zero, since it's disabled on the html form it won't take the value thats there
+    @member.points = 0 
+
+    #validation to make sure there aren't repeat emails
+    if Member.find_by(email: @member.email)
+      respond_to do |format|
+        @member.email = nil
+        flash[:alert] = "You have errors with duplicate emails!"
+        format.html { render :new, status: :unprocessable_entity }
+      end
+      
+      #end the function to not have to continue
+      return 
+    end
 
     respond_to do |format|
       if @member.save
@@ -102,12 +129,28 @@ class MembersController < ApplicationController
 
   # DELETE /members/1 or /members/1.json
   def destroy
-    @member.destroy
+    #add check to not delete yourself
+    if @member.email != current_user.email
 
-    respond_to do |format|
-      format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
-      format.json { head :no_content }
+      #remove the member from other tables
+      destroy_member_manual
+
+      #actually destroy the member
+      @member.destroy
+
+      respond_to do |format|
+        format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
+        format.json { head :no_content }
+      end
+
+    else
+      #Alert the user that they can't remove themselves
+      respond_to do |format|
+        format.html { redirect_to members_url, alert: "Member is current user, can't delete." }
+        format.json { head :no_content }
+      end
     end
+    
   end
 
   private
@@ -120,5 +163,66 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:name, :points, :position, :dues_paid, :email, :source)
       # params.permit(:source)
+    end
+
+    def destroy_member_manual
+      # member_id = @member.id
+      
+      #remove from event_members table
+      EventsMember.where(member_id: @member.id).delete_all
+
+      #remove from announcements table
+      Announcement.where(member_id: @member.id).delete_all
+    end
+
+    def member_index_sort(sort, order)
+      if sort.present?
+        if sort == "name" #Sort by name
+          if order == "asc"
+            @members = @members.order(name: "asc")
+          else
+            @members = @members.order(name: "desc")
+          end
+        elsif sort == "email" #Sort by email
+          if order == "asc"
+            @members = @members.order(email: "asc")
+          else
+            @members = @members.order(email: "desc")
+          end
+        elsif sort == "points" #Sort by points
+          if order == "asc"
+            @members = @members.order(points: "asc")
+          else
+            @members = @members.order(points: "desc")
+          end
+        elsif sort == "position" #Sort By position
+          if order == "asc"
+            @members = @members.order(position: "asc")
+          else
+            @members = @members.order(position: "desc")
+          end
+        else
+          # No sort then
+          # @members = @members.order(email: "desc")
+        end
+      end
+    end
+
+    def member_index_filter(filter)
+      if filter.present?
+        if filter == "dues" #filter by dues
+          @members = @members.where("dues_paid = true")
+
+        elsif filter == "members" #filter by position to get members only
+          @members = @members.where(position: "Member")
+
+        elsif filter == "officers" #filter by position to get members only
+          @members = @members.where(position: "Officer")
+
+        else
+          # No sort then
+          # @members = @members.order(email: "desc")
+        end
+      end
     end
 end

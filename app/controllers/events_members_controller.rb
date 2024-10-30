@@ -41,19 +41,27 @@ class EventsMembersController < ApplicationController
 
   #new code
   def remove_member_from_event
-    @event = Event.find(params[:event_id])
-    @member = Member.find(params[:member_id])
+    event_id = params[:event_id]
+    member_id = params[:member_id]
+    
+    #end the function here and send alert
+    if event_id.present? && member_id.present?
+      @event = Event.find(params[:event_id])
+      @member = Member.find(params[:member_id])
 
-    if @event && @member && @event.members.include?(@member)
-      # Remove the member from the event
-      @event.members.delete(@member)
+      if @event && @member && @event.members.include?(@member)
+        # Remove the member from the event
+        @event.members.delete(@member)
 
-      # Deduct one point from the member's member_points value
-      @member.decrement!(:points, @event.points) #change this to a variable number.
+        # Deduct one point from the member's member_points value
+        @member.decrement!(:points, @event.points) #change this to a variable number.
 
-      flash[:notice] = "Member removed from event successfully and one point deducted!"
+        flash[:notice] = "Member removed from event successfully and points deducted!"
+      else
+        flash[:alert] = "Failed to remove member from event!"
+      end
     else
-      flash[:alert] = "Failed to remove member from event!"
+      flash[:alert] = "Failed to remove member, either the event or member doesn't exist!"
     end
 
     redirect_to events_members_path
