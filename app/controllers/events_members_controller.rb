@@ -2,7 +2,7 @@ require 'axlsx'
 
 class EventsMembersController < ApplicationController
   before_action :set_event_member, only: %i[show edit update destroy]
-  before_action :require_login
+  before_action :require_login, except: %i[register_attendance]
 
   # GET /events_members
   def index
@@ -104,6 +104,41 @@ class EventsMembersController < ApplicationController
       format.html { redirect_to events_members_url, notice: 'Event member was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+
+  def register_attendance
+
+    unless user_signed_in?
+      # Set a custom return path to return here after login
+      session[:return_to] = request.fullpath
+      puts "session[:return_to] in login page123123123123123: #{session[:return_to]}"
+      redirect_to login_path and return  
+    end
+
+    event = Event.find(params[:id])
+    timestamp = params[:timestamp].to_i
+    member = Member.find_by(email: current_user.email) # Assume the person scanning is the logged-in user
+
+    if member.nil?
+      flash[:alert] = "Member record not found for the current user."
+      redirect_to events_path and return
+    end
+    # Check if the QR code was scanned within the last 30 seconds
+    if Time.now.to_i - timestamp <= 30
+      # Register the member for the event if not already registered
+      unless EventsMember.exists?(event: event, member: member)
+        event.events_members.create(member: member)
+        member.increment!(:points, event.points)
+        flash[:notice] = "#{member.name} successfully checked in for #{event.name}!"
+      else
+        flash[:alert] = "You are already registered for this event."
+      end
+    else
+      flash[:alert] = "QR code expired. Please try again."
+    end
+
+    redirect_to event_path(event)
   end
 
   private
