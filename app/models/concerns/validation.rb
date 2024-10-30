@@ -52,25 +52,6 @@ module Validation
         # Checks if the inputted link is valid
         def is_valid_link
             # Checks for empty link
-            if is_input_empty(link)
-                errors.add(:link, "can't be blank!")
-
-            else
-                # Checks if the link is reachable
-                begin
-                    open(link) do |response|
-                    end
-
-                # Handles if link isn't reachable
-                rescue StandardError => e
-                    errors.add(:link, "must be reachable! (Error: #{e.message})")
-                end
-            end
-        end
-
-        # Checks if the inputted link is valid
-        def is_valid_url
-            # Checks for empty link
             if is_input_empty(url)
                 errors.add(:url, "can't be blank!")
 
