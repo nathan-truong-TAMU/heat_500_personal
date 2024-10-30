@@ -28,7 +28,7 @@
   <%= link_to "New event", new_event_path, class: 'new-event-link' %>
 <% end %>
 
-<% if session[:authenticated] && session[:view_mode] == 'admin' %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <%= button_to "Clear All Events", destroy_all_events_path, method: :delete,data: { turbo_confirm: "Are you sure?" }, class: "clearEventsButton" %>
 <% end %>
 

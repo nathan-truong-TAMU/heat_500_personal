@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   def destroy_all
     if session[:authenticated]
       # Loops through and destroys each event and it's relationships
-      Event.each do |event|
+      Event.all.each do |event|
         destroy_event_relationships(event)
         event.destroy
       end
