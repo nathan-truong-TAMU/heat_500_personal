@@ -1,9 +1,11 @@
 <ul>
-  <%= month_calendar(events: @event, attribute: :start_date) do |date, events| %>
-    <%= date.day %>
-    <% events.each do |event| %>
+  <%= month_calendar() do |date| %>
+    <%= date%>
+    <% @eventdates.each_index do |i| %>
       <div>
-        <%= event.name %>
+        <%if @eventdates[i] == date.to_s()%>
+            <%= @events[i].summary %>
+        <%end%>
       </div>
     <% end %>
   <% end %>
