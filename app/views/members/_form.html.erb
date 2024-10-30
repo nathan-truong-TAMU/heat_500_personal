@@ -29,6 +29,7 @@
 
     <div class="form-field">
       <%= form.label :position, class: 'form-label' %>
+      <!-- Defaults to current position if editing and to Member if creating a new member -->
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
         ['Admin', 'Admin']], member.position || 'Member'), class: 'form-control' %>
     </div>
