@@ -36,6 +36,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        # Adds event's URL to the link attribute
+        @event.update(link: event_url(@event))
+
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else

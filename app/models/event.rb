@@ -6,6 +6,5 @@ class Event < ApplicationRecord
     include Validation
     validate :is_valid_name
     validate :is_valid_points
-    validate :is_valid_link
     validate :is_valid_dates
 end
