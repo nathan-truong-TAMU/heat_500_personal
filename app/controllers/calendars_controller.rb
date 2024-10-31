@@ -62,7 +62,7 @@ class CalendarsController < ApplicationController
       puts "Before opening URI"
       @calendars = nil
       @currTime = Time.new
-      URI.open("https://calendar.google.com/calendar/ical/c_cbc58022ad21f89e06e114a10386754bc7803170afc55fb497499fc681d683ab%40group.calendar.google.com/public/basic.ics") do |cal|
+      URI.open("https://calendar.google.com/calendar/ical/ieph4vul7arafa2deddtjpuu2s%40group.calendar.google.com/public/basic.ics") do |cal|
         #calendars = RiCal.parse(cal)
         @calendars = Icalendar.parse(cal)
       end
