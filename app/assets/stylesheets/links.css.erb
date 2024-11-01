@@ -1,25 +1,100 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
 
 body {
-  background-color: #FFF8E7 !important; 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #FFF8E7 !important; /* Creamy as background color */
+  color: #CABA9C; /* Dark Green for text */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+
+#about-organization {
+  background-color: #4C6444; 
+  padding: 30px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+  max-width: 800px; 
+  margin: 20px auto;
 }
 
 #links {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  text-align: left !important; /* Align text to the left for a cleaner look */
 }
 
-h1 {
-  font-family: 'Georgia', serif;
-  color: #2f4f4f;
-  text-align: center;
+#links a {
+  color: black !important; /* Set link text color to black */
+  text-decoration: none !important; /* Remove underline from links */
+  font-weight: bold !important; /* Optional: if you want bold text */
+}
+
+#links a:hover {
+  color: black !important; /* Keep it black on hover to prevent color change */
+  text-decoration: none !important; /* Ensure underline doesn't appear on hover */
+}
+
+#links .link-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important; /* Centers text horizontally */
+  background-color: #CABA9C !important; /* Khaki for the button */
+  color: black !important; /* Text color */
+  font-family: 'Arial', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 15px 20px !important;
+  margin: 10px 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important; /* Shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease !important;
+  position: relative !important;
+  text-align: center !important;
+}
+
+#links .link-item:hover {
+  background-color: #355E3B !important; /* Darker olive green on hover */
+  transform: scale(1.03) !important; /* Slight scaling effect on hover */
+}
+
+.edit-circle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #DC143C !important; /* Crimson red */
+  color: #FFF !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  border-radius: 50% !important; /* Circular shape */
+  text-decoration: none !important;
+  position: absolute !important;
+  top: 50% !important; /* Center vertically */
+  transform: translateY(-50%) !important; /* Center based on height */
+  right: -45px !important; /* Adjust positioning to place it outside the container */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important; /* Shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease !important;
+  transform-origin: center !important; /* Ensure scaling is centered */
+}
+
+.edit-circle:hover {
+  background-color: #B22222 !important; /* Darker red on hover */
+  transform: scale(1.1) translateY(-10px)!important;
+  transform-origin: center !important;
+}
+
+
+
+h1{
+  color: #CABA9C; /* Dark Green for headings */
+}
+
+h2{
+  text-align: center; 
+  color: black;
 }
 
 a {
@@ -56,7 +131,7 @@ a:hover {
   padding: 10px 20px;
   font-size: 16px;
   color: #ffffff;
-  background-color: #228B22; /* Forest green */
+  background-color: #4D2D18; /* Forest green */
   border-radius: 10px;
   text-decoration: none;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
@@ -151,5 +226,89 @@ a:hover {
 
 .destroy-button:active {
   background-color: #FF4500; /* Red-orange on click */
-  transform: scale(0.95);
+  transform: scale(0.95); /*test comment*/
+}
+
+
+.navbar {
+      background-color: #102820 !important; /* Dark Green for navbar background */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand, .nav-link {
+  color: #CABA9C !important; /* Khaki for navbar links */
+}
+
+.btn-primary {
+  background-color: #102820 !important; /* Dark Green for primary button */
+  border-color: #102820 !important;
+  color: #CABA9C !important; /* Khaki for text */
+  border-radius: 6px;
+  padding: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.btn-primary:hover {
+  background-color: #4C6444 !important; /* Hunter Green on hover */
+  border-color: #4C6444 !important;
+}
+
+.btn-success {
+  background-color: #CABA9C !important; /* Khaki for success button */
+  border-color: #102820 !important; /* Dark Green border */
+  color: #102820 !important; /* Dark Green text */
+}
+
+.btn-success:hover {
+  background-color: #f8f9fa !important; /* Light hover color for contrast */
+  color: #102820 !important; /* Dark Green text */
+}
+
+.photo-collage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.collage-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  background-color: #102820;
+  color: #CABA9C;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.centered-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the content both vertically and horizontally */
+  text-align: center;
+}
+
+.custom-label {
+  font-size: 16px; /* Adjust font size */
+  font-weight: bold; /* Make it bold */
+  color: #333; /* Set label color */
+  margin-bottom: 5px; /* Add space between label and input */
+}
+
+.custom-input {
+  width: 100%; /* Full width */
+  padding: 10px; /* Add padding */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size */
 }
