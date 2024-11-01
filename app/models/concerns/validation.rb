@@ -56,15 +56,10 @@ module Validation
                 errors.add(:url, "can't be blank!")
 
             else
-                # Checks if the link is reachable
-                begin
-                    open(url) do |response|
-                    end
-
-                # Handles if link isn't reachable
-                rescue StandardError => e
-                    errors.add(:url, "must be reachable! (Error: #{e.message})")
-                end
+                # Checks that the link has http or https
+                unless url =~ /\Ahttps?:\/\/.+\z/
+                    errors.add(:url, "must start with http:// or https://!")
+                  end
             end
         end
 
