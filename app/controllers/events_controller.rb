@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy qr_code]
   before_action :require_login, only: %i[new show edit update destroy destroy_all]
 
   # GET /events or /events.json
@@ -76,12 +76,23 @@ class EventsController < ApplicationController
     end
   end
 
+  def qr_code
+    # Generate QR code data with event_id and timestamp
+    qr_data = "#{request.base_url}/events/#{@event.id}/register_attendance?timestamp=#{Time.now.to_i}"
+    
+    # Generate the QR code
+    qr_code = RQRCode::QRCode.new(qr_data)
+    @qr_svg = qr_code.as_svg(module_size: 4)
+    
+    render 'qr_code'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound 
     redirect_to events_url, alert: "Event not found."
   end
 
@@ -102,3 +113,5 @@ class EventsController < ApplicationController
     event.events_members.destroy_all
   end
 end
+
+

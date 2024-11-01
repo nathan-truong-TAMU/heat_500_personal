@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>HEAT</title>
+  <title>H.E.A.T.</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -12,45 +12,46 @@
   <!-- Custom Styles -->
   <style>
     body {
-      background-color: #fff;
-      color: #800000;
+      background-color: #FFF8E7 !important; /* Hunter Green as background color */
+      color: #CABA9C; /* Dark Green for text */
     }
 
     .navbar {
-      background-color: #600000 !important;
+      background-color: #102820 !important; /* Dark Green for navbar background */
     }
 
     .navbar-brand, .nav-link {
-      color: #fff !important;
+      color: #CABA9C !important; /* Khaki for navbar links */
     }
 
     .btn-primary {
-      background-color: #800000 !important;
-      border-color: #800000 !important;
+      background-color: #102820 !important; /* Dark Green for primary button */
+      border-color: #102820 !important;
+      color: #CABA9C !important; /* Khaki for text */
     }
 
     .btn-primary:hover {
-      background-color: #8B0000 !important;
-      border-color: #8B0000 !important;
+      background-color: #4C6444 !important; /* Hunter Green on hover */
+      border-color: #4C6444 !important;
     }
 
     .btn-success {
-      background-color: #fff !important;
-      border-color: #800000 !important;
-      color: #800000 !important;
+      background-color: #CABA9C !important; /* Khaki for success button */
+      border-color: #102820 !important; /* Dark Green border */
+      color: #102820 !important; /* Dark Green text */
     }
 
     .btn-success:hover {
-      background-color: #f8f9fa !important;
-      color: #800000 !important;
+      background-color: #f8f9fa !important; /* Light hover color for contrast */
+      color: #102820 !important; /* Dark Green text */
     }
 
     h1, h2 {
-      color: #800000;
+      color: #CABA9C; /* Dark Green for headings */
     }
 
     #about-organization {
-      color: black;
+      color: #CABA9C; /* Dark Green for the about section */
     }
 
     /* Additional styles for the audio player */
@@ -59,6 +60,19 @@
       width: 400px;
       text-align: left;
     }
+
+    .photo-collage {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .collage-image {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 
@@ -66,7 +80,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <%= link_to "Home page", root_path, class: "navbar-brand" %>
+       <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag("HeatAppLogo.png", alt: "Logo",  width: "80", height: "80", class: "d-inline-block align-top") %>
+    <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -90,6 +106,9 @@
           <li class="nav-item">
             <%= link_to "Leaderboard", "/leaderboard", class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Calendar", "/calendars", class: "nav-link" %>
+          </li>
 
         </ul>
       </div>
@@ -110,109 +129,56 @@
     </div>
   </nav>
 
-  <script>
-  function showEventsAndMeetings() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/check_member_attendance', true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          var data = JSON.parse(xhr.responseText);
-          if (data.attended) {
-            document.querySelector('.meetings-attended').style.display = 'block';
-            document.querySelector('.events-attended').style.display = 'block';
-          } else {
-            alert('This member has not attended any meetings or events yet.');
-          }
-        } else {
-          alert('An error occurred while fetching member attendance.');
-        }
-      }
-    };
-    xhr.send();
-  }
-</script>
-
-
-
-
    <!-- About Section-->
-  <section id="about-organization" style="background-color: #f7f7f7; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); max-width: 800px; margin: 20px auto;">
-  <h2 style="text-align: center; color: #333;">Texas A&M HEAT</h2>
-  <div style="background-color: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
-  <%= image_tag("heat.png", alt: "", class: "heat-home-pic", height: "504px", width: "672px") %>
-  <br>
-  <div>
-  <audio id="audioPlayer" controls></audio>
-
-  <div id="textToSpeechSection" style="display: inline-block; margin-left: 10px;">
-    <button id="readContentButton" class="btn btn-primary">Read Content</button>
-  </div>
-</div>
+  <section id="about-organization" style="background-color: #4C6444; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); max-width: 800px; margin: 20px auto;">
+    <h2 style="text-align: center; color: #102820;">Texas A&M H.E.A.T.</h2>
+    <div style="background-color: #CABA9C; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+      <%= image_tag("HeatMainPicture.png", alt: "", class: "heat-home-pic", height: "504px", width: "672px") %>
+      <br>
+    </div>
     <p><strong>Abbreviation(s):</strong> H.E.A.T.</p>
-    <p><strong>Purpose:</strong> H.E.A.T. is a student service organization dedicated to improving humanitarian, environmental, and animal welfare issues through positive activism. The Human Environmental Animal Team is committed to making a difference in all areas of service.</p>
+    <p>Human Environmental Animal Team</p>
+    <p>Howdy! H.E.A.T. is a non-profit 501(c)(3) student service organization dedicated to improving humanitarian, environmental, and animal welfare issues through positive activism.</p>
     
-    <p>Texas A&M H.E.A.T. chapter was founded in the spring of 2013 by Jacob Alpuerto. Since then, our chapter has grown to include a variety of students, each with a very unique background and a passion for making the world better.</p>
+    <p>“H.E.A.T. never demonizes, H.E.A.T. always rises.”</p>
+
+    <div style="background-color: #CABA9C; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+      <div class="photo-collage">
+        <%= image_tag("social2.jpg", alt: "Photo 1", class: "collage-image") %>
+        <%= image_tag("human1.jpg", alt: "Photo 2", class: "collage-image") %>
+        <%= image_tag("streetclean3.jpg", alt: "Photo 3", class: "collage-image") %>
+        <%= image_tag("animal1.jpg", alt: "Photo 4", class: "collage-image") %>
+      </div>
+    </div>
     
-    <p>Even as our chapter continues to grow, there remains a place for everyone in H.E.A.T. At Texas A&M University, H.E.A.T. is a hardworking group that wants to better the world and affect positive change through volunteering and educating our peers. This organization allows us to take part in projects we care about, meet new people, and to be a part of something important. As a member of H.E.A.T., you get to make friendships that grow to feel like family, connections throughout the Aggie community, and change in the lives of those that we work with and for. It's not only rewarding but really fun!</p>
+    <p>Even as our chapter continues to grow, there remains a place for everyone in H.E.A.T. at Texas A&M University! H.E.A.T. is a dedicated group focused on creating positive change through
+        volunteering and peer education. Members engage in meaningful projects, build strong
+        friendships, connect with the Aggie community, and make a real difference in other's lives—all
+        while having fun! Some of our favorite projects include building ramps for those in need, working
+        at food banks, cleaning up local and beach litter, and volunteering with various animal rescues
+        and sanctuaries.
+    </p>
     
-    <p>Some of our favorite projects include building ramps for people in need, working at food banks, cleaning up litter both locally and on beaches, and volunteering with a variety of animal rescues and sanctuaries that work with wolfdogs, tigers, reptiles and amphibians, and companion animals.</p>
-    
-    <p>Our goals for the upcoming year include increasing membership numbers and participation, improving our relationships with each other through more socials, and expanding our outreach to establish new projects with new organizations. If you would like us to help you with a project near the Bryan/College Station area, please reach out to one of our executives or contact us at <a href="mailto:heattamu@gmail.com">heattamu@gmail.com</a>.</p>
-    
-    <p><strong>Year Founded:</strong> 2013</p>
-    <p><strong>Membership Dues:</strong> $20/semester for new members; $15/semester for returning members</p>
-    <p><strong>Admits Members:</strong> First Quarter of Each Semester</p>
-    <p><strong>Meeting Locations:</strong> TBA</p>
+    <p><strong>Bottom-up organization</strong> </p>
+    <p>
+        At H.E.A.T., we want to volunteer at places that matter to YOU! We encourage initiative and are
+        here to support your passions. Whether you've always dreamed of cleaning a local stream or
+        helping out at a donkey sanctuary 45 minutes away—let's make it happen!
+    </p>
   
     
-    <h3>Group Contact Information</h3>
-    <p><strong>Website:</strong> <a href="http://heatestablishment.tamu.edu">heatestablishment.tamu.edu</a>, <a href="https://www.instagram.com/heattamu/?hl=en">Instagram</a></p>
-    <p><strong>Email:</strong> <a href="mailto:heattamu@gmail.com">heattamu@gmail.com</a></p>
+    <h3>JOIN US!</h3>
+    <p>
+        Membership Dues: $20/semester for new members, $15/semester for returning members
+        We accept members the first quarter of each semester.
+        Meeting locations will always be announced on our Instagram and GroupMe.
+        Have a Question? DM us on Instagram or send us an email (or include a button that says
+        CONTACT US?)
+        
+      </p>
   </div>
 </section>
 
-  <!-- Include Bootstrap JS and jQuery for modal functionality -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-  <!-- Audio Playback Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const readContentButton = document.querySelector('#readContentButton');
-      const audioPlayer = document.querySelector('#audioPlayer');
-
-      readContentButton.addEventListener('click', async function () {
-        try {
-          // Extract only the visible text content of the page
-          const pageContent = document.body.innerText;
-
-          // Send the text content for speech conversion
-          const response = await fetch('/read_and_convert', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'text/plain',
-            },
-            body: pageContent,
-          });
-
-          if (response.ok) {
-            const audioBlob = await response.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-
-            // Set the audio player source and play the audio
-            audioPlayer.src = audioUrl;
-            audioPlayer.play();
-          } else {
-            console.error('Failed to convert text to speech');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      });
-    });
-  </script>
 
 </body>
 
