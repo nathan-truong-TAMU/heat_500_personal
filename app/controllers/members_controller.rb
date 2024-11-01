@@ -25,8 +25,9 @@ class MembersController < ApplicationController
     #the controller method/action for the leaderboard page. Should really only be retrieval of information
     @filter = params[:filter]
     
-
-    @members = Member.all
+    #get all members and officers from the club
+    get_members
+    
     @members = @members.order(points: "desc")
 
     @curr = 1
@@ -48,7 +49,7 @@ class MembersController < ApplicationController
 
   # GET /members or /members.json
   def index
-    @members = Member.all
+    get_members
 
     #need to check the params to filter and sort as indicated
     filter = params[:filter]
@@ -160,10 +161,14 @@ class MembersController < ApplicationController
       @member = Member.find(params[:id])
     end
 
+    # Filter out to only members and officers
+    def get_members
+      @members = Member.where.not(position: "admin")
+    end
+
     # Only allow a list of trusted parameters through.
     def member_params
       params.require(:member).permit(:name, :points, :position, :dues_paid, :email, :source)
-      # params.permit(:source)
     end
 
     def destroy_member_manual

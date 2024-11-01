@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @announcement %>
+
+<div>
+  <%= link_to "Edit this announcements", edit_announcement_path(@announcement) %> |
+  <%= link_to "Back to announcements", announcements_path %>
+
+  <%= button_to "Destroy this announcements", @announcement, method: :delete %>
+</div>
