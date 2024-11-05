@@ -23,6 +23,11 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
 
+    if @photo.image.attached?
+      # Set the path attribute to the uploaded image filename
+      @photo.path = @photo.image.filename.to_s
+    end
+
     respond_to do |format|
       if @photo.save
         format.html { redirect_to photo_url(@photo), notice: "Photo was successfully created." }
@@ -65,6 +70,6 @@ class PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:path, :alt_text, :description)
+      params.require(:photo).permit(:alt_text, :description, :image)
     end
 end
