@@ -120,7 +120,6 @@ class EventsMembersController < ApplicationController
     unless user_signed_in?
       # Set a custom return path to return here after login
       session[:return_to] = request.fullpath
-      puts "session[:return_to] in login page123123123123123: #{session[:return_to]}"
       redirect_to login_path and return  
     end
 
@@ -132,8 +131,8 @@ class EventsMembersController < ApplicationController
       flash[:alert] = "Member record not found for the current user."
       redirect_to events_path and return
     end
-    # Check if the QR code was scanned within the last 30 seconds
-    if Time.now.to_i - timestamp <= 30
+    # Check if the QR code was scanned within the last 10 mins
+    if Time.now.to_i - timestamp <= 600
       # Register the member for the event if not already registered
       unless EventsMember.exists?(event: event, member: member)
         event.events_members.create(member: member)
