@@ -9,7 +9,7 @@
   <%= link_to "Add Members", "/event/#{@event.id}/add"%> 
 
 
-  <%= button_to "Destroy this event", @event, method: :delete, form: {class: "inline-form event-actions "} %>
+  <%= button_to "Destroy this event", @event, method: :delete, data: { turbo_confirm: "Are you sure?" }, form: {class: "inline-form event-actions "} %>
 </div>
 
 <style>
