@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     delete 'remove_member_from_event', on: :collection
   end
 
+  resources :photos
+
   # Add this route for toggling the authenticated view
   devise_scope :user do
     get 'toggle_view_mode', to: 'users/sessions#toggle_view_mode'
