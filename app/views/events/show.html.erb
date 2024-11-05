@@ -55,11 +55,12 @@
       <%= render @event %>
     </div>
 
+
     <!-- Event Actions -->
     <div class="event-actions" style="margin-top: 20px;">
       <%= link_to "Edit this event", edit_event_path(@event), class: "edit-link" %> |
       <%= link_to "Back to events", events_path, class: "back-link" %> |
-      <%= button_to "Destroy this event", @event, method: :delete, class: "destroy-button" %>
+      <%= button_to "Destroy this event", @event, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "destroy-button" %>
     </div>
   </div>
 
