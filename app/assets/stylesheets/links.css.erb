@@ -373,3 +373,262 @@ a:hover {
     background-color: #4C6444;
     transform: scale(1.05);
   }
+
+.member-table {
+  width: 100%;
+  margin: 20px auto;
+  background-color: #FFF8E7; /* Creamy background for table */
+  color: #102820; /* Dark Green for text */
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.member-table th, .member-table td {
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle; 
+}
+
+.member-table th {
+  background-color: #4C6444; /* Hunter Green for header */
+  color: #FFF8E7; /* Light text color */
+  font-weight: bold;
+}
+
+.member-table tr:nth-child(even) {
+  background-color: #f0e9d2; /* Slightly lighter cream for alternate rows */
+}
+
+.member-table tr:hover {
+  background-color: #CABA9C; /* Khaki for hover */
+}
+
+.member-table .actions {
+  display: flex;
+  gap: 5px; /* Space between buttons */
+  justify-content: center;
+  align-items: center;
+}
+
+.member-table .actions .btn {
+  width: 60px; /* Set fixed width for uniformity */
+  height: 35px; /* Set fixed height */
+  padding: 0; /* Remove default padding */
+  font-size: 14px; /* Consistent font size */
+  text-align: center;
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease;
+  border: none; /* Remove default border */
+}
+
+.member-table .actions .btn-primary {
+  background-color: #102820 !important;
+  color: #CABA9C !important;
+  margin-right: 5px;
+}
+
+.member-table .actions .btn-danger {
+  background-color: #DC143C !important; /* Crimson for delete button */
+  color: #FFF !important;
+  margin-right: 5px;
+}
+
+.member-table .actions .btn-primary:hover {
+  background-color: #4C6444 !important; /* Hunter Green on hover */
+}
+
+.member-table .actions .btn-danger:hover {
+  background-color: #B22222 !important; /* Darker red on hover */
+}
+
+.new-member-link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #102820;
+  color: #CABA9C;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-bottom: 40px;
+}
+
+.new-member-link:hover {
+  background-color: #4C6444;
+  transform: scale(1.05);
+}
+
+.sort-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFF8E7; /* Light text color */
+  background-color: #4C6444; /* Hunter Green background to match header */
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-radius: 0; /* Remove border radius for uniform header look */
+}
+
+/* Hover effect for sort buttons */
+.sort-btn:hover {
+  background-color: #355E3B; /* Darker green on hover */
+  color: #FFF8E7;
+}
+
+/* Selected state for sort buttons */
+.sort-btn.selected-btn {
+  background-color: #102820; /* Dark Green for selected state */
+  color: #CABA9C; /* Khaki color to indicate selected */
+}
+
+
+
+.notice {
+    color: #28a745;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+
+  .notice {
+    color: #28a745;
+    font-size: 16px;
+  }
+
+  .member-details {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  .action-links {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .action-links a, .action-links form {
+    display: inline-block;
+    margin: 5px;
+    text-decoration: none;
+    color: #007bff;
+    background-color: transparent;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .action-links a:hover, .action-links form:hover {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+  }
+
+  .action-links form button {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  .action-links form {
+    display: inline;
+  }
+
+  .events-attended {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.events-attended h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.events-attended ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.events-attended li {
+  margin-bottom: 5px;
+}
+
+
+.simple-calendar {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 15px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #8a6240;
+}
+
+.day {
+    align-items: center;
+    justify-content: center;
+    position: relative; /* For absolute positioning of events */
+    transition: background-color 0.2s;
+}
+
+.wday-0 { background-color: #f9f9f9; } /* Sunday */
+.wday-1 { background-color: #ffffff; } /* Monday */
+.wday-2 { background-color: #ffffff; } /* Tuesday */
+.wday-3 { background-color: #ffffff; } /* Wednesday */
+.wday-4 { background-color: #ffffff; } /* Thursday */
+.wday-5 { background-color: #ffffff; } /* Friday */
+.wday-6 { background-color: #f9f9f9; } /* Saturday */
+
+.today {
+    background-color: #CABA9C; /* Today's date */
+    color: #102820;
+}
+
+.past {
+    background-color: #102820;  /* Past dates */
+    color: #CABA9C;
+}
+
+.future {
+    background-color: #4C6444; /* Future dates */
+    color: #CABA9C;
+}
+
+.start-date {
+}
+
+.prev-month {
+    opacity: 0.8
+}
+
+.next-month {
+    opacity: 0.8
+}
+
+.current-month {
+    font-weight: bold; /* Bold text for current month days */
+}
+
+.has-events {
+    background-color: #93A889; /* Highlight days with events */
+    color: #1f2f22;
+}
+
+.has-events::after {
+}
