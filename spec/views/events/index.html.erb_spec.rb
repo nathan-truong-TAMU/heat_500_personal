@@ -11,7 +11,7 @@ RSpec.describe "events/index", type: :view do
       start_date: '1999-12-31 23:59:00',
       points: 10
     )
-    
+
     @event2 = Event.create!(
       link: '/',
       name: 'Second Event',
@@ -29,11 +29,11 @@ RSpec.describe "events/index", type: :view do
 
   it "renders a list of events" do
     render
-    
+
     # Check if the page contains the event names
     expect(rendered).to include(@event1.name)
     expect(rendered).to include(@event2.name)
-    
+
     # Check if the page contains the event descriptions
     expect(rendered).to include(@event1.description)
     expect(rendered).to include(@event2.description)

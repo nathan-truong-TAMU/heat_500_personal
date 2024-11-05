@@ -7,3 +7,5 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # db/seeds.rb
+Member.create([name: "Admin", email: "heat-admin@gmail.com", position: "admin", dues_paid: true, points: 0])
+puts "Admin account has been created"

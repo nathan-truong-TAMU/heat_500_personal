@@ -10,7 +10,7 @@ RSpec.describe "events/show", type: :view do
       start_date: '1999-12-31 23:59:00',
       points: 10
     )
-    
+
     assign(:event, @event)
   end
 
@@ -23,9 +23,9 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to include(@event.description)
 
     # Adjust the date format according to your view
-    expect(rendered).to include(@event.end_date.strftime("%A, %d %B %Y at %I:%M %p")) 
+    expect(rendered).to include(@event.end_date.strftime("%A, %d %B %Y at %I:%M %p"))
     expect(rendered).to include(@event.start_date.strftime("%A, %d %B %Y at %I:%M %p"))
-    
+
     expect(rendered).to include(@event.points.to_s)
   end
 end

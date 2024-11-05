@@ -9,7 +9,7 @@ RSpec.describe "members/index", type: :view do
       dues_paid: true,
       position: 'Officer'
     )
-    
+
     @member2 = Member.create!(
       name: 'Jane Smith',
       points: 150,
@@ -25,11 +25,11 @@ RSpec.describe "members/index", type: :view do
 
   it "renders a list of members" do
     render
-    
+
     # Check if the page contains the member names
     expect(rendered).to include(@member1.name)
     expect(rendered).to include(@member2.name)
-    
+
     # Check if the page contains the member points
     expect(rendered).to include(@member1.points.to_s)
     expect(rendered).to include(@member2.points.to_s)

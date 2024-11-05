@@ -12,116 +12,37 @@
     <% end %>
 
     <div class="form-field">
-      <%= form.label :name, class: 'form-label' %>
+      <%= form.label :name, class: 'custom-label' %>
       <%= form.text_field :name, required: true, class: 'form-control' %>
     </div>
 
     <!-- Points have a hard limit of 999,999,999 -->
     <%# Also don't want to let them change points directly since it needs to correlate with meetings %>
     <div class="form-field">
-      <%= form.label :points, class: 'form-label' %>
+      <%= form.label :points, class: 'custom-label' %>
       <%= form.text_field :points, class: 'form-control', disabled: true, maxlength: 9, oninput: "this.value=this.value.replace(/[^0-9]/g,'');" %>
     </div>
 
     <%# Only be able to access the email field for the creation of the member %>
     <div class="form-field">
-      <%= form.label :email, class: 'form-label' %>
+      <%= form.label :email, class: 'custom-label' %>
       <%= form.text_field :email, required: true, type: "email", disabled: (member.email.present? && member.id.present?), class: 'form-control' %>
     </div>
     <div class="form-field">
-      <%= form.label :dues, class: 'form-label' %>
+      <%= form.label :dues, class: 'custom-label' %>
       <%= form.check_box :dues_paid, class: 'form-control' %>
     </div>
-
+    <br>
     <div class="form-field">
-      <%= form.label :position, class: 'form-label' %>
+      <%= form.label :position, class: 'custom-label' %>
       <!-- Defaults to current position if editing and to Member if creating a new member -->
       <%= form.select :position, options_for_select([['Member', 'Member'], ['Officer', 'Officer'],
         ['Admin', 'Admin']], member.position || 'Member'), class: 'form-control' %>
     </div>
     <br>
     <div class="form-field">
-      <%= form.submit 'Save Member', class: 'form-submit' %>
+      <%= form.submit 'Save Member', class: 'fbtm btn-primary' %>
     </div>
   <% end %>
 </div>
 
-<style>
-  body {
-    background-color: #f0f2f5;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-  }
-
-  .form-container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 20px;
-    max-width: 600px;
-    margin: 40px auto;
-  }
-
-  h2 {
-    color: #d9534f;
-    margin-bottom: 15px;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    color: #d9534f;
-  }
-
-  li {
-    background-color: #f2dede;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  .form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #495057;
-  }
-
-  .form-control {
-    display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  }
-
-  .form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-
-  .form-submit {
-    padding: 10px 15px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    color: #fff;
-    background-color: #007bff;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-
-  .form-submit:hover {
-    background-color: #0056b3;
-  }
-</style>

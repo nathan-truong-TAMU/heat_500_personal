@@ -8,7 +8,7 @@ class EventsMembersController < ApplicationController
   def index
     @events = Event.all
     @events_members = EventsMember.includes(:event, :member).all
-    @members = Member.all  # Add this line to set @members
+    @members = Member.all # Add this line to set @members
   end
 
   # for exporting table data
@@ -39,12 +39,12 @@ class EventsMembersController < ApplicationController
   # GET /events_members/1/edit
   def edit; end
 
-  #new code
+  # new code
   def remove_member_from_event
     event_id = params[:event_id]
     member_id = params[:member_id]
-    
-    #end the function here and send alert
+
+    # end the function here and send alert
     if event_id.present? && member_id.present?
       @event = Event.find(params[:event_id])
       @member = Member.find(params[:member_id])
@@ -54,7 +54,7 @@ class EventsMembersController < ApplicationController
         @event.members.delete(@member)
 
         # Deduct one point from the member's member_points value
-        @member.decrement!(:points, @event.points) #change this to a variable number.
+        @member.decrement!(:points, @event.points) # change this to a variable number.
 
         flash[:notice] = "Member removed from event successfully and points deducted!"
       else
@@ -113,15 +113,12 @@ class EventsMembersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
 
   def register_attendance
-
     unless user_signed_in?
       # Set a custom return path to return here after login
       session[:return_to] = request.fullpath
-      puts "session[:return_to] in login page123123123123123: #{session[:return_to]}"
-      redirect_to login_path and return  
+      redirect_to login_path and return
     end
 
     event = Event.find(params[:id])
@@ -132,15 +129,15 @@ class EventsMembersController < ApplicationController
       flash[:alert] = "Member record not found for the current user."
       redirect_to events_path and return
     end
-    # Check if the QR code was scanned within the last 30 seconds
-    if Time.now.to_i - timestamp <= 30
+    # Check if the QR code was scanned within the last 10 mins
+    if Time.now.to_i - timestamp <= 600
       # Register the member for the event if not already registered
-      unless EventsMember.exists?(event: event, member: member)
-        event.events_members.create(member: member)
+      if EventsMember.exists?(event:, member:)
+        flash[:alert] = "You are already registered for this event."
+      else
+        event.events_members.create(member:)
         member.increment!(:points, event.points)
         flash[:notice] = "#{member.name} successfully checked in for #{event.name}!"
-      else
-        flash[:alert] = "You are already registered for this event."
       end
     else
       flash[:alert] = "QR code expired. Please try again."

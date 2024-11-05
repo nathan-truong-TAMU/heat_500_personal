@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    reset_session  # Clears the entire session
+    reset_session # Clears the entire session
     redirect_to login_manual_path, notice: 'You have been logged out.'
   end
 

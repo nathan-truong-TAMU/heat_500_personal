@@ -11,7 +11,7 @@ RSpec.describe "members/show", type: :view do
   end
 
   before(:each) do
-    assign(:member, member)  # Assign the member to the view
+    assign(:member, member) # Assign the member to the view
 
     # Allows Admin View
     allow(view).to receive(:session).and_return({ authenticated: 'Admin', view_mode: 'Admin' })

@@ -1,0 +1,47 @@
+<div class="form-container">
+  <%= form_with(model: announcement) do |form| %>
+    <% if announcement.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(announcement.errors.count, "error") %> prohibited this announcement from being saved:</h2>
+
+        <ul>
+          <% announcement.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# t.bigint "member_id", null: false
+    t.datetime "start_date"
+    t.string "description"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_announcements_on_member_id" %>
+
+    <div>
+      <div class="form-field">
+        <% member = (@announcement.member.present?) ? @announcement.member : @member %>
+        <strong><%= form.label "Member: #{member.name}", class: 'form-label' %></strong>
+      </div>
+
+      <%# Title %>
+      <div class="form-field">
+        <%= form.label :title, class: 'form-label' %>
+        <%= form.text_field :title, required: true, class: 'form-control' %>
+      </div>
+
+      <%# Description %>
+      <div class="form-field">
+        <%= form.label :description, class: 'form-label' %>
+        <%= form.text_field :description, required: true, class: 'form-control' %>
+      </div>
+
+      <br>
+      <hr>
+      <%= form.submit "Save Announcement", class: 'form-submit' %>
+    </div>
+
+  <% end %>
+</div>

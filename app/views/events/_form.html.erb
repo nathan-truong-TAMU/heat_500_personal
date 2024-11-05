@@ -13,119 +13,39 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :name, "Event Name", class: 'form-label' %>
+      <%= form.label :name, "Event Name", class: 'custom-label' %>
       <%= form.text_field :name, class: 'form-control', placeholder: "Enter name of event" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :description, "Event Description", class: 'form-label' %>
+      <%= form.label :description, "Event Description", class: 'custom-label' %>
       <%= form.text_area :description, class: 'form-control', placeholder: "Enter description of event" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :start_date, "Event Start", class: 'form-label' %>
+      <%= form.label :start_date, "Event Start", class: 'custom-label' %>
       <%= form.datetime_field :start_date, class: 'form-control', placeholder: "Enter start date/time of event" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :end_date, "Event Deadline", class: 'form-label' %>
+      <%= form.label :end_date, "Event Deadline", class: 'custom-label' %>
       <%= form.datetime_field :end_date, class: 'form-control', placeholder: "Enter deadline date/time of event" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :location, "Event Location", class: 'form-label' %>
+      <%= form.label :location, "Event Location", class: 'custom-label' %>
       <%= form.text_field :location, class: 'form-control', placeholder: "Enter the location of the event" %>
     </div>
 
     <!-- Points have a hard limit of 999,999,999 -->
     <div class="form-field">
-      <%= form.label :points, class: 'form-label' %>
+      <%= form.label :points, class: 'custom-label' %>
       <%= form.text_field :points, class: 'form-control', maxlength: 9, oninput: "this.value=this.value.replace(/[^0-9]/g,'');" %>
     </div>
-
+    <br>
     <div class="form-group">
-      <%= form.submit class: 'form-submit' %>
+      <%= form.submit class: 'btm btn-primary' %>
     </div>
   <% end %>
 </div>
 
-<style>
-  body {
-    background-color: #f5f5f5;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding: 20px;
-  }
-
-  .form-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 40px auto;
-  }
-
-  h2 {
-    color: #d9534f;
-    font-size: 20px;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0 0 20px;
-  }
-
-  ul li {
-    background-color: #f2dede;
-    color: #a94442;
-    border: 1px solid #ebccd1;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .form-label {
-    margin-bottom: 5px;
-    display: block;
-    font-weight: bold;
-    color: #333;
-  }
-
-  .form-control {
-    display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-
-  .form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-
-  .form-submit {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    line-height: 1.5;
-    border-radius: 5px;
-    color: white;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    cursor: pointer;
-  }
-
-  .form-submit:hover {
-    background-color: #4cae4c;
-  }
-</style>
