@@ -66,3 +66,21 @@
 </div>
 
 <%= link_to "New announcements", new_announcement_path %>
+
+ <footer class = "footer">
+  <p>Contact Us</p>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;">
+    <%= link_to "https://www.instagram.com/heattamu", target: "_blank" do %>
+      <%= image_tag("instagram_logo.png", alt: "Instagram", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+    
+    <%= link_to "mailto:heattamu@gmail.com" do %>
+      <%= image_tag("email_logo.png", alt: "Email", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+    
+    <%= link_to "https://www.tiktok.com/@heattamu", target: "_blank" do %>
+      <%= image_tag("tiktok_logo.png", alt: "TikTok", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+  </div>
+  <p style="margin-top: 15px;">&copy; <%= Time.now.year %> Texas A&M H.E.A.T. All Rights Reserved.</p>
+</footer>

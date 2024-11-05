@@ -23,24 +23,24 @@
     <div>
       <div class="form-field">
         <% member = (@announcement.member.present?) ? @announcement.member : @member %>
-        <strong><%= form.label "Member: #{member.name}", class: 'form-label' %></strong>
+        <strong><%= form.label "Member: #{member.name}", class: 'custom-label' %></strong>
       </div>
 
       <%# Title %>
       <div class="form-field">
         <%= form.label :title, class: 'form-label' %>
-        <%= form.text_field :title, required: true, class: 'form-control' %>
+        <%= form.text_field :title, required: true, class: 'custom-control' %>
       </div>
 
       <%# Description %>
       <div class="form-field">
         <%= form.label :description, class: 'form-label' %>
-        <%= form.text_field :description, required: true, class: 'form-control' %>
+        <%= form.text_field :description, required: true, class: 'custom-control' %>
       </div>
 
       <br>
       <hr>
-      <%= form.submit "Save Announcement", class: 'form-submit' %>
+      <%= form.submit "Save Announcement", class: 'btm btn-primary' %>
     </div>
 
   <% end %>
