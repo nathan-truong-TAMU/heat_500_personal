@@ -85,7 +85,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 
-#Google calendar
+# Google calendar
 gem 'google-apis-calendar_v3'
 gem "icalendar"
 gem "simple_calendar"

@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     user = User.from_omniauth(auth)
-    
+
     if user.present?
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
@@ -9,17 +9,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       # Checks the email of the google account's permissions in the member table
       member = Member.find_by(email: user.email)
-      
+
       # If the user is logging into the website for the first time, automatically add their information to members table
-      unless member
-        member = Member.create(
-          name: user.full_name,
-          email: user.email,
-          position: 'Member',
-          points: 0,
-          dues_paid: false
-        )
-      end
+      member ||= Member.create(
+        name: user.full_name,
+        email: user.email,
+        position: 'Member',
+        points: 0,
+        dues_paid: false
+      )
 
       # Handles setting session variables
       if member&.position == 'Admin'
@@ -33,7 +31,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session[:view_mode] = 'Member'
       end
 
-      
       redirect_to session.delete(:return_to) || after_sign_in_path_for(user) and return
     else
       flash[:alert] =

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "members/new", type: :view do
   before(:each) do
-    assign(:member, Member.new())
+    assign(:member, Member.new)
   end
 
   it "renders new member form" do

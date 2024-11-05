@@ -1,8 +1,8 @@
 class AnnouncementsController < ApplicationController
-  before_action :set_announcement, only: %i[ show edit update destroy ]
+  before_action :set_announcement, only: %i[show edit update destroy]
   # before_action :require_member_login, %i[ edit update destroy ]
-  before_action :get_member, only: %i[ new create update destroy ]
-  before_action :require_login, only: %i[ index show new create edit update destroy ]
+  before_action :get_member, only: %i[new create update destroy]
+  before_action :require_login, only: %i[index show new create edit update destroy]
 
   # GET /announcements or /announcements.json
   def index
@@ -11,12 +11,12 @@ class AnnouncementsController < ApplicationController
 
   # GET /announcements or /announcements.json
   def indexMembers
-    #meant to be so that it needs only member login
-    if current_user.present?
-      @announcements = Announcement.all
-    else
-      @announcements = []
-    end 
+    # meant to be so that it needs only member login
+    @announcements = if current_user.present?
+                       Announcement.all
+                     else
+                       []
+                     end
   end
 
   # GET /announcements/1 or /announcements/1.json
@@ -31,15 +31,12 @@ class AnnouncementsController < ApplicationController
   end
 
   # GET /announcements/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /announcements or /announcements.json
   def create
-
     @announcement = Announcement.new(announcement_params)
     @announcement.member_id = @member.id
-
 
     respond_to do |format|
       if @announcement.save
@@ -76,22 +73,23 @@ class AnnouncementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_announcement
-      @announcement = Announcement.find(params[:id])
-    end
 
-    def get_member
-      puts "Member method"
-      if current_user.present?
-        @member = Member.find_by(email: current_user.email)
-      else
-        redirect_to login_path
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_announcement
+    @announcement = Announcement.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def announcement_params
-      params.require(:announcement).permit(:title, :description, :member_id, :start_date)
+  def get_member
+    puts "Member method"
+    if current_user.present?
+      @member = Member.find_by(email: current_user.email)
+    else
+      redirect_to login_path
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def announcement_params
+    params.require(:announcement).permit(:title, :description, :member_id, :start_date)
+  end
 end

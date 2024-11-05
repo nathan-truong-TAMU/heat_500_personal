@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: %i[ show edit update destroy ]
+  before_action :set_photo, only: %i[show edit update destroy]
 
   # GET /photos or /photos.json
   def index
@@ -7,8 +7,7 @@ class PhotosController < ApplicationController
   end
 
   # GET /photos/1 or /photos/1.json
-  def show
-  end
+  def show; end
 
   # GET /photos/new
   def new
@@ -16,8 +15,7 @@ class PhotosController < ApplicationController
   end
 
   # GET /photos/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /photos or /photos.json
   def create
@@ -63,13 +61,14 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def photo_params
-      params.require(:photo).permit(:alt_text, :description, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def photo_params
+    params.require(:photo).permit(:alt_text, :description, :image)
+  end
 end
