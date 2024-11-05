@@ -62,13 +62,12 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
   end
 
-
   # Only allow a list of trusted parameters through.
   def link_params
     params.require(:link).permit(:title, :url)
   end
 
   def event_params
-    params.require(:event).permit()
+    params.require(:event).permit
   end
 end

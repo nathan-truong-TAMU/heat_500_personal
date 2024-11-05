@@ -1,0 +1,25 @@
+<div id="<%= dom_id photo %>">
+  <% if photo.image.attached? %>
+    <div>
+      <%= image_tag photo.image, alt: photo.alt_text, size: "100x100" %> <!-- Display the image -->
+    </div>
+    <% else %>
+      <p>No Image Available</p> <!-- Message if no image is uploaded -->
+  <% end %>
+
+  <p>
+    <strong>Path:</strong>
+    <%= photo.path %>
+  </p>
+
+  <p>
+    <strong>Alt text:</strong>
+    <%= photo.alt_text %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= photo.description %>
+  </p>
+
+</div>
