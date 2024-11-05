@@ -87,34 +87,34 @@
           <%# Name column with sorting %>
           <% if params[:sort] == "name" %>
             <% if params[:order] == "desc" %>
-              <th><%= link_to(raw("Name &#8595;"), member_list_path(sort: "name", order: "asc"), class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Name &#8595;"), member_list_path(sort: "name", order: "asc"), class: 'th-link') %></th>
             <% else %>
-              <th><%= link_to(raw("Name &#8593;"), member_list_path, class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Name &#8593;"), member_list_path, class: 'th-link selected-btn') %></th>
             <% end %>
           <% else %>
-            <th><%= link_to("Name", member_list_path(sort: "name", order: "desc"), class: 'btn btn-primary sort-btn') %></th>
+            <th><%= link_to("Name", member_list_path(sort: "name", order: "desc"), class: 'th-link selected-btn') %></th>
           <% end %>
           
           <%# Email column with sorting %>
           <% if params[:sort] == "email" %>
             <% if params[:order] == "desc" %>
-              <th><%= link_to(raw("Email &#8595;"), member_list_path(sort: "email", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Email &#8595;"), member_list_path(sort: "email", order: "asc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
             <% else %>
-              <th><%= link_to(raw("Email &#8593;"), member_list_path, class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Email &#8593;"), member_list_path, class: 'th-link selected-btn') %></th>
             <% end %>
           <% else %>
-            <th><%= link_to("Email", member_list_path(sort: "email", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+            <th><%= link_to("Email", member_list_path(sort: "email", order: "desc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
           <% end %>
 
           <%# Points column with sorting %>
           <% if params[:sort] == "points" %>
             <% if params[:order] == "desc" %>
-              <th><%= link_to(raw("Points &#8595;"), member_list_path(sort: "points", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Points &#8595;"), member_list_path(sort: "points", order: "asc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
             <% else %>
-              <th><%= link_to(raw("Points &#8593;"), member_list_path, class: 'btn btn-primary sort-btn') %></th>
+              <th><%= link_to(raw("Points &#8593;"), member_list_path, class: 'th-link selected-btn') %></th>
             <% end %>
           <% else %>
-            <th><%= link_to("Points", member_list_path(sort: "points", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+            <th><%= link_to("Points", member_list_path(sort: "points", order: "desc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
           <% end %>
 
           <th>Dues Paid</th>
@@ -133,7 +133,7 @@
             <td class="actions">
               <%= link_to("Show", member_path(member), class: 'btn btn-primary') %>
               <%= link_to("Edit", edit_member_path(member), class: 'btn btn-primary') %>
-              <%= link_to("Delete", member_path(member), class: 'btn btn-danger', data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" }) %>
+              <%= link_to("Delete", member_path(member), class: 'btn btn-primary btn-danger', data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" }) %>
             </td>
           </tr>
         <% end %>

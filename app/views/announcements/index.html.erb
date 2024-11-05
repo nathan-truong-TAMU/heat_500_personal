@@ -54,11 +54,24 @@
       </div>
     </div>
   </nav>
-<h1>Announcements</h1>
+<h1 style="color:#4D2D18">Announcements</h1>
 
-<div id="announcements">
+<div id="announcements" style="color: black;">
   <% @announcements.each do |announcement| %>
-    <%= render announcement %>
+    <p>
+      <strong>Officer</strong>
+      <br>
+      <p style="text-decoration: underline"><%= announcement.member.name %></p>
+    </p>
+
+    <p>
+      <strong>Title</strong>
+      <%= announcement.title %>
+    </p>
+
+    <p>
+      <strong>Description</strong>
+      <%= announcement.description %>
     <p>
       <%= link_to "Show this announcements", announcement %>
     </p>
