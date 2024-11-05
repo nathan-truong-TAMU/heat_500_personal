@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "members/edit", type: :view do
-  let(:member) {
+  let(:member) do
     Member.create!(
       name: 'John Cena',
       points: 100,
       dues_paid: true,
       position: 'Officer'
     )
-  }
+  end
 
   before(:each) do
     assign(:member, member)
-    render  # Render the view so we can check its output
+    render # Render the view so we can check its output
   end
 
   it "renders the edit member form" do

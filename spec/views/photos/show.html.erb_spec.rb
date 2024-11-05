@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "photos/show", type: :view do
   before(:each) do
     assign(:photo, Photo.create!(
-      path: "Path",
-      alt_text: "Alt Text",
-      description: "Description"
-    ))
+                     path: "Path",
+                     alt_text: "Alt Text",
+                     description: "Description"
+                   ))
   end
 
   it "renders attributes in <p>" do

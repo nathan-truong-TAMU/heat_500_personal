@@ -15,7 +15,7 @@ class EventsController < ApplicationController
         destroy_event_relationships(event)
         event.destroy
       end
-      
+
       redirect_to events_url, notice: "All events have been successfully deleted."
     else
       redirect_to events_url, alert: "You do not have permission to delete all events."
@@ -78,16 +78,16 @@ class EventsController < ApplicationController
   def qr_code
     # Generate QR code data with event_id and timestamp
     qr_data = "#{request.base_url}/events/#{@event.id}/register_attendance?timestamp=#{Time.now.to_i}"
-    
+
     # Generate the QR code
     qr_code = RQRCode::QRCode.new(qr_data)
     @qr_svg = qr_code.as_svg(module_size: 4)
-    
+
     render 'qr_code'
   end
 
   def add_members
-    @list_members = Member.left_outer_joins(:events_members).where(events_members: {event_id: nil}).where.not(id: EventsMember.select(:member_id).where(event_id: @event.id), name: "Admin")
+    @list_members = Member.left_outer_joins(:events_members).where(events_members: { event_id: nil }).where.not(id: EventsMember.select(:member_id).where(event_id: @event.id), name: "Admin")
 
     puts @list_members
   end
@@ -95,20 +95,19 @@ class EventsController < ApplicationController
   def add_members_patch
     selected_members = params[:member_ids]
 
-    if !selected_members.present?
+    unless selected_members.present?
       flash[:alert] = "Not member selected 1"
       redirect_to add_members_event_path(@event)
-      return 
+      return
     end
 
     selected_members = params[:ids]
 
-
-    if !selected_members.present?
+    unless selected_members.present?
       respond_to do |format|
-        format.html { redirect_to add_members_event_path(@event), notice: "Not member selected"}
+        format.html { redirect_to add_members_event_path(@event), notice: "Not member selected" }
       end
-      return 
+      return
     end
 
     # @member = Member.find(@event_member.member_id)
@@ -121,7 +120,7 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to add_members_event_path(@event), notice: "Members added"}
+      format.html { redirect_to add_members_event_path(@event), notice: "Members added" }
     end
   end
 
@@ -130,7 +129,7 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
-  rescue ActiveRecord::RecordNotFound 
+  rescue ActiveRecord::RecordNotFound
     redirect_to events_url, alert: "Event not found."
   end
 
@@ -151,5 +150,3 @@ class EventsController < ApplicationController
     event.events_members.destroy_all
   end
 end
-
-

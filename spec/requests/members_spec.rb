@@ -14,19 +14,19 @@ require 'rails_helper'
 
 RSpec.describe "/members", type: :request do
   before do
-    post login_path, params: {password: 'TxAMHeat#2k13'}
+    post login_path, params: { password: 'TxAMHeat#2k13' }
   end
 
   # This should return the minimal set of attributes required to create a valid
   # Member. As you add validations to Member, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip("Add a hash of attributes valid for your model")
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip("Add a hash of attributes invalid for your model")
-  }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -62,9 +62,9 @@ RSpec.describe "/members", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Member" do
-        expect {
+        expect do
           post members_url, params: { member: valid_attributes }
-        }.to change(Member, :count).by(1)
+        end.to change(Member, :count).by(1)
       end
 
       it "redirects to the created member" do
@@ -75,25 +75,23 @@ RSpec.describe "/members", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Member" do
-        expect {
+        expect do
           post members_url, params: { member: invalid_attributes }
-        }.to change(Member, :count).by(0)
+        end.to change(Member, :count).by(0)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post members_url, params: { member: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
+      let(:new_attributes) do
         skip("Add a hash of attributes valid for your model")
-      }
+      end
 
       it "updates the requested member" do
         member = Member.create! valid_attributes
@@ -111,22 +109,20 @@ RSpec.describe "/members", type: :request do
     end
 
     context "with invalid parameters" do
-    
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         member = Member.create! valid_attributes
         patch member_url(member), params: { member: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested member" do
       member = Member.create! valid_attributes
-      expect {
+      expect do
         delete member_url(member)
-      }.to change(Member, :count).by(-1)
+      end.to change(Member, :count).by(-1)
     end
 
     it "redirects to the members list" do

@@ -10,13 +10,13 @@ RSpec.describe "events/edit", type: :view do
 
     # Create a valid event instance with necessary attributes
     @event = assign(:event, Event.create!(
-      link: '/',
-      name: 'YouTuber Event',
-      description: 'Here, we will be YouTubing on the most YouTube ever.',
-      end_date: '2000-01-01 00:00:00',
-      start_date: '1999-12-31 23:59:00',
-      points: 10
-    ))
+                              link: '/',
+                              name: 'YouTuber Event',
+                              description: 'Here, we will be YouTubing on the most YouTube ever.',
+                              end_date: '2000-01-01 00:00:00',
+                              start_date: '1999-12-31 23:59:00',
+                              points: 10
+                            ))
   end
 
   it "renders the edit event form" do

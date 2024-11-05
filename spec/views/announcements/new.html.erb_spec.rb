@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "announcements/new", type: :view do
   before(:each) do
-    assign(:announcement, Announcements.new())
+    assign(:announcement, Announcements.new)
   end
 
   it "renders new announcements form" do
