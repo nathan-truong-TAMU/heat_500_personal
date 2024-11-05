@@ -40,7 +40,9 @@
           <li class="nav-item">
             <%= link_to "Calendar", "/calendars", class: "nav-link" %>
           </li>
-
+          <li class="nav-item">
+            <%= link_to "Photos", "/photos", class: "nav-link" %>
+          </li>
         </ul>
       </div>
       <div class="ml-auto">
@@ -63,10 +65,17 @@
    <!-- About Section-->
   <section id="about-organization" >
     <h2>Texas A&M H.E.A.T.</h2>
-    <div style="background-color: #CABA9C; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
-      <%= image_tag("HeatMainPicture.png", alt: "", class: "heat-home-pic", height: "504px", width: "672px") %>
-      <br>
+    <!-- Handles Photo Gallery Slider -->
+    <div id="photo-slider" style="background-color: #CABA9C; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+      <% @photos.each do |photo| %>
+        <div class="slide" style="display: none;">
+          <%= image_tag photo.image, alt: photo.alt_text, class: "heat-home-pic", height: "504px", width: "672px" %>
+        </div>
+      <% end %>
     </div>
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+
     <p><strong>Abbreviation(s):</strong> H.E.A.T.</p>
     <p>Human Environmental Animal Team</p>
     <p>Howdy! H.E.A.T. is a non-profit 501(c)(3) student service organization dedicated to improving humanitarian, environmental, and animal welfare issues through positive activism.</p>
@@ -128,5 +137,33 @@
   <p style="margin-top: 15px;">&copy; <%= Time.now.year %> Texas A&M H.E.A.T. All Rights Reserved.</p>
 </footer>
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = (i === index) ? "block" : "none";
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;  // Loop back to the first slide
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;  // Loop back to the last slide
+      showSlide(currentSlide);
+    }
+
+    document.getElementById("next").addEventListener("click", nextSlide);
+    document.getElementById("prev").addEventListener("click", prevSlide);
+
+    showSlide(currentSlide);  // Show the first slide initially
+  });
+</script>
 
 </html>
