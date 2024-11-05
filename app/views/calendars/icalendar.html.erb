@@ -1,3 +1,55 @@
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+       <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag("HeatAppLogo.png", alt: "Logo",  width: "80", height: "80", class: "d-inline-block align-top") %>
+    <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "Links", links_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Members", members_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Events", events_path, class: "nav-link" %>
+          </li>
+          <% if is_officer_or_admin?(session) %>
+            <li class="nav-item">
+              <%= link_to "Event Attendance", events_members_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to "Leaderboard", "/leaderboard", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Calendar", "/calendars", class: "nav-link" %>
+          </li>
+
+        </ul>
+      </div>
+      <div class="ml-auto">
+        <% if current_user %>
+        <div style="width: 75px; height: 75px; border-radius: 50%; overflow: hidden;">
+          <%= link_to(check_member_attendance_path, onclick: "showEventsAndMeetings()") do %>
+  <%= image_tag(current_user.avatar_url, style: "width: 100%; height: auto; border-radius: 50%; margin-bottom: 5px;") %>
+<% end %>
+
+        </div>
+        <%= button_to "Logout", destroy_user_session_path(redirect_to: root_path), data: { turbo: "false" }, method: :delete, class: "btn btn-success" %>
+        <% else %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
+        <% end %>
+        <!-- Add the new button for reading the content -->
+      </div>
+    </div>
+  </nav>
+
 <ul>
   <%= month_calendar() do |date| %>
     <%= date%>
@@ -11,66 +63,25 @@
   <% end %>
 </ul>
 
-<style>
-.simple-calendar {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 15px;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background-color: #8a6240;
-}
 
-.day {
-    align-items: center;
-    justify-content: center;
-    position: relative; /* For absolute positioning of events */
-    transition: background-color 0.2s;
-}
 
-.wday-0 { background-color: #f9f9f9; } /* Sunday */
-.wday-1 { background-color: #ffffff; } /* Monday */
-.wday-2 { background-color: #ffffff; } /* Tuesday */
-.wday-3 { background-color: #ffffff; } /* Wednesday */
-.wday-4 { background-color: #ffffff; } /* Thursday */
-.wday-5 { background-color: #ffffff; } /* Friday */
-.wday-6 { background-color: #f9f9f9; } /* Saturday */
+ <footer class = "footer">
+  <p>Contact Us</p>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;">
+    <%= link_to "https://www.instagram.com/heattamu", target: "_blank" do %>
+      <%= image_tag("instagram_logo.png", alt: "Instagram", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+    
+    <%= link_to "mailto:heattamu@gmail.com" do %>
+      <%= image_tag("email_logo.png", alt: "Email", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+    
+    <%= link_to "https://www.tiktok.com/@heattamu", target: "_blank" do %>
+      <%= image_tag("tiktok_logo.png", alt: "TikTok", width: "30", height: "30", class: "footer-icon") %>
+    <% end %>
+  </div>
+  <p style="margin-top: 15px;">&copy; <%= Time.now.year %> Texas A&M H.E.A.T. All Rights Reserved.</p>
+</footer>
+</body>
 
-.today {
-    background-color: #CABA9C; /* Today's date */
-    color: #102820;
-}
-
-.past {
-    background-color: #102820;  /* Past dates */
-    color: #CABA9C;
-}
-
-.future {
-    background-color: #4C6444; /* Future dates */
-    color: #CABA9C;
-}
-
-.start-date {
-}
-
-.prev-month {
-    opacity: 0.8
-}
-
-.next-month {
-    opacity: 0.8
-}
-
-.current-month {
-    font-weight: bold; /* Bold text for current month days */
-}
-
-.has-events {
-    background-color: #93A889; /* Highlight days with events */
-    color: #1f2f22;
-}
-
-.has-events::after {
-}
-</style>
+</html>
