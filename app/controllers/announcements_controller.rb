@@ -9,6 +9,16 @@ class AnnouncementsController < ApplicationController
     @announcements = Announcement.all
   end
 
+  # GET /announcements or /announcements.json
+  def indexMembers
+    #meant to be so that it needs only member login
+    if current_user.present?
+      @announcements = Announcement.all
+    else
+      @announcements = []
+    end 
+  end
+
   # GET /announcements/1 or /announcements/1.json
   def show
     # Join statements are not needed can just get member by doing, as long as there is a active record relationship
@@ -60,7 +70,7 @@ class AnnouncementsController < ApplicationController
     @announcement.destroy
 
     respond_to do |format|
-      format.html { redirect_to announcements_index_url, notice: "Announcements was successfully destroyed." }
+      format.html { redirect_to announcements_url, notice: "Announcements was successfully destroyed." }
       format.json { head :no_content }
     end
   end

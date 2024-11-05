@@ -28,7 +28,7 @@ RSpec.describe "/announcements", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       Announcements.create! valid_attributes
-      get announcements_index_url
+      get announcements_url
       expect(response).to be_successful
     end
   end
@@ -60,12 +60,12 @@ RSpec.describe "/announcements", type: :request do
     context "with valid parameters" do
       it "creates a new Announcements" do
         expect {
-          post announcements_index_url, params: { announcement: valid_attributes }
+          post announcements_url, params: { announcement: valid_attributes }
         }.to change(Announcements, :count).by(1)
       end
 
       it "redirects to the created announcement" do
-        post announcements_index_url, params: { announcement: valid_attributes }
+        post announcements_url, params: { announcement: valid_attributes }
         expect(response).to redirect_to(announcement_url(Announcements.last))
       end
     end
@@ -73,13 +73,13 @@ RSpec.describe "/announcements", type: :request do
     context "with invalid parameters" do
       it "does not create a new Announcements" do
         expect {
-          post announcements_index_url, params: { announcement: invalid_attributes }
+          post announcements_url, params: { announcement: invalid_attributes }
         }.to change(Announcements, :count).by(0)
       end
 
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post announcements_index_url, params: { announcement: invalid_attributes }
+        post announcements_url, params: { announcement: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -129,7 +129,7 @@ RSpec.describe "/announcements", type: :request do
     it "redirects to the announcements list" do
       announcements = Announcements.create! valid_attributes
       delete announcement_url(announcements)
-      expect(response).to redirect_to(announcements_index_url)
+      expect(response).to redirect_to(announcements_url)
     end
   end
 end

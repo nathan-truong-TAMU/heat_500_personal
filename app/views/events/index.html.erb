@@ -11,7 +11,8 @@
       <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
         <p>
           <%= link_to "Show this event", event, class: 'event-link' %>
-          <%= link_to "Show QR Code", qr_code_event_path(event), class: 'qr-code-link', target: '_blank' %>
+          &nbsp;
+          <%= link_to "Show QR Code", qr_code_event_path(event), class: 'btn btn-info', target: '_blank' %>
         </p>
       <% end %>
 

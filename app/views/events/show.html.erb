@@ -6,11 +6,12 @@
   <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %> |
   <%# Can implement this last after doing event attendance %>
-  <%= link_to "Add Members", "/event/#{@event.id}/add"%> 
-
-
-  <%= button_to "Destroy this event", @event, method: :delete, form: {class: "inline-form event-actions "} %>
+  <%= link_to "Add Members", add_members_event_path(@event)%> 
 </div>
+
+<%# Just make it a little more aestetic %>
+<br>
+<%= button_to "Destroy this event", @event, method: :delete, form:{}, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
 
 <style>
   body {

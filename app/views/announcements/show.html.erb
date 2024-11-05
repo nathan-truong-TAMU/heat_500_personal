@@ -6,5 +6,5 @@
   <%= link_to "Edit this announcements", edit_announcement_path(@announcement) %> |
   <%= link_to "Back to announcements", announcements_path %>
 
-  <%= button_to "Destroy this announcements", @announcement, method: :delete %>
+  <%= button_to "Destroy this announcements", @announcement, method: :delete , class: 'btn btn-danger', data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" }%>
 </div>

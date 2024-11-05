@@ -33,34 +33,34 @@
         <%# Name %>
         <%if params[:sort] == "name" %>
           <%if params[:order] == "desc" %>
-            <th><%= link_to(raw("Name &#8595"), member_list_path(sort: "name", order: "asc"), focus: true, class: 'btn btn-primary sort-btn') %></th>
+            <th><%= link_to(raw("Name &#8595"), member_list_path(sort: "name", order: "asc"), focus: true, style:"color: inherit;", class: 'th-link selected-btn')%></th>
           <%else%>
-            <th><%= link_to(raw("Name &#8593"), member_list_path, focus: true, class: 'btn btn-primary sort-btn') %></th>
+            <th><%= link_to(raw("Name &#8593"), member_list_path, focus: true, class: 'th-link selected-btn') %></th>
           <%end %>
         <%else%>
-          <th><%= link_to(raw("Name"), member_list_path(sort: "name", order: "desc"), class: 'btn btn-primary sort-btn') %></th>
+          <th><%= link_to(raw("Name"), member_list_path(sort: "name", order: "desc"), class: 'th-link') %></th>
         <%end%>
         
         <%# Email %>
         <%if params[:sort] == "email" %>
           <%if params[:order] == "desc" %>
-            <th><%= link_to(raw("Email &#8595"), member_list_path(sort: "email", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn selected-btn') %></th>
+            <th><%= link_to(raw("Email &#8595"), member_list_path(sort: "email", order: "asc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
           <%else%>
-            <th><%= link_to(raw("Email &#8593"), member_list_path, class: 'btn btn-primary sort-btn selected-btn') %></th>
+            <th><%= link_to(raw("Email &#8593"), member_list_path, class: 'th-link selected-btn') %></th>
           <%end %>
         <%else%>
-          <th><%= link_to(raw("Email"), member_list_path(sort: "email", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+          <th><%= link_to(raw("Email"), member_list_path(sort: "email", order: "desc", filter: params[:filter]), class: 'th-link') %></th>
         <%end%>
 
         <%# Points %>
         <%if params[:sort] == "points" %>
           <%if params[:order] == "desc" %>
-            <th><%= link_to(raw("Points &#8595"), member_list_path(sort: "points", order: "asc", filter: params[:filter]), class: 'btn btn-primary sort-btn selected-btn') %></th>
+            <th><%= link_to(raw("Points &#8595"), member_list_path(sort: "points", order: "asc", filter: params[:filter]), class: 'th-link selected-btn') %></th>
           <%else%>
-            <th><%= link_to(raw("Points &#8593"), member_list_path, class: 'btn btn-primary sort-btn selected-btn') %></th>
+            <th><%= link_to(raw("Points &#8593"), member_list_path, class: 'th-link selected-btn') %></th>
           <%end %>
         <%else%>
-          <th><%= link_to(raw("Points"), member_list_path(sort: "points", order: "desc", filter: params[:filter]), class: 'btn btn-primary sort-btn') %></th>
+          <th><%= link_to(raw("Points"), member_list_path(sort: "points", order: "desc", filter: params[:filter]), class: 'th-link') %></th>
         <%end%>
         <%# <th>Points</th> %>
         <th>Dues Paid</th>
@@ -168,9 +168,29 @@
     
   }
 
+  
+
+  .th-default{
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .th-link{
+    color: inherit;
+    display: inherit;
+    vertical-align: inherit;
+    font-weight: inherit;
+    text-align: inherit;
+  }
+
+  .th-link:hover{
+    color: #F2EED7;
+  }
+
   .selected-btn{
-    background-color: #102820;
-    color: red;
+    color: #C0EBA6;
   }
 
 </style>
