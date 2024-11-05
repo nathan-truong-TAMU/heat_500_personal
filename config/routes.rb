@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :announcements
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :events do
     collection do
@@ -8,6 +9,9 @@ Rails.application.routes.draw do
     member do
       get 'qr_code' # Route for displaying the QR code
       get 'register_attendance', to: 'events_members#register_attendance'
+      get 'add_members'
+      post 'add_members', to: 'events#add_members_patch'
+
     end
   
   end

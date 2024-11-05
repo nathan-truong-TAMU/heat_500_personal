@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy qr_code]
+  before_action :set_event, only: %i[show edit update destroy qr_code add_members add_members_patch]
   before_action :require_login, only: %i[new show edit update destroy destroy_all]
 
   # GET /events or /events.json
@@ -84,6 +84,45 @@ class EventsController < ApplicationController
     @qr_svg = qr_code.as_svg(module_size: 4)
     
     render 'qr_code'
+  end
+
+  def add_members
+    @list_members = Member.left_outer_joins(:events_members).where(events_members: {event_id: nil}).where.not(id: EventsMember.select(:member_id).where(event_id: @event.id), name: "Admin")
+
+    puts @list_members
+  end
+
+  def add_members_patch
+    selected_members = params[:member_ids]
+
+    if !selected_members.present?
+      flash[:alert] = "Not member selected 1"
+      redirect_to add_members_event_path(@event)
+      return 
+    end
+
+    selected_members = params[:ids]
+
+
+    if !selected_members.present?
+      respond_to do |format|
+        format.html { redirect_to add_members_event_path(@event), notice: "Not member selected"}
+      end
+      return 
+    end
+
+    # @member = Member.find(@event_member.member_id)
+    # @event = Event.find(@event_member.event_id)
+
+    selected_members.each do |member|
+      event_member = EventsMember.new(event_id: @event.id, member_id: member.id)
+      event_member.save
+      member.increment!(:points, @event.points)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to add_members_event_path(@event), notice: "Members added"}
+    end
   end
 
   private
