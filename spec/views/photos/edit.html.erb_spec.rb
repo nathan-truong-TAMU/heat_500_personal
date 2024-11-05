@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "photos/edit", type: :view do
-  let(:photo) {
+  let(:photo) do
     Photo.create!(
       path: "MyString",
       alt_text: "MyString",
       description: "MyString"
     )
-  }
+  end
 
   before(:each) do
     assign(:photo, photo)
@@ -17,7 +17,6 @@ RSpec.describe "photos/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", photo_path(photo), "post" do
-
       assert_select "input[name=?]", "photo[path]"
 
       assert_select "input[name=?]", "photo[alt_text]"

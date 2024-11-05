@@ -11,7 +11,6 @@ Rails.application.routes.draw do
       get 'register_attendance', to: 'events_members#register_attendance'
       get 'add_members'
       post 'add_members', to: 'events#add_members_patch'
-
     end
   
   end

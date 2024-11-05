@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "announcements/edit", type: :view do
-  let(:announcement) {
-    Announcements.create!()
-  }
+  let(:announcement) do
+    Announcements.create!
+  end
 
   before(:each) do
     assign(:announcement, announcement)
