@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy qr_code add_members add_members_patch]
+  before_action :set_event, only: %i[show edit update destroy qr_code add_members add_members_post remove_members remove_members_delete]
   before_action :require_login, only: %i[new show edit update destroy destroy_all]
 
   # GET /events or /events.json
@@ -86,41 +86,115 @@ class EventsController < ApplicationController
     render 'qr_code'
   end
 
+  #GET method to /events/id/add_members
   def add_members
-    @list_members = Member.left_outer_joins(:events_members).where(events_members: { event_id: nil }).where.not(id: EventsMember.select(:member_id).where(event_id: @event.id), name: "Admin")
-
-    puts @list_members
+    @members = Member.left_outer_joins(:events_members).where(events_members: { event_id: nil })
+    .where.not(id: EventsMember.select(:member_id).where(event_id: @event.id), name: "Admin")
   end
 
-  def add_members_patch
+  #POST method from /events/id/add_members
+  def add_members_post
     selected_members = params[:member_ids]
 
     unless selected_members.present?
-      flash[:alert] = "Not member selected 1"
-      redirect_to add_members_event_path(@event)
+      flash[:alert] = "No member has been selected!"
+
+      respond_to do |format|
+        @event.errors.add(:name, "Error")
+        format.html { redirect_to add_members_event_path(@event) }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
       return
     end
 
-    selected_members = params[:ids]
+    selected_members = selected_members[:ids]
 
     unless selected_members.present?
+      puts "Need to select members (array of input not being read properly)"
+
       respond_to do |format|
         format.html { redirect_to add_members_event_path(@event), notice: "Not member selected" }
       end
       return
     end
 
-    # @member = Member.find(@event_member.member_id)
-    # @event = Event.find(@event_member.event_id)
+    #this might throw an error if one of the ids doesn't exist
+    #if that's the case then switch to Member.where(id: selected_members)
+    #However if there is an error then it needs to be looked into cause all ids should exist in table
+    members = Member.where(id: selected_members)
 
-    selected_members.each do |member|
+    members.each do |member|
       event_member = EventsMember.new(event_id: @event.id, member_id: member.id)
-      event_member.save
+      
+      unless event_member.save
+        #if the save fails
+        flash[:alert] =  "Unable to add member to the event - member joined table"
+        redirect_to add_members_event_path(@event)
+
+        return
+      end
       member.increment!(:points, @event.points)
     end
 
     respond_to do |format|
+      flash[:alert] = "Members added succesfully and points incremented!(Alert)"
       format.html { redirect_to add_members_event_path(@event), notice: "Members added" }
+    end
+  end
+
+  #Get method to /events/id/remove_members
+  def remove_members
+    @members = @event.members
+  end
+
+  #DELETE method from /events/id/remove_members
+  def remove_members_delete
+    selected_members = params[:member_ids]
+
+    unless selected_members.present?
+      flash[:alert] = "No member has been selected!"
+
+      respond_to do |format|
+        format.html { redirect_to add_members_event_path(@event) }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+
+    selected_members = selected_members[:ids]
+
+    unless selected_members.present?
+      # puts "No member has been selected!(Array of input not working properly)"
+      
+      respond_to do |format|
+        format.html { redirect_to add_members_event_path(@event), notice: "No member has been selected!(Array of input not working properly)" }
+      end
+      return
+    end
+
+    #this might throw an error if one of the ids doesn't exist
+    #if that's the case then switch to Member.where(id: selected_members)
+    #However if there is an error then it needs to be looked into cause all ids should exist in table
+    members = Member.where(id: selected_members)
+
+    members.each do |member|
+      if @event.members.include?(member)
+        # Remove the member from the event
+        @event.members.delete(member)
+
+        # Deduct one point from the member's member_points value
+        member.decrement!(:points, @event.points) # change this to a variable number.
+
+        # flash[:notice] = "Member removed from event successfully and points deducted!"
+      else
+        flash[:alert] = "Failed to remove member from event! Member not in the event."
+      end
+      
+    end
+
+    respond_to do |format|
+      flash[:alert] = "Members Removed Succesfully and points deducted!(Alert)"
+      format.html { redirect_to remove_members_event_path(@event), notice: "Members Removed Succesfully and points deducted!" }
     end
   end
 

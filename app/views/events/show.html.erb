@@ -60,9 +60,11 @@
     <div class="event-actions" style="margin-top: 20px;">
       <%= link_to "Edit this event", edit_event_path(@event), class: "edit-link" %> |
       <%= link_to "Back to events", events_path, class: "back-link" %> |
-      <%= button_to "Destroy this event", @event, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "destroy-button" %>
       <%# Can implement this last after doing event attendance %>
-      <%# <%= link_to "Add Members", add_members_event_path(@event) %>
+      <%= link_to "Add Members", add_members_event_path(@event) , class: "edit-link"%> |
+      <%= link_to "Remove Members", remove_members_event_path(@event), class: "edit-link" %>
+      <%= button_to "Destroy this event", @event, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "destroy-button" %>
+      
     </div>
   </div>
 

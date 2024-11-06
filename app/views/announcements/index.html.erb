@@ -54,18 +54,27 @@
       </div>
     </div>
   </nav>
-<h1>Announcements</h1>
+<h1 style="color:#4D2D18">Announcements</h1>
 
-<div id="announcements">
-  <% @announcements.each do |announcement| %>
-    <%= render announcement %>
-    <p>
-      <%= link_to "Show this announcements", announcement %>
-    </p>
+<div id="announcements" style="color: black;">
+   <% @announcements.each do |announcement| %>
+    
+    <%= render 'message', announcement: announcement%>
+
+    <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+      <p>
+        <%= link_to "Show this announcements", announcement, class: "edit-link" %>
+      </p>
+    <% end%>
+
+    <hr>
+
   <% end %>
 </div>
 
-<%= link_to "New announcements", new_announcement_path %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+  <%= link_to "New announcements", new_announcement_path, class: "" %>
+<% end %>
 
  <footer class = "footer">
   <p>Contact Us</p>

@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
       redirect_to login_manual_path unless is_officer_or_admin?
     end
   end
+
+  def require_member_login
+    redirect_to login_path unless current_user.present?
+  end
 end
