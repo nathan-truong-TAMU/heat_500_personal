@@ -23,7 +23,7 @@
       <% flash.each do |key, value| -%>
       <%# flash.discard() is meant to make sure it only is displayed once.%>
       <%# Noticed it would duplicate for notice so doing it for flash notices for now %>
-        <section class="flash flash-general flash__<%= key %>"><%=(key != "notice") ? value.html_safe : flash.discard(value) %></section>
+        <section class="flash flash-general flash__<%= key %>"><%= value.html_safe %> </section>
       <% end -%>
     <% end %>
     <%= yield %>
