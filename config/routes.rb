@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       get 'qr_code' # Route for displaying the QR code
       get 'register_attendance', to: 'events_members#register_attendance'
       get 'add_members'
-      post 'add_members', to: 'events#add_members_patch'
+      post 'add_members', to: 'events#add_members_post'
+
+      get 'remove_members'
+      delete 'remove_members', to: 'events#remove_members_delete'
     end
   
   end

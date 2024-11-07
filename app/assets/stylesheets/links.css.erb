@@ -479,6 +479,12 @@ a:hover {
   transform: scale(1.05);
 }
 
+.bg-hunter-green{
+  background-color: #4C6444; /* Hunter Green for header */
+  color: #FFF8E7; /* Light text color */
+  <%# font-weight: bold; %>
+}
+
 .sort-btn {
   display: inline-block;
   width: 100%;
@@ -504,6 +510,27 @@ a:hover {
 .sort-btn.selected-btn {
   background-color: #102820; /* Dark Green for selected state */
   color: #CABA9C; /* Khaki color to indicate selected */
+}
+
+.th-default{
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: center;
+}
+
+.th-link{
+  color: inherit;
+  display: inherit;
+  vertical-align: inherit;
+  font-weight: inherit;
+  text-align: inherit;
+}
+.th-link:hover{
+  color: #F2EED7;
+}
+.selected-btn{
+  color: cream;
 }
 
 
@@ -651,3 +678,4 @@ a:hover {
 
 .has-events::after {
 }
+

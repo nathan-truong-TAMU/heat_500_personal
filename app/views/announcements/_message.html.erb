@@ -1,0 +1,30 @@
+<div class="card bg-hunter-green" style="width: 50%; text-align: left; ">
+    <div class="card-header">
+        <h6><strong>Officer:</strong> <%= announcement.member.name %></h6>
+    </div>
+    <div class="card-body">
+       <h6><strong> Title: </strong></h6>
+        <p style="font-decoration: underline;"><%= announcement.title %></p>
+
+       <h6><strong> Message: </strong></h6>
+       <div class="card">
+            <p style="text-decoration: italicize; text-align: center; color: black;"><q><em>&nbsp;<%= announcement.description %>&nbsp;</em></q></p>
+       </div>
+    </div>
+    <div class="card-footer" style="display: flex;">
+        <div style="display: flex; gap: 2%; margin: auto;">
+            <h6 style="">Created: </h6>
+            <% if announcement.created_at.present? %>
+                <p><%= announcement.created_at.strftime("%A, %d %B %Y at %I:%M %p") %></p>
+            <% else %>
+                <em>No start date available</em>
+            <% end %>
+            <h6>Last Updated: </h6>
+            <% if announcement.updated_at.present? %>
+                <p><%= announcement.updated_at.strftime("%A, %d %B %Y at %I:%M %p") %></p>
+            <% else %>
+                <em>No start date available</em>
+            <% end %>
+        </div>
+    </div>
+</div>
