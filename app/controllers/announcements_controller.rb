@@ -1,12 +1,13 @@
 class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: %i[show edit update destroy]
-  # before_action :require_member_login, %i[ edit update destroy ]
+  before_action :require_member_login, only: %i[ index ]
   before_action :get_member, only: %i[new create update destroy]
-  before_action :require_login, only: %i[index show new create edit update destroy]
+  before_action :require_login, only: %i[show new create edit update destroy]
 
   # GET /announcements or /announcements.json
   def index
     @announcements = Announcement.all
+    @announcements = @announcements.order(created_at: "desc")
   end
 
   # GET /announcements or /announcements.json
