@@ -3,186 +3,115 @@
 <head>
   <title>Member Attendance</title>
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-       <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag("HeatAppLogo.png", alt: "Logo",  width: "80", height: "80", class: "d-inline-block align-top") %>
-    <% end %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <%= link_to "Links", links_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Members", members_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Events", events_path, class: "nav-link" %>
-          </li>
-          <% if is_officer_or_admin?(session) %>
-            <li class="nav-item">
-              <%= link_to "Event Attendance", events_members_path, class: "nav-link" %>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <%= link_to "Leaderboard", "/leaderboard", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Calendar", "/calendars", class: "nav-link" %>
-          </li>
+  <div class="header">
+    <h2><%= current_user.full_name %></h2>
+  </div>
 
-        </ul>
-      </div>
-      <div class="ml-auto">
-        <% if current_user %>
-        <div style="width: 75px; height: 75px; border-radius: 50%; overflow: hidden;">
-          <%= link_to(check_member_attendance_path, onclick: "showEventsAndMeetings()") do %>
-  <%= image_tag(current_user.avatar_url, style: "width: 100%; height: auto; border-radius: 50%; margin-bottom: 5px;") %>
-<% end %>
+  <%# Have the the profile information displayed for the user to edit%>
+  <div class="" style="text-align: center; color: green; width: 90%;">
+    <h3>Member Page</h3>
+    <h3><% puts "Here is the url #{current_user.avatar_url} " %></h3>
+    <br>
+    
+    <%= image_tag(current_user.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block") %>
 
-        </div>
-        <%= button_to "Logout", destroy_user_session_path(redirect_to: root_path), data: { turbo: "false" }, method: :delete, class: "btn btn-success" %>
-        <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
+    <div class="form-container">
+      <%= form_with(model: @member, local: true) do |form| %>
+        <% if @member.errors.any? %>
+          <div>
+            <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+            <ul>
+              <% @member.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-        <!-- Add the new button for reading the content -->
-      </div>
-    </div>
-  </nav>
 
-<div class="header">
-  <h2><%= current_user.full_name %></h2>
-</div>
+        <div class="form-field">
+          <%= form.label :name, class: 'custom-label' %>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
 
-<%# Have the the profile information displayed for the user to edit%>
-<div class="" style="text-align: center; color: green; width: 90%;">
-  <h3>Member Page</h3>
-  <h3><% puts "Here is the url #{current_user.avatar_url} " %></h3>
-  <br>
-  
-  <%= image_tag(current_user.avatar_url, alt: "Profile Picture" , class: "rounded mx-auto d-block") %>
+        <div class="form-field">
+          <%= form.label :points, class: 'custom-label' %>
+          <%= form.number_field :points, disabled: true, class: 'form-control' %>
+        </div>
 
-  <div class="form-container">
-    <%= form_with(model: @member, local: true) do |form| %>
-      <% if @member.errors.any? %>
-        <div>
-          <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
-          <ul>
-            <% @member.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+        <div class="form-field">
+          <%= form.label :email, class: 'custom-label' %>
+          <%= form.text_field :email, disabled: true, class: 'form-control' %>
+        </div>
+          
+        <div class="form-field">
+          <%= form.label :dues, class: 'custom-label' %>
+          <%= form.check_box :dues_paid, disabled: true, class: 'form-control' %>
+        </div>
+
+        <%
+          
+        %>
+        <div class="form-field">
+          <%= form.text_field nil , hidden: true, :readonly => true, :name => 'source', :value => 'member', class: 'form-control' %>
+        </div>
+
+
+        <br>
+        <div class="form-field">
+          <%= form.submit 'Save Changes', class: 'btm btn-primary' %>
         </div>
       <% end %>
+    </div>
 
-      <div class="form-field">
-        <%= form.label :name, class: 'custom-label' %>
-        <%= form.text_field :name, class: 'form-control' %>
-      </div>
-
-      <div class="form-field">
-        <%= form.label :points, class: 'custom-label' %>
-        <%= form.number_field :points, disabled: true, class: 'form-control' %>
-      </div>
-
-      <div class="form-field">
-        <%= form.label :email, class: 'custom-label' %>
-        <%= form.text_field :email, disabled: true, class: 'form-control' %>
-      </div>
-        
-      <div class="form-field">
-        <%= form.label :dues, class: 'custom-label' %>
-        <%= form.check_box :dues_paid, disabled: true, class: 'form-control' %>
-      </div>
-
-      <%
-        
-      %>
-      <div class="form-field">
-        <%= form.text_field nil , hidden: true, :readonly => true, :name => 'source', :value => 'member', class: 'form-control' %>
-      </div>
-
-
-      <br>
-      <div class="form-field">
-        <%= form.submit 'Save Changes', class: 'btm btn-primary' %>
-      </div>
-    <% end %>
   </div>
 
-</div>
+  <br>
+  <hr>
 
-<br>
-<hr>
+  <div>
 
-<div>
-
-  <div class="events-attended">
-    <h3>Events Attended</h3>
-    <% if @member && @join_events %>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Points</th>
-            <th>View Event</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @join_events.each do |event| %>
+    <div class="events-attended">
+      <h3>Events Attended</h3>
+      <% if @member && @join_events %>
+        <table>
+          <thead>
             <tr>
-              <td><%= event.start_date.strftime("%b %d, %Y %I:%M %p") %></td>
-              <td><%= event.name %></td>
-              <td><%= event.points %></td>
-
-              <td><%= link_to "Show this event", event, class: ' btn btn-primary'  %></td>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Points</th>
+              <th>View Event</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p><%= @member ? "This member has not attended any events yet." : "Member is not in the system." %></p>
-    <% end %>
+          </thead>
+          <tbody>
+            <% @join_events.each do |event| %>
+              <tr>
+                <td><%= event.start_date.strftime("%b %d, %Y %I:%M %p") %></td>
+                <td><%= event.name %></td>
+                <td><%= event.points %></td>
+
+                <td><%= link_to "Show this event", event, class: ' btn btn-primary'  %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p><%= @member ? "This member has not attended any events yet." : "Member is not in the system." %></p>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="total-points">
-  <h3>Total Points:</h3>
-  <p><%= @member ? @member.points : "Member is not in the system." %></p>
-</div>
+  <div class="total-points">
+    <h3>Total Points:</h3>
+    <p><%= @member ? @member.points : "Member is not in the system." %></p>
+  </div>
 
-<script>
-function redirectToHome() {
-  window.location.href = '<%= root_path %>';
-}
-</script>
+  <script>
+  function redirectToHome() {
+    window.location.href = '<%= root_path %>';
+  }
+  </script>
 
 </body>
-</html>
-
- <footer class = "footer">
-  <p>Contact Us</p>
-  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;">
-    <%= link_to "https://www.instagram.com/heattamu", target: "_blank" do %>
-      <%= image_tag("instagram_logo.png", alt: "Instagram", width: "30", height: "30", class: "footer-icon") %>
-    <% end %>
-    
-    <%= link_to "mailto:heattamu@gmail.com" do %>
-      <%= image_tag("email_logo.png", alt: "Email", width: "30", height: "30", class: "footer-icon") %>
-    <% end %>
-    
-    <%= link_to "https://www.tiktok.com/@heattamu", target: "_blank" do %>
-      <%= image_tag("tiktok_logo.png", alt: "TikTok", width: "30", height: "30", class: "footer-icon") %>
-    <% end %>
-  </div>
-  <p style="margin-top: 15px;">&copy; <%= Time.now.year %> Texas A&M H.E.A.T. All Rights Reserved.</p>
-</footer>
-</body>
-
 </html>
