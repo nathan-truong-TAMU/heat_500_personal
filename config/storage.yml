@@ -13,9 +13,9 @@ local:
 # Handles Digital Ocean Credentials
 digitalocean:
   service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:digitalocean, :access_key) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret) %>
-  region: <%= Rails.application.credentials.dig(:digitalocean, :region) %>
-  bucket: <%= Rails.application.credentials.dig(:digitalocean, :bucket) %>
-  endpoint: <%= Rails.application.credentials.dig(:digitalocean, :endpoint) %>
+  access_key_id: <%= ENV['DIGITAL_OCEAN_ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['DIGITAL_OCEAN_SECRET'] %>
+  region: <%= ENV['DIGITAL_OCEAN_REGION'] %>
+  bucket: <%= ENV['DIGITAL_OCEAN_BUCKET'] %>
+  endpoint: <%= ENV['DIGITAL_OCEAN_ENDPOINT'] %>
   force_path_style: true
