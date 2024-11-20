@@ -98,35 +98,6 @@ table {
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag("HeatAppLogo.png", alt: "Logo", width: "80", height: "80", class: "d-inline-block align-top") %>
-    <% end %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-        </ul>
-      </div>
-      <div class="ml-auto">
-        <% if current_user %>
-        <div style="width: 75px; height: 75px; border-radius: 50%; overflow: hidden;">
-          <%= link_to(check_member_attendance_path, onclick: "showEventsAndMeetings()") do %>
-  <%= image_tag(current_user.avatar_url, style: "width: 100%; height: auto; border-radius: 50%; margin-bottom: 5px;") %>
-<% end %>
-        </div>
-        <%= button_to "Logout", destroy_user_session_path(redirect_to: root_path), data: { turbo: "false" }, method: :delete, class: "btn btn-success" %>
-        <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-success" %>
-        <% end %>
-        </div>
-      </div>
-    </div>
-  </nav>
-
     <script>
   function showEventsAndMeetings() {
     var xhr = new XMLHttpRequest();
