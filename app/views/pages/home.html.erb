@@ -14,15 +14,15 @@
   <section id="about-organization" >
     <h2>Texas A&M H.E.A.T.</h2>
     <!-- Handles Photo Gallery Slider -->
-    <div id="photo-slider" style="background-color: #CABA9C; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+    <div id="photo-slider" style="background-color: #CABA9C; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
       <% @photos.each do |photo| %>
         <div class="slide" style="display: none;">
           <%= image_tag photo.image, alt: photo.alt_text, class: "heat-home-pic", height: "504px", width: "672px" %>
         </div>
       <% end %>
+      <button id="prev" class="slider-button" style="left: 10px;"></i><</button>
+      <button id="next" class="slider-button" style="right: 10px;"></i>></button>
     </div>
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
 
     <p><strong>Abbreviation(s):</strong> H.E.A.T.</p>
     <p>Human Environmental Animal Team</p>
