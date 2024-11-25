@@ -5,95 +5,6 @@
   <title>HEAT</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
-  <!-- Include Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom Styles -->
-  <style>
-    body {
-      background-color: #fff;
-      color: #800000;
-    }
-
-    .navbar {
-      background-color: #600000 !important;
-    }
-
-    .navbar-brand, .nav-link {
-      color: #fff !important;
-    }
-
-    .btn-primary {
-      background-color: #800000 !important;
-      border-color: #800000 !important;
-    }
-
-    .btn-primary:hover {
-      background-color: #8B0000 !important;
-      border-color: #8B0000 !important;
-    }
-
-    .btn-success {
-      background-color: #fff !important;
-      border-color: #800000 !important;
-      color: #800000 !important;
-    }
-
-    .btn-success:hover {
-      background-color: #f8f9fa !important;
-      color: #800000 !important;
-    }
-
-    h1, h2 {
-      color: #800000;
-    }
-
-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      border-radius: 8px;
-    }
-
-    th,
-    td {
-      padding: 12px 15px;
-      border: none;
-      text-align: left;
-    }
-
-    thead {
-      background-color: #eaeaea;
-    }
-
-    th {
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    tbody tr {
-      transition: background-color 0.3s ease;
-    }
-
-    tbody tr:nth-child(odd) {
-      background-color: #ffffff;
-    }
-
-    tbody tr:nth-child(even) {
-      background-color: #f4f4f4;
-    }
-
-    tbody tr:hover {
-      background-color: #dddfe2;
-    }
-
-    td {
-      vertical-align: middle;
-    }
-  </style>
 </head>
 
 <body>
@@ -124,7 +35,7 @@ table {
   <div class="container mt-4">
     <!-- Authotization message -->
     <div>
-      <h5>Must enter password to gain access</h2>
+      <h2>Must enter password to gain access</h2>
     </div></br></br>
 
     <!-- Admin Login button -->
@@ -132,11 +43,11 @@ table {
       <h2 class="mb-3">Admin Login</h2>
       <%= form_with url: login_path, local: true do |form| %>
         <div class="form-group">
-          <%= form.label :password %> <br>
+          <%= form.label :password, style: "color: black;" %> <br>
           <%= form.password_field :password %>
         </div>
         <div>
-          <%= form.submit "Submit", class: "btn btn-primary" %>
+          <%= form.submit "Submit", style: "margin-bottom: 20px;" %>
         </div>
       <% end %>
       <% if flash[:alert] %>
@@ -144,13 +55,6 @@ table {
       <% end %>
     </div>
   </div>
-
-  <!-- Include Bootstrap JS and jQuery for modal functionality -->
-  <%# <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> %>
-  <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> %>
-
- 
 
 </body>
 

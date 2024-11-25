@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @photos = Photo.all
+    @photos = Photo.where(home_page: true)
   end
 end

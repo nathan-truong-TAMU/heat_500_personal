@@ -1,8 +1,8 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
 
 body {
-  background-color: #FFF8E7 !important; /* Creamy as background color */
-  color: #CABA9C; /* Dark Green for text */
+  background-color: #d3c9b0 !important;
+  color: #fff4df;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -12,7 +12,7 @@ body {
 
 
 #about-organization {
-  background-color: #4C6444; 
+  background-color: #4C6444;
   padding: 30px; 
   border-radius: 8px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
@@ -90,7 +90,7 @@ body {
 
 
 h1{
-  color: #CABA9C; /* Dark Green for headings */
+  color: black; /* Dark Green for headings */
 }
 
 h2{
@@ -534,14 +534,6 @@ a:hover {
 }
 
 
-
-.notice {
-    color: #28a745;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-
   .notice {
     color: #28a745;
     font-size: 16px;
@@ -679,3 +671,84 @@ a:hover {
 .has-events::after {
 }
 
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  color: black;
+  text-align: center;
+  padding: 0;
+}
+
+.slider-button:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+
+#photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Limit height to make it scrollable */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.photo-card {
+  width: 200px; /* Make each photo card smaller */
+  background-color: #4C6444;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-card p {
+  margin: 10px;
+  font-size: 0.9rem; /* Slightly smaller text */
+  text-align: center;
+}
+
+.photo-card a {
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #caba9c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Slightly smaller buttons */
+  transition: background-color 0.2s ease;
+}
+
+.photo-card a:hover {
+  background-color: #a9957a;
+}
+  
