@@ -11,19 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>  <!-- Add file upload field -->
-  </div>
+  <% unless photo.persisted? %>
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image %>  <!-- Add file upload field -->
+    </div>
+  <% end %>
 
-  <div>
-    <%= form.label :alt_text, style: "display: block" %>
+  <div class="form-field">
+    <%= form.label :alt_text, style: "display: block", class: 'custom-label' %>
     <%= form.text_field :alt_text %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="form-field">
+    <%= form.label :description, style: "display: block", class: 'custom-label' %>
     <%= form.text_field :description %>
+  </div>
+
+  <div class="form-field" style="margin-bottom: 15px;">
+    <%= form.label :home_page, class: 'custom-label' %>
+    <%= form.check_box :home_page, class: 'form-control' %>
   </div>
 
   <div>

@@ -26,4 +26,41 @@
     <%= photo.description %>
   </p>
 
+  <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+    <p>
+      <strong>Displayed on Home Page:</strong>
+      <%= photo.home_page? ? 'Yes' : 'No' %>
+    </p>
+  <% end %>
+
 </div>
+
+<style>
+  body {
+    background-color: #f0f2f5;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    margin: 0;
+  }
+
+  #<%= dom_id photo %> {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+  }
+
+  #<%= dom_id photo %> p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  #<%= dom_id photo %> strong {
+    color: #333;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+</style>
