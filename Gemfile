@@ -103,3 +103,9 @@ gem "brakeman"
 gem "rubocop"
 
 gem "rqrcode"
+
+# Handles S3 Cloud Storage
+gem 'aws-sdk-s3', '~> 1.114'
+
+# Handles setting environment variables for Cloud Storage
+gem 'dotenv-rails', groups: [:development, :test]
