@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H.E.A.T.</title>
+  <title>H.E.A.T. Photos</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 </head>
@@ -14,11 +14,22 @@
 
 <div id="photos">
   <% @photos.each do |photo| %>
-    <%= render photo %>
-    <p>
-      <%= link_to "Show this photo", photo %>
-    </p>
+    <div class="photo-card">
+      <%= render photo %>
+      <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+        <p>
+          <%= link_to "Show this photo", photo %>
+        </p>
+      <% end%>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New photo", new_photo_path %>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+  <div style="text-align: center; margin: 20px;">
+    <%= link_to "New photo", new_photo_path, class: "photo-card-link", style: "padding: 10px 20px; background-color: #CABA9C; color: white; text-decoration: none; border-radius: 5px;" %>
+  </div>
+<% end%>
+
+</body>
+</html>
