@@ -7,15 +7,19 @@
       <p>No Image Available</p> <!-- Message if no image is uploaded -->
   <% end %>
 
+  <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
   <p>
     <strong>Path:</strong>
     <%= photo.path %>
   </p>
+  <% end %>
 
-  <p>
-    <strong>Alt text:</strong>
-    <%= photo.alt_text %>
-  </p>
+  <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+    <p>
+      <strong>Alt text:</strong>
+      <%= photo.alt_text %>
+    </p>
+  <% end %>
 
   <p>
     <strong>Description:</strong>

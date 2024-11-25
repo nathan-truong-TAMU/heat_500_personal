@@ -16,16 +16,20 @@
   <% @photos.each do |photo| %>
     <div class="photo-card">
       <%= render photo %>
-      <p>
-        <%= link_to "Show this photo", photo %>
-      </p>
+      <% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+        <p>
+          <%= link_to "Show this photo", photo %>
+        </p>
+      <% end%>
     </div>
   <% end %>
 </div>
 
-<div style="text-align: center; margin: 20px;">
-  <%= link_to "New photo", new_photo_path, class: "photo-card-link", style: "padding: 10px 20px; background-color: #CABA9C; color: white; text-decoration: none; border-radius: 5px;" %>
-</div>
+<% if is_officer_or_admin?(session) && is_officer_or_admin_view?(session) %>
+  <div style="text-align: center; margin: 20px;">
+    <%= link_to "New photo", new_photo_path, class: "photo-card-link", style: "padding: 10px 20px; background-color: #CABA9C; color: white; text-decoration: none; border-radius: 5px;" %>
+  </div>
+<% end%>
 
 </body>
 </html>
