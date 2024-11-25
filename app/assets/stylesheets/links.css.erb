@@ -705,52 +705,58 @@ a:hover {
 
 
 #photos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      background-color: #f4f4f4;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Limit height to make it scrollable */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
 
-    .photo-card {
-      background-color: #ffffff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+.photo-card {
+  width: 200px; /* Make each photo card smaller */
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    .photo-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
+.photo-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
 
-    .photo-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+.photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-    .photo-card p {
-      margin: 10px;
-      font-size: 1rem;
-      text-align: center;
-    }
+.photo-card p {
+  margin: 10px;
+  font-size: 0.9rem; /* Slightly smaller text */
+  text-align: center;
+}
 
-    .photo-card a {
-      display: inline-block;
-      margin: 10px;
-      padding: 8px 16px;
-      background-color: #caba9c;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
-    }
+.photo-card a {
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #caba9c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Slightly smaller buttons */
+  transition: background-color 0.2s ease;
+}
 
-    .photo-card a:hover {
-      background-color: #a9957a;
-    }   
+.photo-card a:hover {
+  background-color: #a9957a;
+}
+  
